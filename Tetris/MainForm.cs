@@ -12,9 +12,14 @@ namespace Tetris
 {
     public partial class MainForm : Form
     {
+        Screen screen;
+
         public MainForm()
         {
+            screen = new Screen();
             InitializeComponent();
+            this.Controls.Add(screen);
+
         }
 
         private void Level_btn_Click(object sender, EventArgs e)
