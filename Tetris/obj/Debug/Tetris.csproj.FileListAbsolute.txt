@@ -1,0 +1,9 @@
+E:\ProjectsGit\Tetris\Tetris\bin\Debug\Tetris.exe.config
+E:\ProjectsGit\Tetris\Tetris\bin\Debug\Tetris.exe
+E:\ProjectsGit\Tetris\Tetris\bin\Debug\Tetris.pdb
+E:\ProjectsGit\Tetris\Tetris\obj\Debug\Tetris.csprojResolveAssemblyReference.cache
+E:\ProjectsGit\Tetris\Tetris\obj\Debug\Tetris.MainForm.resources
+E:\ProjectsGit\Tetris\Tetris\obj\Debug\Tetris.Properties.Resources.resources
+E:\ProjectsGit\Tetris\Tetris\obj\Debug\Tetris.csproj.GenerateResource.Cache
+E:\ProjectsGit\Tetris\Tetris\obj\Debug\Tetris.exe
+E:\ProjectsGit\Tetris\Tetris\obj\Debug\Tetris.pdb
