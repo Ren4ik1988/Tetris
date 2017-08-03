@@ -16,5 +16,30 @@ namespace Tetris
         {
             InitializeComponent();
         }
+
+        private void Level_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Exit_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NewGame_btn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void StartPause_Btn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
