@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Figure.cs" />
+    <Compile Include="FigureImg.cs" />
     <Compile Include="GameStatus.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -90,9 +92,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\Безымянный.png" />
+    <None Include="Resources\Block.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BackGraund.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

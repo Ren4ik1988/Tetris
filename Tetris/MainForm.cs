@@ -7,16 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Tetris
 {
-    public partial class MainForm : Form
+    partial class MainForm : Form
     {
-        Screen screen;
+       public Screen screen;
+        Thread thread;
+        public Model model;
+
 
         public MainForm()
         {
-            screen = new Screen();
+            model = new Model();
+            screen = new Screen(model);
+            model.gameStatus = GameStatus.game_Paused;
             InitializeComponent();
             this.Controls.Add(screen);
 
@@ -44,7 +50,18 @@ namespace Tetris
 
         private void StartPause_Btn_Click(object sender, EventArgs e)
         {
+            if (model.gameStatus != GameStatus.game_Playing)
+            {
+                model.gameStatus = GameStatus.game_Playing;
+                thread = new Thread(model.Play);
+                thread.Start();
+            }
+            else
+            {
+                 model.gameStatus = GameStatus.game_Playing;
+                thread.Abort();
 
+            }
         }
     }
 }
