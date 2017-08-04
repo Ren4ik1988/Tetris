@@ -22,7 +22,7 @@ namespace Tetris
         {
             model = new Model();
             screen = new Screen(model);
-            model.gameStatus = GameStatus.game_Paused;
+            model.GameStatus = GameStatus.Paused;
             InitializeComponent();
             this.Controls.Add(screen);
 
@@ -50,15 +50,15 @@ namespace Tetris
 
         private void StartPause_Btn_Click(object sender, EventArgs e)
         {
-            if (model.gameStatus != GameStatus.game_Playing)
+            if (model.GameStatus != GameStatus.Playing)
             {
-                model.gameStatus = GameStatus.game_Playing;
+                model.GameStatus = GameStatus.Playing;
                 thread = new Thread(model.Play);
                 thread.Start();
             }
             else
             {
-                 model.gameStatus = GameStatus.game_Playing;
+                 model.GameStatus = GameStatus.Playing;
                 thread.Abort();
 
             }

@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Tetris
 {
     class Model // вмещает в себя логику игры
     {
-        // тут все вроде супер, за исключением что открытые члены лучше с большой буквы (закрытые с маленькой)
-        public Figure figure;
-        public GameStatus gameStatus;
+        public Figure Figure;
+        public GameStatus GameStatus;
 
-        public Model() // сам класс приватный, а конструктор public (странно выглядит когда читаешь)
+        public Model() 
         {
-            figure = new Figure();
-            gameStatus = GameStatus.game_Paused;
+            Figure = new Figure();
+            GameStatus = GameStatus.Paused;
         }
 
-        // сама по себе задумка неплохая, посмотрим что будет дальше))
         public void Play()
         {
-            while (gameStatus == GameStatus.game_Playing)
+            while (GameStatus == GameStatus.Playing)
             {
-                figure.Run();
+                Thread.Sleep(100);
+                Figure.Run();
             }
         }
     }

@@ -4,86 +4,62 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using System.Threading;
 
 namespace Tetris
 {
     class Figure
     {
-        FigureImg figureImg;
-        public Image img;
-        public int x, y;
-        Random r;
+        #region private properties
 
-        //Лучше так:
+        FigureImg figureImage;
+        Random random;
+        Image image;
+        Point position;
 
-        //#region public members // добавление регионов в код дисциплинирует размещение свойств, методов и пр. еще их можно скрывать чтобы не мешались
+        #endregion
 
-        //public Image image; //img тоже было хорошее название, но image более описательно 
-        //public int xPos, yPos; // xPos, yPos - так название более читабельно чем просто x, y
+        #region свойства доступа
 
-        //#endregion
+        public Point Position { get => position; }
+        public Image Image { get => image; }
 
-        //#region private properties
+        #endregion
 
-        //FigureImg figureImage;
-        //Random random;
+        #region Constructor
 
-        //#endregion
-
-        //... 
-        // вообще открытые члены класса должны быть с большой буквы, либо добавь методы для получения и установки в них значения.
-        // x, y предлагаю заменить на объект Point
-
-        internal Figure() // - почему решил именно internal ?
+        public Figure() 
         {
-            //предлагаю после этой строчки:
-            figureImg = new FigureImg();
-            //вызывать приватную функцию инициализации позиции
-            //InitializePos();
+            figureImage = new FigureImg();
 
-            r = new Random();
-            x = figureImg.X + r.Next(0, 225);
-            y = figureImg.Y;
-
-            img = figureImg.Img;
+            image = figureImage.Img;
+ 
+            InitializePos();
         }
 
-        //в итоге конструктор с учетом всех переделок может принять вид (как один из вариантов):
-
-        //public Figure()
-        //{
-        //    figureImage = new FigureImg();
-        //    image = figureImg.Img;
-
-        //    InitializePos();
-        //}
-
-        //а функция InitializePos такой вид:
-        //void InitializePos()
-        //{
-        //  random = new Random();
-
-        //  position = new Point(
-        //      figureImg.X + random.Next(0, 225), 
-        //      figureImg.Y);
-        //}
-
-        public void Run()
-        {
-            Thread.Sleep(100);
-            y++;
-        }
+        #endregion
 
         #region private functions
 
-        //void InitializePos()
-        //{
-            //r = new Random();
-            //x = figureImg.X + r.Next(0, 225);
-            //y = figureImg.Y;
-        //}
+        private void InitializePos()
+        {
+            random = new Random();
+
+            position.X = 25*random.Next(0,10);
+            position.Y = 25;
+
+            position = new Point(position.X, position.Y);
+        }
 
         #endregion
+
+        #region public functions
+
+        public void Run()
+        {
+            position.Y += 25;
+        }
+
+        #endregion
+
     }
 }

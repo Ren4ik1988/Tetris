@@ -9,13 +9,14 @@ namespace Tetris
 {
     class FigureImg
     {
-        Image img = Properties.Resources.Block; //так не плохо, но все же лучше поместить инициализацию в конструктор по умолчанию
-        int x, y;
+        Image image; 
+        
+        public FigureImg()
+        {
+            image = Properties.Resources.Block;
+        }
 
-        public Image Img { get => img; } // img неплохо, но image читабельнее
-        public int X { get => x; set => x = value; } // лучше уж тогда сделать автосвойство))
-        public int Y { get => y; } // тут есть смысл оставить как сейчас, а вообще x и y лучше замени на Point и сделай для него два соответствующих свойства
-
+        public Image Img { get => image; } 
 
     }
 }
