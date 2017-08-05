@@ -18,13 +18,9 @@ namespace Tetris
             GameStatus = GameStatus.Paused;
         }
 
-        public void Play()
+        public void Play(object obj)
         {
-            while (GameStatus == GameStatus.Playing)
-            {
-                Thread.Sleep(100);
-                Figure.Run();
-            }
+            Figure.Run();
         }
     }
 }

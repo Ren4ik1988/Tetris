@@ -29,7 +29,7 @@ namespace Tetris
                 );
 
             if (model.GameStatus != GameStatus.Playing)
-                return;
+               return;
 
             Thread.Sleep(100);
             Invalidate();

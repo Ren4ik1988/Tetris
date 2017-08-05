@@ -14,7 +14,8 @@ namespace Tetris
     partial class MainForm : Form
     {
         public Screen screen;
-        Thread modelPlay;
+        TimerCallback modelPlay;
+        System.Threading.Timer move;
         public Model model;
 
 
@@ -32,15 +33,17 @@ namespace Tetris
         {
             if (model.GameStatus == GameStatus.Playing)
             {
+                StartPause_Btn.Text = "Продолжить";
                 model.GameStatus = GameStatus.Paused;
-                modelPlay.Abort();
+                move.Change(Timeout.Infinite, 0);
             }
             else
             {
+                StartPause_Btn.Text = "Пауза";
                 model.GameStatus = GameStatus.Playing;
-                modelPlay = new Thread(model.Play);
-                modelPlay.Start();
                 screen.Invalidate();
+                modelPlay = new TimerCallback(model.Play);
+                move = new System.Threading.Timer(modelPlay, null, 0, 1000);
             }
         }
 
@@ -51,19 +54,20 @@ namespace Tetris
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(modelPlay != null)
+            if(model.GameStatus == GameStatus.Playing)
             {
-                model.GameStatus = GameStatus.Stop;
-                modelPlay.Abort();
+                model.GameStatus = GameStatus.Paused;
+                move.Change(Timeout.Infinite, 0);
+                StartPause_Btn.Text = "Продолжить";
             }
 
-
-           DialogResult dr = MessageBox.Show("Вы уверены, что хотите закрыть игру?", "Tetris", MessageBoxButtons.YesNoCancel);
+            DialogResult dr = MessageBox.Show("Вы уверены, что хотите закрыть игру?", "Tetris", MessageBoxButtons.YesNoCancel);
 
             if (dr == DialogResult.Yes)
                 e.Cancel = false;
             else
                 e.Cancel = true;
+
         }
     }
 }
