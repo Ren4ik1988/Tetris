@@ -45,7 +45,6 @@
             this.textBox1.Size = new System.Drawing.Size(110, 13);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "Уровень сложности";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Level_btn
             // 
@@ -55,7 +54,6 @@
             this.Level_btn.TabIndex = 0;
             this.Level_btn.Text = "Легко";
             this.Level_btn.UseVisualStyleBackColor = true;
-            this.Level_btn.Click += new System.EventHandler(this.Level_btn_Click);
             // 
             // Exit_btn
             // 
@@ -75,7 +73,6 @@
             this.NewGame_btn.TabIndex = 0;
             this.NewGame_btn.Text = "New game";
             this.NewGame_btn.UseVisualStyleBackColor = true;
-            this.NewGame_btn.Click += new System.EventHandler(this.NewGame_btn_Click);
             // 
             // StartPause_Btn
             // 
@@ -111,6 +108,7 @@
             this.HelpButton = true;
             this.Name = "MainForm";
             this.Text = "Tetris";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

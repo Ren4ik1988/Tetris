@@ -21,14 +21,23 @@ namespace Tetris
             this.model = model;
         }
 
-        private void Screen_Paint(object sender, PaintEventArgs e)
+        void Draw(PaintEventArgs e)
         {
             e.Graphics.DrawImage(
                 model.Figure.Image,
                 model.Figure.Position
                 );
+
+            if (model.GameStatus != GameStatus.Playing)
+                return;
+
             Thread.Sleep(100);
             Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Draw(e);
         }
     }
 }

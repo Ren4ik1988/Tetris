@@ -13,8 +13,8 @@ namespace Tetris
 {
     partial class MainForm : Form
     {
-       public Screen screen;
-        Thread thread;
+        public Screen screen;
+        Thread modelPlay;
         public Model model;
 
 
@@ -28,40 +28,42 @@ namespace Tetris
 
         }
 
-        private void Level_btn_Click(object sender, EventArgs e)
+        private void StartPause_Btn_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            if (model.GameStatus == GameStatus.Playing)
+            {
+                model.GameStatus = GameStatus.Paused;
+                modelPlay.Abort();
+            }
+            else
+            {
+                model.GameStatus = GameStatus.Playing;
+                modelPlay = new Thread(model.Play);
+                modelPlay.Start();
+                screen.Invalidate();
+            }
         }
 
         private void Exit_btn_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
 
-        private void NewGame_btn_Click(object sender, EventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-        }
-
-        private void StartPause_Btn_Click(object sender, EventArgs e)
-        {
-            if (model.GameStatus != GameStatus.Playing)
+            if(modelPlay != null)
             {
-                model.GameStatus = GameStatus.Playing;
-                thread = new Thread(model.Play);
-                thread.Start();
+                model.GameStatus = GameStatus.Stop;
+                modelPlay.Abort();
             }
+
+
+           DialogResult dr = MessageBox.Show("Вы уверены, что хотите закрыть игру?", "Tetris", MessageBoxButtons.YesNoCancel);
+
+            if (dr == DialogResult.Yes)
+                e.Cancel = false;
             else
-            {
-                 model.GameStatus = GameStatus.Playing;
-                thread.Abort();
-
-            }
+                e.Cancel = true;
         }
     }
 }
