@@ -82,6 +82,7 @@ namespace Tetris
             StartPause_Btn.Text = "Начать игру";
             Level_btn.Enabled = true;
             model.GameStatus = GameStatus.StartNew;
+            model.Reset();
             model.Play(model.GameStatus);
             screen.Invalidate();
         }
@@ -90,14 +91,14 @@ namespace Tetris
         {
             if( Level_btn.Text == "Легко")
             {
-                speedGame = 800;
+                speedGame = 700;
                 Level_btn.Text = "Средне";
                 return;
             }
 
             if (Level_btn.Text == "Средне")
             {
-                speedGame = 600;
+                speedGame = 400;
                 Level_btn.Text = "Тяжело";
                 return;
             }

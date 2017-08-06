@@ -45,7 +45,7 @@ namespace Tetris
             random = new Random();
 
             position.X = 25*random.Next(0,10);
-            position.Y = 25;
+            position.Y = -25;
 
             position = new Point(position.X, position.Y);
         }
@@ -56,7 +56,8 @@ namespace Tetris
 
         public void Run()
         {
-            position.Y += 25;
+            if (position.Y != 475)
+                position.Y += 25;
         }
 
         public void Reset()
