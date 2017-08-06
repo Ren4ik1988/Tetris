@@ -23,9 +23,10 @@ namespace Tetris
 
         void Draw(PaintEventArgs e)
         {
+            foreach( Figure f in model.Figure)
             e.Graphics.DrawImage(
-                model.Figure.Image,
-                model.Figure.Position
+                f.Image,
+                f.Position
                 );
 
             if (model.GameStatus != GameStatus.Playing)

@@ -32,7 +32,7 @@
             this.Level_btn = new System.Windows.Forms.Button();
             this.Exit_btn = new System.Windows.Forms.Button();
             this.NewGame_btn = new System.Windows.Forms.Button();
-            this.StartPause_Btn = new System.Windows.Forms.Button();
+             this.StartPause_Btn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
