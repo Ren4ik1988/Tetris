@@ -44,7 +44,6 @@ namespace Tetris
             numberOfBlock = 0;
             figure.Clear();
             figure = new List<Figure>() { new Figure() };
-
         }
     }
 }
