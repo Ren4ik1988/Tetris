@@ -54,6 +54,7 @@
             this.Level_btn.TabIndex = 0;
             this.Level_btn.Text = "Легко";
             this.Level_btn.UseVisualStyleBackColor = true;
+            this.Level_btn.Click += new System.EventHandler(this.Level_btn_Click);
             // 
             // Exit_btn
             // 

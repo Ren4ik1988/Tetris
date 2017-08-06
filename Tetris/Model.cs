@@ -24,6 +24,7 @@ namespace Tetris
                 Figure.Run();
             else
                 Figure.Reset();
+
         }
     }
 }

@@ -14,13 +14,17 @@ namespace Tetris
     partial class MainForm : Form
     {
         public Screen screen;
+        public Model model;
+
         TimerCallback modelPlay;
         System.Threading.Timer move;
-        public Model model;
+        int speedGame;
+        
 
 
         public MainForm()
         {
+            speedGame = 1000;
             model = new Model();
             screen = new Screen(model);
             model.GameStatus = GameStatus.Paused;
@@ -40,10 +44,11 @@ namespace Tetris
             else
             {
                 StartPause_Btn.Text = "Пауза";
+                Level_btn.Enabled = false;
                 model.GameStatus = GameStatus.Playing;
                 screen.Invalidate();
                 modelPlay = new TimerCallback(model.Play);
-                move = new System.Threading.Timer(modelPlay, null, 0, 1000);
+                move = new System.Threading.Timer(modelPlay, null, 0, speedGame);
             }
         }
 
@@ -72,10 +77,37 @@ namespace Tetris
 
         private void NewGame_btn_Click(object sender, EventArgs e)
         {
-            move.Change(Timeout.Infinite, 0);
+            if (move != null)
+                move.Change(Timeout.Infinite, 0);
             StartPause_Btn.Text = "Начать игру";
+            Level_btn.Enabled = true;
             model.GameStatus = GameStatus.StartNew;
             model.Play(model.GameStatus);
+            screen.Invalidate();
         }
+
+        private void Level_btn_Click(object sender, EventArgs e)
+        {
+            if( Level_btn.Text == "Легко")
+            {
+                speedGame = 800;
+                Level_btn.Text = "Средне";
+                return;
+            }
+
+            if (Level_btn.Text == "Средне")
+            {
+                speedGame = 600;
+                Level_btn.Text = "Тяжело";
+                return;
+            }
+
+            if (Level_btn.Text == "Тяжело")
+            {
+                speedGame = 1000;
+                Level_btn.Text = "Легко";
+                return;
+        }
+    }
     }
 }
