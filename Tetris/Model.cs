@@ -20,7 +20,10 @@ namespace Tetris
 
         public void Play(object obj)
         {
-            Figure.Run();
+            if (GameStatus != GameStatus.StartNew)
+                Figure.Run();
+            else
+                Figure.Reset();
         }
     }
 }

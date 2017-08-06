@@ -69,5 +69,13 @@ namespace Tetris
                 e.Cancel = true;
 
         }
+
+        private void NewGame_btn_Click(object sender, EventArgs e)
+        {
+            move.Change(Timeout.Infinite, 0);
+            StartPause_Btn.Text = "Начать игру";
+            model.GameStatus = GameStatus.StartNew;
+            model.Play(model.GameStatus);
+        }
     }
 }

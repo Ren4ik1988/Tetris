@@ -59,6 +59,10 @@ namespace Tetris
             position.Y += 25;
         }
 
+        public void Reset()
+        {
+            InitializePos();
+        }
         #endregion
 
     }

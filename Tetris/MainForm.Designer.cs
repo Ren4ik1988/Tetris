@@ -73,6 +73,7 @@
             this.NewGame_btn.TabIndex = 0;
             this.NewGame_btn.Text = "Новая игра";
             this.NewGame_btn.UseVisualStyleBackColor = true;
+            this.NewGame_btn.Click += new System.EventHandler(this.NewGame_btn_Click);
             // 
             // StartPause_Btn
             // 
