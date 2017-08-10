@@ -17,20 +17,20 @@ namespace Tetris
 
         public Screen(Model model)
         {
-            InitializeComponent(); 
+            InitializeComponent();
             this.model = model;
         }
 
         void Draw(PaintEventArgs e)
         {
-            foreach( Figure f in model.Figure)
-            e.Graphics.DrawImage(
-                f.Image,
-                f.Position
-                );
+            foreach (Figure f in model.Figure)
+                e.Graphics.DrawImage(
+                    f.Image,
+                    f.Position
+                    );
 
             if (model.GameStatus != GameStatus.Playing)
-               return;
+                return;
 
             Thread.Sleep(100);
             Invalidate();
