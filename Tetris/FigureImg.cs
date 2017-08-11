@@ -9,8 +9,14 @@ namespace Tetris
 {
     class FigureImg
     {
-        Image image; 
+        Image image;
+
+        //эту строчку лучше сюда перенести:
+        //public Image Img { get => image; }
         
+        //члены класса и свойства лучше над конструктором, а функции под ним
+        //при этом функции сначала должны идти public, и только потом private
+
         public FigureImg()
         {
             image = Properties.Resources.Block;

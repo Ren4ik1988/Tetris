@@ -89,6 +89,8 @@ namespace Tetris
 
         private void Level_btn_Click(object sender, EventArgs e)
         {
+            // если используешь текст в условии (if), то лучше вынеси его в const string, так будет правильнее
+
             if( Level_btn.Text == "Легко")
             {
                 speedGame = 700;

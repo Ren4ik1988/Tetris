@@ -25,6 +25,11 @@ namespace Tetris
         {
             if (GameStatus != GameStatus.StartNew)
             {
+                //почему именно 445 ?
+                //если это не случайное число, то вынеси в константу и назови как-нибудь))
+                //в программировании такие вещи называют "магическими числами", это нехорошо.
+                //На самом деле не обязательно выносить в константу, можно даже в локальную переменную,
+                //главное чтобы название было у этого числа
                 if (Figure[numberOfBlock].Position.Y != 475)
                 {
 
@@ -43,7 +48,8 @@ namespace Tetris
         {
             numberOfBlock = 0;
             figure.Clear();
-            figure = new List<Figure>() { new Figure() };
+            figure = new List<Figure>() { new Figure() }; //такая строчка уже есть в конструкторе. 
+            //Вынеси в функцию, например - InitializeFigureList()
         }
     }
 }
