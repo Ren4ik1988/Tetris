@@ -39,8 +39,5 @@ Thumbs.db
 #dotCover
 *.dotCover
 
-*.designer.cs
-Components/*
-
 #Manually added
 *.pfx
