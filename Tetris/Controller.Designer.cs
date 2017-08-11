@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.MainPanel = new System.Windows.Forms.GroupBox();
-            this.StartPause_Btn = new System.Windows.Forms.Button();
-            this.NewGame_btn = new System.Windows.Forms.Button();
-            this.Exit_btn = new System.Windows.Forms.Button();
-            this.Level_btn = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Level_btn = new System.Windows.Forms.Button();
+            this.Exit_btn = new System.Windows.Forms.Button();
+            this.NewGame_btn = new System.Windows.Forms.Button();
+            this.StartPause_Btn = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,39 +45,20 @@
             this.MainPanel.Controls.Add(this.NewGame_btn);
             this.MainPanel.Controls.Add(this.StartPause_Btn);
             this.MainPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MainPanel.Location = new System.Drawing.Point(219, 332);
+            this.MainPanel.Location = new System.Drawing.Point(219, 12);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(149, 181);
             this.MainPanel.TabIndex = 0;
             this.MainPanel.TabStop = false;
             // 
-            // StartPause_Btn
+            // textBox1
             // 
-            this.StartPause_Btn.Location = new System.Drawing.Point(38, 19);
-            this.StartPause_Btn.Name = "StartPause_Btn";
-            this.StartPause_Btn.Size = new System.Drawing.Size(75, 23);
-            this.StartPause_Btn.TabIndex = 0;
-            this.StartPause_Btn.Text = "Start/Pause";
-            this.StartPause_Btn.UseCompatibleTextRendering = true;
-            this.StartPause_Btn.UseVisualStyleBackColor = true;
-            // 
-            // NewGame_btn
-            // 
-            this.NewGame_btn.Location = new System.Drawing.Point(38, 48);
-            this.NewGame_btn.Name = "NewGame_btn";
-            this.NewGame_btn.Size = new System.Drawing.Size(75, 23);
-            this.NewGame_btn.TabIndex = 0;
-            this.NewGame_btn.Text = "New game";
-            this.NewGame_btn.UseVisualStyleBackColor = true;
-            // 
-            // Exit_btn
-            // 
-            this.Exit_btn.Location = new System.Drawing.Point(38, 77);
-            this.Exit_btn.Name = "Exit_btn";
-            this.Exit_btn.Size = new System.Drawing.Size(75, 23);
-            this.Exit_btn.TabIndex = 0;
-            this.Exit_btn.Text = "Exit";
-            this.Exit_btn.UseVisualStyleBackColor = true;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(21, 112);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(110, 13);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "Уровень сложности";
             // 
             // Level_btn
             // 
@@ -88,14 +69,33 @@
             this.Level_btn.Text = "Легко";
             this.Level_btn.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // Exit_btn
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(21, 112);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(110, 13);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "Уровень сложности";
+            this.Exit_btn.Location = new System.Drawing.Point(38, 77);
+            this.Exit_btn.Name = "Exit_btn";
+            this.Exit_btn.Size = new System.Drawing.Size(75, 23);
+            this.Exit_btn.TabIndex = 0;
+            this.Exit_btn.Text = "Exit";
+            this.Exit_btn.UseVisualStyleBackColor = true;
+            // 
+            // NewGame_btn
+            // 
+            this.NewGame_btn.Location = new System.Drawing.Point(38, 48);
+            this.NewGame_btn.Name = "NewGame_btn";
+            this.NewGame_btn.Size = new System.Drawing.Size(75, 23);
+            this.NewGame_btn.TabIndex = 0;
+            this.NewGame_btn.Text = "New game";
+            this.NewGame_btn.UseVisualStyleBackColor = true;
+            // 
+            // StartPause_Btn
+            // 
+            this.StartPause_Btn.Location = new System.Drawing.Point(38, 19);
+            this.StartPause_Btn.Name = "StartPause_Btn";
+            this.StartPause_Btn.Size = new System.Drawing.Size(75, 23);
+            this.StartPause_Btn.TabIndex = 0;
+            this.StartPause_Btn.Text = "Start/Pause";
+            this.StartPause_Btn.UseCompatibleTextRendering = true;
+            this.StartPause_Btn.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
