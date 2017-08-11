@@ -41,3 +41,7 @@ Thumbs.db
 
 #Manually added
 *.pfx
+
+#TetrisV15
+*.vs/Tetris/v15/.suo
+
