@@ -30,7 +30,7 @@ namespace Tetris
         {
             for (int i = 0; i < Model.vertLength; i++)
                 for (int j = 0; j < Model.gorizontLength; j++)
-                    e.Graphics.DrawImage(model.MainScreen[i, j].Image, model.MainScreen[i, j].Position);
+                    e.Graphics.DrawImage(model.MainScreen[i, j].Image, PositionOfBlocks.Position[i,j]);
         }
     }
 }

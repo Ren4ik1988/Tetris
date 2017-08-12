@@ -45,7 +45,7 @@
             this.MainPanel.Controls.Add(this.NewGame_btn);
             this.MainPanel.Controls.Add(this.StartPause_Btn);
             this.MainPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MainPanel.Location = new System.Drawing.Point(219, 12);
+            this.MainPanel.Location = new System.Drawing.Point(273, 12);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(149, 181);
             this.MainPanel.TabIndex = 0;
@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 623);
+            this.ClientSize = new System.Drawing.Size(434, 511);
             this.Controls.Add(this.MainPanel);
             this.Name = "MainForm";
             this.Text = "Tetris";

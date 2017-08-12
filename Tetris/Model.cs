@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Tetris
 {
@@ -14,6 +15,7 @@ namespace Tetris
         public const int gorizontLength = 10;
 
         #endregion
+
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
 
@@ -34,4 +36,5 @@ namespace Tetris
                 }
         }
     }
+        
 }

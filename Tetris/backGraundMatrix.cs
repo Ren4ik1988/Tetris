@@ -9,17 +9,14 @@ namespace Tetris
 {
     class BackGraundMatrix
     {
-        BackGraundImage backGraundImage;
-        Point position;
         Image image;
 
-        public Point Position { get => position; set => position = value; }
-        public Image Image { get => image; set => image = value; }
+        public Image Image { get => image; }
 
         public BackGraundMatrix()
         {
-            backGraundImage = new BackGraundImage();
-            image = backGraundImage.Image;
+            image = Properties.Resources.BackImage;
         }
+
     }
 }

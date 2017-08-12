@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackGraundImage.cs" />
     <Compile Include="BackGraundMatrix.cs" />
     <Compile Include="Controller.cs">
       <SubType>Form</SubType>
@@ -54,6 +53,7 @@
       <DependentUpon>Controller.cs</DependentUpon>
     </Compile>
     <Compile Include="Model.cs" />
+    <Compile Include="PositionOfBlocks.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screen.cs">
