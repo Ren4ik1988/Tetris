@@ -96,6 +96,7 @@
             this.StartPause_Btn.Text = "Start/Pause";
             this.StartPause_Btn.UseCompatibleTextRendering = true;
             this.StartPause_Btn.UseVisualStyleBackColor = true;
+            this.StartPause_Btn.Click += new System.EventHandler(this.StartPause_Btn_Click);
             // 
             // MainForm
             // 

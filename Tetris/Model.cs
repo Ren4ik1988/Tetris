@@ -15,12 +15,14 @@ namespace Tetris
         public const int gorizontLength = 10;
 
         #endregion
-
+        
+        Random random;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
 
         public Model()
         {
+            random = new Random();
             mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
             FillMatrix();
         }
@@ -35,6 +37,13 @@ namespace Tetris
                     mainScreen[i, j] = new BackGraundMatrix();
                 }
         }
+
+        public void Random()
+        {
+            int j = random.Next(0,9); //локальная переменная используется для определения рандомной
+                                      //позиции блока по горизонтальной координате
+            mainScreen[0, j].PutImg();
+            mainScreen[0, j].Image = mainScreen[0, j].Image;
+        }
     }
-        
 }

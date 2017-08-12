@@ -22,5 +22,11 @@ namespace Tetris
             InitializeComponent();
             this.Controls.Add(screen);
         }
+
+        private void StartPause_Btn_Click(object sender, EventArgs e)
+        {
+            model.Random();
+            screen.Invalidate();
+        }
     }
 }
