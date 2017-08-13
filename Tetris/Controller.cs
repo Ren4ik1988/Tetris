@@ -80,5 +80,13 @@ namespace Tetris
                 model.GameLevel = Model.Easy;
             }
         }
+
+        private void NewGame_btn_Click(object sender, EventArgs e)
+        {
+            model.GameStatus = GameStatus.NewGame;
+            model.FillMatrix();
+            StartPause_Btn.Text = start;
+            Level_btn.Enabled = true;
+        }
     }
 }

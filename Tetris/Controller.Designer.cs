@@ -64,7 +64,7 @@
             // 
             this.Level_btn.Location = new System.Drawing.Point(38, 138);
             this.Level_btn.Name = "Level_btn";
-            this.Level_btn.Size = new System.Drawing.Size(75, 23);
+            this.Level_btn.Size = new System.Drawing.Size(80, 23);
             this.Level_btn.TabIndex = 0;
             this.Level_btn.Text = "Легко";
             this.Level_btn.UseVisualStyleBackColor = true;
@@ -74,27 +74,28 @@
             // 
             this.Exit_btn.Location = new System.Drawing.Point(38, 77);
             this.Exit_btn.Name = "Exit_btn";
-            this.Exit_btn.Size = new System.Drawing.Size(75, 23);
+            this.Exit_btn.Size = new System.Drawing.Size(80, 23);
             this.Exit_btn.TabIndex = 0;
-            this.Exit_btn.Text = "Exit";
+            this.Exit_btn.Text = "Выход";
             this.Exit_btn.UseVisualStyleBackColor = true;
             // 
             // NewGame_btn
             // 
             this.NewGame_btn.Location = new System.Drawing.Point(38, 48);
             this.NewGame_btn.Name = "NewGame_btn";
-            this.NewGame_btn.Size = new System.Drawing.Size(75, 23);
+            this.NewGame_btn.Size = new System.Drawing.Size(80, 23);
             this.NewGame_btn.TabIndex = 0;
-            this.NewGame_btn.Text = "New game";
+            this.NewGame_btn.Text = "Новая игра";
             this.NewGame_btn.UseVisualStyleBackColor = true;
+            this.NewGame_btn.Click += new System.EventHandler(this.NewGame_btn_Click);
             // 
             // StartPause_Btn
             // 
             this.StartPause_Btn.Location = new System.Drawing.Point(38, 19);
             this.StartPause_Btn.Name = "StartPause_Btn";
-            this.StartPause_Btn.Size = new System.Drawing.Size(75, 23);
+            this.StartPause_Btn.Size = new System.Drawing.Size(80, 23);
             this.StartPause_Btn.TabIndex = 0;
-            this.StartPause_Btn.Text = "Start/Pause";
+            this.StartPause_Btn.Text = "Начать игру";
             this.StartPause_Btn.UseCompatibleTextRendering = true;
             this.StartPause_Btn.UseVisualStyleBackColor = true;
             this.StartPause_Btn.Click += new System.EventHandler(this.StartPause_Btn_Click);

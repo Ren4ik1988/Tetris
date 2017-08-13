@@ -37,20 +37,27 @@ namespace Tetris
         {
             GameStatus = GameStatus.Paused;
             random = new Random();
-            mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
             FillMatrix();
         }
 
         internal BackGraundMatrix[,] MainScreen { get => mainScreen; set => mainScreen = value; }
         public int GameLevel { set => gameLevel = value; }
 
-        private void FillMatrix()
+        public void FillMatrix()
         {
+            i = j = 0;
+            mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
+
             for (int i = 0; i < vertLength; i++)
                 for (int j = 0; j < gorizontLength; j++)
                 {
                     mainScreen[i, j] = new BackGraundMatrix();
                 }
+            if (timer != null)
+            {
+                StartTimer(screen);
+                screen.Invalidate();
+            }
         }
 
         public void Random()
