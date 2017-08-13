@@ -27,6 +27,7 @@ namespace Tetris
         {
             model.Random();
             screen.Invalidate();
+            model.StartTimer(screen);
         }
     }
 }

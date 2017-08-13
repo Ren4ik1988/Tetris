@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackGraundMatrix.cs" />
+    <Compile Include="GameStatus.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="Controller.cs">
       <SubType>Form</SubType>

@@ -23,7 +23,10 @@ namespace Tetris
 
         public void PutImg()
         {
-            Image = images.BlockImage;
+            if (Image != images.BlockImage)
+                Image = images.BlockImage;
+            else
+                Image = images.MainImage;
         }
     }
 }
