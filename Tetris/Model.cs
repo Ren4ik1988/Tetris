@@ -17,8 +17,16 @@ namespace Tetris
 
         #endregion
 
+        #region Constants: константы уровней игры
+        public const int Easy = 1000;
+        public const int Middle = 700;
+        public const int Hard = 500;
+        #endregion
+
+        public GameStatus GameStatus;
         Random random;
         int i, j; //поля определяют номера ячеек матрицы
+        int gameLevel; //определяет скорость игры
         Timer timer;
         TimerCallback moveBlock;
         Screen screen;
@@ -27,12 +35,14 @@ namespace Tetris
 
         public Model()
         {
+            GameStatus = GameStatus.Paused;
             random = new Random();
             mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
             FillMatrix();
         }
 
         internal BackGraundMatrix[,] MainScreen { get => mainScreen; set => mainScreen = value; }
+        public int GameLevel { set => gameLevel = value; }
 
         private void FillMatrix()
         {
@@ -45,6 +55,7 @@ namespace Tetris
 
         public void Random()
         {
+            i = 0;
             j = random.Next(0, 9); //определяет рандомную позицию блока по горизонтальной координате
             mainScreen[i, j].PutImg(); // меняет изображение переменной Image на картинку блока
             mainScreen[i, j].Image = mainScreen[i, j].Image; // производит замену элемента ячейки
@@ -52,12 +63,17 @@ namespace Tetris
 
         public void StartTimer(Screen screen)
         {
-            this.screen = screen;
-            moveBlock = new TimerCallback(Run);
-            timer = new Timer(moveBlock, null, 1000, 1000);
+            if (GameStatus == GameStatus.Started)
+            {
+                this.screen = screen;
+                moveBlock = new TimerCallback(Run);
+                timer = new Timer(moveBlock, null, 500, gameLevel);
+            }
+            else
+                timer.Change(Timeout.Infinite, 0);
         }
 
-        void Run(object obj)
+        void Run(object obj) //отвечает за движение фигуры
         {
             mainScreen[i, j].PutImg();
             mainScreen[i, j].Image = mainScreen[i, j].Image;
@@ -66,8 +82,8 @@ namespace Tetris
             mainScreen[i, j].Image = mainScreen[i, j].Image;
 
             screen.Invalidate();
-            if (i == (vertLength-1) )
-                timer.Change(Timeout.Infinite, 0);
+            if (i == (vertLength - 1))
+                Random();
         }
     }
 }

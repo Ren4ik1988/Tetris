@@ -8,7 +8,7 @@ namespace Tetris
 {
     enum GameStatus
     {
-        Statrted,
+        Started,
         Paused,
         NewGame
     }
