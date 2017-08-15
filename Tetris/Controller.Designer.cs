@@ -78,6 +78,7 @@
             this.Exit_btn.TabIndex = 0;
             this.Exit_btn.Text = "Выход";
             this.Exit_btn.UseVisualStyleBackColor = true;
+            this.Exit_btn.Click += new System.EventHandler(this.Exit_btn_Click);
             // 
             // NewGame_btn
             // 
@@ -108,6 +109,7 @@
             this.Controls.Add(this.MainPanel);
             this.Name = "MainForm";
             this.Text = "Tetris";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             this.ResumeLayout(false);

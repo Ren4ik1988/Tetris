@@ -88,5 +88,26 @@ namespace Tetris
             StartPause_Btn.Text = start;
             Level_btn.Enabled = true;
         }
+
+        private void Exit_btn_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (model.GameStatus == GameStatus.Started)
+            {
+                StartPause_Btn.Text = resume;
+                model.GameStatus = GameStatus.Paused;
+                model.StartTimer(screen);
+            }
+
+            DialogResult dr = MessageBox.Show("Вы уверены, что хотите выйти из игры?", "Тетрис", MessageBoxButtons.YesNoCancel);
+            if (dr != DialogResult.Yes)
+                e.Cancel = true;
+            else
+                e.Cancel = false;
+        }
     }
 }
