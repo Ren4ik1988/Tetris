@@ -13,20 +13,21 @@ namespace Tetris
         Image image;
 
         public Image Image { get => image; set => image = value; }
+        internal Images Images { get => images; set => images = value; }
 
         public BackGraundMatrix()
         {
-            images = new Images();
-            Image = images.MainImage;
+            Images = new Images();
+            Image = Images.MainImage;
         }
 
 
         public void PutImg()
         {
-            if (Image != images.BlockImage)
-                Image = images.BlockImage;
+            if (Image != Images.BlockImage)
+                Image = Images.BlockImage;
             else
-                Image = images.MainImage;
+                Image = Images.MainImage;
         }
     }
 }

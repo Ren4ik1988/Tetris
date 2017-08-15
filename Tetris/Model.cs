@@ -82,15 +82,25 @@ namespace Tetris
 
         void Run(object obj) //отвечает за движение фигуры
         {
-            mainScreen[i, j].PutImg();
-            mainScreen[i, j].Image = mainScreen[i, j].Image;
-            i++;
-            mainScreen[i, j].PutImg();
-            mainScreen[i, j].Image = mainScreen[i, j].Image;
-
-            screen.Invalidate();
-            if (i == (vertLength - 1))
+            if (mainScreen[i + 1, j + 1].Image == mainScreen[i + 1, j + 1].Images.BlockImage)
+            {
                 Random();
+            }
+            else
+            {
+
+                mainScreen[i, j].PutImg();
+                mainScreen[i, j].Image = mainScreen[i, j].Image;
+                i++;
+                mainScreen[i, j].PutImg();
+                mainScreen[i, j].Image = mainScreen[i, j].Image;
+
+                screen.Invalidate();
+
+                if (i == (vertLength - 1))
+                    Random();
+            }
+            
         }
     }
 }
