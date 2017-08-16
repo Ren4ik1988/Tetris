@@ -25,6 +25,7 @@ namespace Tetris
 
         public GameStatus GameStatus;
         Random random;
+        static bool checkStatus;
         int i, j; //поля определяют номера ячеек матрицы
         int gameLevel; //определяет скорость игры
         Timer timer;
@@ -84,6 +85,7 @@ namespace Tetris
         {
             if (mainScreen[i+1, j].Image == mainScreen[i + 1, j].Images.BlockImage)
             {
+                isAllFull();
                 Random();
             }
             else
@@ -98,9 +100,38 @@ namespace Tetris
                 screen.Invalidate();
 
                 if (i == (vertLength - 1))
+                {
+                    isAllFull();
                     Random();
+                }
             }
             
+        }
+
+        private void isAllFull() //проверяет вся ли линия заполнена
+        {
+            for(j=0; j < gorizontLength; j++)
+            {
+                if (mainScreen[i, j].Image == mainScreen[i, j].Images.MainImage)
+                {
+                    checkStatus = false;
+                    return;
+                }
+                else
+                    checkStatus = true;
+            }
+
+            if (checkStatus == true)
+                clearLine();
+        }
+
+        private void clearLine() //если вся линия полностью заполнилась, очищает линию
+        {
+            for (j = 0; j < gorizontLength; j++)
+            {
+                if(mainScreen[i, j].Image != mainScreen[i, j].Images.MainImage)
+                    mainScreen[i, j].PutImg();
+            }
         }
     }
 }
