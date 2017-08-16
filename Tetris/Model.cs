@@ -19,8 +19,8 @@ namespace Tetris
 
         #region Constants: константы уровней игры
         public const int Easy = 1000;
-        public const int Middle = 700;
-        public const int Hard = 500;
+        public const int Middle = 600;
+        public const int Hard = 300;
         #endregion
 
         public GameStatus GameStatus;
@@ -63,7 +63,7 @@ namespace Tetris
         public void Random()
         {
             i = 0;
-            j = random.Next(0, 9); //определяет рандомную позицию блока по горизонтальной координате
+            j = random.Next(0, 10); //определяет рандомную позицию блока по горизонтальной координате
             mainScreen[i, j].PutImg(); // меняет изображение переменной Image на картинку блока
             mainScreen[i, j].Image = mainScreen[i, j].Image; // производит замену элемента ячейки
         }
@@ -82,7 +82,7 @@ namespace Tetris
 
         void Run(object obj) //отвечает за движение фигуры
         {
-            if (mainScreen[i + 1, j + 1].Image == mainScreen[i + 1, j + 1].Images.BlockImage)
+            if (mainScreen[i+1, j].Image == mainScreen[i + 1, j].Images.BlockImage)
             {
                 Random();
             }
