@@ -20,7 +20,7 @@ namespace Tetris
         #region Constants: константы уровней игры
         public const int Easy = 1000;
         public const int Middle = 600;
-        public const int Hard = 300;
+        public const int Hard = 100;
         #endregion
 
         public GameStatus GameStatus;
@@ -49,16 +49,16 @@ namespace Tetris
             i = j = 0;
             mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
 
+            if (timer != null)
+                StartTimer(screen);
+
             for (int i = 0; i < vertLength; i++)
                 for (int j = 0; j < gorizontLength; j++)
                 {
                     mainScreen[i, j] = new BackGraundMatrix();
                 }
-            if (timer != null)
-            {
-                StartTimer(screen);
+            if (screen != null)
                 screen.Invalidate();
-            }
         }
 
         public void Random()
