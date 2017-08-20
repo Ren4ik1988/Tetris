@@ -31,6 +31,7 @@ namespace Tetris
         Timer timer;
         TimerCallback moveBlock;
         Screen screen;
+        Figure figure;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
 
@@ -44,7 +45,7 @@ namespace Tetris
         internal BackGraundMatrix[,] MainScreen { get => mainScreen; set => mainScreen = value; }
         public int GameLevel { set => gameLevel = value; }
 
-        public void FillMatrix()
+        public void FillMatrix() //изначальное построение матрицы экрана
         {
             i = j = 0;
             mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
@@ -59,6 +60,8 @@ namespace Tetris
                 }
             if (screen != null)
                 screen.Invalidate();
+
+            figure = new Figure(mainScreen);
         }
 
         public void Random()
@@ -67,6 +70,7 @@ namespace Tetris
             j = random.Next(0, 10); //определяет рандомную позицию блока по горизонтальной координате
             mainScreen[i, j].PutImg(); // меняет изображение переменной Image на картинку блока
             mainScreen[i, j].Image = mainScreen[i, j].Image; // производит замену элемента ячейки
+            figure.AddNew1(i,j);
         }
 
         public void StartTimer(Screen screen)
@@ -93,9 +97,11 @@ namespace Tetris
 
                 mainScreen[i, j].PutImg();
                 mainScreen[i, j].Image = mainScreen[i, j].Image;
+                figure.AddNew1(i, j);
                 i++;
                 mainScreen[i, j].PutImg();
                 mainScreen[i, j].Image = mainScreen[i, j].Image;
+                figure.AddNew1(i, j);
 
                 screen.Invalidate();
 
@@ -125,10 +131,8 @@ namespace Tetris
                 clearLine();
         }
 
-        private void clearLine() //если вся линия полностью заполнилась, очищает линию
+        private void clearLine() //если вся линия полностью заполнилась, очищает линию и перемещает верхние фигуры на пустую строку
         {
-            timer.Change(Timeout.Infinite, 0);
-
             for (j = 0; j < gorizontLength; j++)
             {
                 if(mainScreen[i, j].Image != mainScreen[i, j].Images.MainImage)
@@ -144,15 +148,9 @@ namespace Tetris
                         mainScreen[i, j].PutImg();
                         mainScreen[i - 1, j].PutImg();
                     }
-
                 }
-
-
                 i--;
             }
-
-            timer = new Timer(moveBlock, null, 500, gameLevel);
-
         }
     }
 }
