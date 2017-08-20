@@ -127,11 +127,32 @@ namespace Tetris
 
         private void clearLine() //если вся линия полностью заполнилась, очищает линию
         {
+            timer.Change(Timeout.Infinite, 0);
+
             for (j = 0; j < gorizontLength; j++)
             {
                 if(mainScreen[i, j].Image != mainScreen[i, j].Images.MainImage)
                     mainScreen[i, j].PutImg();
             }
+
+            while (i > 0)
+            {
+                for (j = 0; j < gorizontLength; j++)
+                {
+                    if (mainScreen[i - 1, j].Image != mainScreen[i - 1, j].Images.MainImage)
+                    {
+                        mainScreen[i, j].PutImg();
+                        mainScreen[i - 1, j].PutImg();
+                    }
+
+                }
+
+
+                i--;
+            }
+
+            timer = new Timer(moveBlock, null, 500, gameLevel);
+
         }
     }
 }
