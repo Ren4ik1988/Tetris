@@ -11,10 +11,12 @@ namespace Tetris
         int i, j; // поля совместимы с полями из класса Model
         static int i2, j2; // вспомогательные поля для обозначения позиций дополнительных элементов фигуры
         BackGraundMatrix[,] mainScreen;
+        short[,] onOff;
 
-        public Figure(BackGraundMatrix[,] mainScreen)
+        public Figure(BackGraundMatrix[,] mainScreen, short[,] onOff)
         {
             this.mainScreen = mainScreen;
+            this.onOff = onOff;
         }
 
         public void Random(ref int i, ref int j) // метод вызывается когда необходимо создать фигуру "квадрат"
@@ -34,6 +36,7 @@ namespace Tetris
             mainScreen[i, j2].Image = mainScreen[i, j].Image;
             mainScreen[i2, j].Image = mainScreen[i, j].Image;
             mainScreen[i2, j2].Image = mainScreen[i, j].Image;
+            onOff[i, j] = onOff[i, j2] = onOff[i2, j] = onOff[i2, j2] = Model.On;
         }
 
         internal bool Run(ref int i, ref int j)
@@ -46,6 +49,7 @@ namespace Tetris
             mainScreen[i, j].PutImg();
             mainScreen[i, j].Image = mainScreen[i, j].Image;
             mainScreen[i, j2].Image = mainScreen[i, j].Image;
+            onOff[i, j] = onOff[i, j2] = Model.Off;
 
             #endregion
 
@@ -59,13 +63,14 @@ namespace Tetris
             mainScreen[i, j2].Image = mainScreen[i, j].Image;
             mainScreen[i2, j].Image = mainScreen[i, j].Image;
             mainScreen[i2, j2].Image = mainScreen[i, j].Image;
+            onOff[i, j] = onOff[i, j2] = onOff[i2, j] = onOff[i2, j2] = Model.On;
 
             #endregion
 
             if (i2 == (Model.vertLength - 1))
                 return false;
-            else if (mainScreen[i2 + 1, j].Image == mainScreen[i2 + 1, j].Images.BlockImage |
-                      mainScreen[i2 + 1, j2].Image == mainScreen[i2 + 1, j2].Images.BlockImage)
+            else if (onOff[i2+1,j] == Model.On ||
+                     onOff[i2+1, j2] == Model.On)
                 return false;
             return true;
 

@@ -23,6 +23,11 @@ namespace Tetris
         public const int Hard = 100;
         #endregion
 
+        #region Constants: константа включена для удобства определния наличия в ячейке изображения
+        public const short On = 1;
+        public const short Off = 0;
+        #endregion
+
         public GameStatus GameStatus;
         Random random;
         static bool checkStatus;
@@ -34,6 +39,7 @@ namespace Tetris
         Figure figure;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
+        short[,] onOff;
 
         public Model()
         {
@@ -50,6 +56,7 @@ namespace Tetris
         {
             i = j = 0;
             mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
+            onOff = new short[vertLength, gorizontLength];
 
             if (timer != null)
                 StartTimer(screen);
@@ -58,11 +65,12 @@ namespace Tetris
                 for (int j = 0; j < gorizontLength; j++)
                 {
                     mainScreen[i, j] = new BackGraundMatrix();
+                    onOff[i, j] = Off;
                 }
             if (screen != null)
                 screen.Invalidate();
 
-            figure = new Figure(mainScreen);
+            figure = new Figure(mainScreen, onOff);
         }
 
         public void Random()
