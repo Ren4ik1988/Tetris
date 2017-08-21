@@ -39,6 +39,7 @@ namespace Tetris
         {
             GameStatus = GameStatus.Paused;
             random = new Random();
+            checkStatus = true;
             FillMatrix();
         }
 
@@ -70,7 +71,7 @@ namespace Tetris
             j = random.Next(0, 10); //определяет рандомную позицию блока по горизонтальной координате
             //mainScreen[i, j].PutImg(); // меняет изображение переменной Image на картинку блока
             //mainScreen[i, j].Image = mainScreen[i, j].Image; // производит замену элемента ячейки
-            figure.Random(ref i,ref j);
+            figure.Random(ref i, ref j);
         }
 
         public void StartTimer(Screen screen)
@@ -87,55 +88,54 @@ namespace Tetris
 
         void Run(object obj) //отвечает за движение фигуры
         {
-            if (i == (vertLength - 1))
+            if (checkStatus)
             {
-                Random();
-            }
-            else if (mainScreen[i + 1, j].Image == mainScreen[i + 1, j].Images.BlockImage |
-                   mainScreen[i + 1, j + 1].Image == mainScreen[i + 1, j + 1].Images.BlockImage)
-            {
-                figure.Run(ref i, ref j);
+                checkStatus = figure.Run(ref i, ref j);
                 screen.Invalidate();
             }
-        }
-
-        private void isAllFull() //проверяет вся ли линия заполнена
-        {
-            for(j=0; j < gorizontLength; j++)
+            else
             {
-                if (mainScreen[i, j].Image == mainScreen[i, j].Images.MainImage)
-                {
-                    checkStatus = false;
-                    return;
-                }
-                else
-                    checkStatus = true;
-            }
-
-            if (checkStatus == true)
-                clearLine();
-        }
-
-        private void clearLine() //если вся линия полностью заполнилась, очищает линию и перемещает верхние фигуры на пустую строку
-        {
-            for (j = 0; j < gorizontLength; j++)
-            {
-                if(mainScreen[i, j].Image != mainScreen[i, j].Images.MainImage)
-                    mainScreen[i, j].PutImg();
-            }
-
-            while (i > 0)
-            {
-                for (j = 0; j < gorizontLength; j++)
-                {
-                    if (mainScreen[i - 1, j].Image != mainScreen[i - 1, j].Images.MainImage)
-                    {
-                        mainScreen[i, j].PutImg();
-                        mainScreen[i - 1, j].PutImg();
-                    }
-                }
-                i--;
+                checkStatus = true;
+                Random();
             }
         }
+
+        //private void isAllFull() //проверяет вся ли линия заполнена
+        //{
+        //    for(j=0; j < gorizontLength; j++)
+        //    {
+        //        if (mainScreen[i, j].Image == mainScreen[i, j].Images.MainImage)
+        //        {
+        //            checkStatus = false;
+        //            return;
+        //        }
+        //        else
+        //            checkStatus = true;
+        //    }
+
+        //    if (checkStatus == true)
+        //        clearLine();
+        //}
+
+        //private void clearLine() //если вся линия полностью заполнилась, очищает линию и перемещает верхние фигуры на пустую строку
+        //{
+        //    for (j = 0; j < gorizontLength; j++)
+        //    {
+        //        if(mainScreen[i, j].Image != mainScreen[i, j].Images.MainImage)
+        //            mainScreen[i, j].PutImg();
+        //    }
+
+        //    while (i > 0)
+        //    {
+        //        for (j = 0; j < gorizontLength; j++)
+        //        {
+        //            if (mainScreen[i - 1, j].Image != mainScreen[i - 1, j].Images.MainImage)
+        //            {
+        //                mainScreen[i, j].PutImg();
+        //                mainScreen[i - 1, j].PutImg();
+        //            }
+        //        }
+        //        i--;
+        //    }
     }
 }
