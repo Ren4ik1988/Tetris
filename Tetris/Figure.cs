@@ -17,13 +17,13 @@ namespace Tetris
         {
             this.mainScreen = mainScreen;
             this.onOff = onOff;
-        }
+        }//конструктор
 
         public void Random(ref int i, ref int j) // метод вызывается когда необходимо создать фигуру "квадрат"
         {
             this.i = i;
 
-            if (j > 8)
+            if (j > 8)  //условия исключает возможность выхода значения квадрата за пределы массива по горизонатльной линии
                 this.j = --j;
             else
                 this.j = j;
@@ -67,13 +67,21 @@ namespace Tetris
 
             #endregion
 
+            #region Третья часть метода: проверяет условие заполненности матрицы
             if (i2 == (Model.vertLength - 1))
+            {
+                i = i2; // замена значений необходима для корректной работы методов класса Model
                 return false;
-            else if (onOff[i2+1,j] == Model.On ||
-                     onOff[i2+1, j2] == Model.On)
+            }
+            else if (onOff[i2 + 1, j] == Model.On ||
+                     onOff[i2 + 1, j2] == Model.On)
+            {
+                i = i2;
                 return false;
+            }
             return true;
+            #endregion
 
-        }
+        } //метод определяет логику движения квадрата и заполнение игрового поля
     }
 }
