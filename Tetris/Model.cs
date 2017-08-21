@@ -87,27 +87,16 @@ namespace Tetris
 
         void Run(object obj) //отвечает за движение фигуры
         {
-            if (mainScreen[i+1, j].Image == mainScreen[i + 1, j].Images.BlockImage)
+            if (i == (vertLength - 1))
             {
-                isAllFull();
                 Random();
             }
-            else
+            else if (mainScreen[i + 1, j].Image == mainScreen[i + 1, j].Images.BlockImage |
+                   mainScreen[i + 1, j + 1].Image == mainScreen[i + 1, j + 1].Images.BlockImage)
             {
-
-               figure.Run(ref i,ref j);
-                
-               // figure.AddNew1(i, j);
-
+                figure.Run(ref i, ref j);
                 screen.Invalidate();
-
-                if (i == (vertLength - 1))
-                {
-                    isAllFull();
-                    Random();
-                }
             }
-            
         }
 
         private void isAllFull() //проверяет вся ли линия заполнена
