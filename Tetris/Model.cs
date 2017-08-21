@@ -68,9 +68,9 @@ namespace Tetris
         {
             i = 0;
             j = random.Next(0, 10); //определяет рандомную позицию блока по горизонтальной координате
-            mainScreen[i, j].PutImg(); // меняет изображение переменной Image на картинку блока
-            mainScreen[i, j].Image = mainScreen[i, j].Image; // производит замену элемента ячейки
-            figure.AddNew1(i,j);
+            //mainScreen[i, j].PutImg(); // меняет изображение переменной Image на картинку блока
+            //mainScreen[i, j].Image = mainScreen[i, j].Image; // производит замену элемента ячейки
+            figure.Random(ref i,ref j);
         }
 
         public void StartTimer(Screen screen)
@@ -95,13 +95,9 @@ namespace Tetris
             else
             {
 
-                mainScreen[i, j].PutImg();
-                mainScreen[i, j].Image = mainScreen[i, j].Image;
-                figure.AddNew1(i, j);
-                i++;
-                mainScreen[i, j].PutImg();
-                mainScreen[i, j].Image = mainScreen[i, j].Image;
-                figure.AddNew1(i, j);
+               figure.Run(ref i,ref j);
+                
+               // figure.AddNew1(i, j);
 
                 screen.Invalidate();
 
