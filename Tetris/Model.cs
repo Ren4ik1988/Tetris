@@ -28,6 +28,13 @@ namespace Tetris
         public const short Off = 0;
         #endregion
 
+        #region Readonly: поля ридонли для обозначения пустой ячейки и заполненной соответственно
+        static readonly BackGraundMatrix isNull;
+        static readonly BackGraundMatrix isNotNull;
+        internal static BackGraundMatrix IsNull => isNull;
+        internal static BackGraundMatrix IsNotNull => isNotNull;
+        #endregion
+
         public GameStatus GameStatus;
         Random random;
         static bool checkStatus;
@@ -37,6 +44,7 @@ namespace Tetris
         TimerCallback moveBlock;
         Screen screen;
         Figure figure;
+        bool navigatorOn;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
         short[,] onOff;
@@ -46,11 +54,21 @@ namespace Tetris
             GameStatus = GameStatus.Paused;
             random = new Random();
             checkStatus = true;
+            navigatorOn = false;
             FillMatrix();
+        }
+
+        static Model()
+        {
+            isNull = new BackGraundMatrix();
+            isNotNull = new BackGraundMatrix();
+            isNotNull.PutImg();
         }
 
         internal BackGraundMatrix[,] MainScreen { get => mainScreen; set => mainScreen = value; }
         public int GameLevel { set => gameLevel = value; }
+
+        
 
         public void FillMatrix() //изначальное построение матрицы экрана
         {
@@ -96,8 +114,17 @@ namespace Tetris
         {
             if (checkStatus)
             {
-                checkStatus = figure.Run(ref i, ref j);
-                screen.Invalidate();
+                if (!navigatorOn)
+                {
+                    checkStatus = figure.Run(ref i, ref j);
+                    screen.Invalidate();
+                }
+                else
+                {
+                    navigatorOn = false;
+                    figure.RightMove(ref i, ref j);
+                    screen.Invalidate();
+                }
             }
             else
             {
@@ -147,7 +174,10 @@ namespace Tetris
 
         internal void RightMove()
         {
-            throw new NotImplementedException();
+            if (GameStatus == GameStatus.Started)
+            { 
+                navigatorOn = true;
+            }
         }
 
         internal void LeftMove()
