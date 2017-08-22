@@ -109,5 +109,28 @@ namespace Tetris
             else
                 e.Cancel = false;
         }
+
+        private void Manipulate(object sender, KeyEventArgs e)
+        {
+            switch(e.KeyCode)
+            {
+                case Keys.Left: model.LeftMove(); break;
+                case Keys.Right: model.RightMove(); break;
+                default: break;
+            }
+        }
+
+        private void InputCatch(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                case Keys.Right:
+                case Keys.Up:
+                case Keys.Down:
+                    e.IsInputKey = true;
+                    break;
+            }
+        }
     }
 }

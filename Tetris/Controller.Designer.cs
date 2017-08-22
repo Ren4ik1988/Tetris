@@ -100,6 +100,8 @@
             this.StartPause_Btn.UseCompatibleTextRendering = true;
             this.StartPause_Btn.UseVisualStyleBackColor = true;
             this.StartPause_Btn.Click += new System.EventHandler(this.StartPause_Btn_Click);
+            this.StartPause_Btn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Manipulate);
+            this.StartPause_Btn.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.InputCatch);
             // 
             // MainForm
             // 

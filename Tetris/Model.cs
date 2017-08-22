@@ -144,6 +144,16 @@ namespace Tetris
             //    i--;
             //}
         }
+
+        internal void RightMove()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void LeftMove()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
