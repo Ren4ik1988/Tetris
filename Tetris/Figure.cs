@@ -110,6 +110,35 @@ namespace Tetris
 
             #endregion
         }
+
+        internal void LeftMove(ref int i , ref int j)
+        {
+            if (j2 == 1)
+                return;
+
+            this.i = i;
+            this.j = j;
+
+            #region Сбарсываем элементы правого столбца фигуры
+
+            mainScreen[i, j2].Image =
+                mainScreen[i2, j2].Image = Model.IsNull.Image;
+
+            onOff[i, j2] = onOff[i2, j2] = Model.Off;
+
+            #endregion
+
+            #region Дополняем левую часть фигуры новыми элементами
+            j--;
+            j2--;
+
+            mainScreen[i, j].Image =
+                mainScreen[i2, j].Image = Model.IsNotNull.Image;
+
+            onOff[i, j] = onOff[i2, j] = Model.On;
+
+            #endregion
+        }
     }
 }
 

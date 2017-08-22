@@ -44,7 +44,7 @@ namespace Tetris
         TimerCallback moveBlock;
         Screen screen;
         Figure figure;
-        bool navigatorOn;
+        bool navigator;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
         short[,] onOff;
@@ -54,7 +54,7 @@ namespace Tetris
             GameStatus = GameStatus.Paused;
             random = new Random();
             checkStatus = true;
-            navigatorOn = false;
+            navigator = false;
             FillMatrix();
         }
 
@@ -114,14 +114,14 @@ namespace Tetris
         {
             if (checkStatus)
             {
-                if (!navigatorOn)
+                if (!navigator)
                 {
                     checkStatus = figure.Run(ref i, ref j);
                     screen.Invalidate();
                 }
                 else
                 {
-                    navigatorOn = false;
+                    navigator = false;
                     figure.RightMove(ref i, ref j);
                     screen.Invalidate();
                 }
@@ -145,10 +145,10 @@ namespace Tetris
             }
 
             if (checkStatus)
-                clearLine();
+                ClearLine();
         }
 
-        private void clearLine() //если вся линия полностью заполнилась, очищает линию и перемещает верхние фигуры на пустую строку
+        private void ClearLine() //если вся линия полностью заполнилась, очищает линию и перемещает верхние фигуры на пустую строку
         {
             for (j = 0; j < gorizontLength; j++)
             {
@@ -172,17 +172,17 @@ namespace Tetris
             //}
         }
 
-        internal void RightMove()
+        internal void Navigator()
         {
             if (GameStatus == GameStatus.Started)
             { 
-                navigatorOn = true;
+                navigator = true;
             }
         }
 
         internal void LeftMove()
         {
-            throw new NotImplementedException();
+            navigator = true;
         }
     }
 }
