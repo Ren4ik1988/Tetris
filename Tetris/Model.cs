@@ -18,8 +18,8 @@ namespace Tetris
         #endregion
 
         #region Constants: константы уровней игры
-        public const int Easy = 1000;
-        public const int Middle = 600;
+        public const int Easy = 500;
+        public const int Middle = 300;
         public const int Hard = 100;
         #endregion
 
@@ -97,6 +97,11 @@ namespace Tetris
         {
             i = 0;
             j = random.Next(0, 10); //определяет рандомную позицию блока по горизонтальной координате
+
+            if (timer != null)
+            {
+                timer.Change(0, gameLevel);
+            }
             figure.Random(ref i, ref j);
         }
 
@@ -106,7 +111,7 @@ namespace Tetris
             {
                 this.screen = screen;
                 moveBlock = new TimerCallback(Run);
-                timer = new Timer(moveBlock, null, 500, gameLevel);
+                timer = new Timer(moveBlock, null, 0, gameLevel);
             }
             else
                 timer.Change(Timeout.Infinite, 0);
@@ -138,8 +143,7 @@ namespace Tetris
                             break;
 
                         case NavigateType.Down:
-                            figure.DownMove(ref i, ref j);
-                            screen.Invalidate();
+                            timer.Change(0, 50);
                             break;
 
                         case NavigateType.Turn:
@@ -201,7 +205,7 @@ namespace Tetris
         }
 
 
-        internal void Navigator()
+        internal void RightMove()
         {
             if (GameStatus == GameStatus.Started)
             {

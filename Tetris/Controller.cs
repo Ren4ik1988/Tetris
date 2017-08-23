@@ -115,7 +115,9 @@ namespace Tetris
             switch(e.KeyCode)
             {
                 case Keys.Left: model.LeftMove(); break;
-                case Keys.Right: model.Navigator(); break;
+                case Keys.Right: model.RightMove(); break;
+                case Keys.Down: model.DownMove(); break;
+                case Keys.Up: model.TurnMove(); break;
                 default: break;
             }
         }

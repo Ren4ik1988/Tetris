@@ -43,6 +43,20 @@ namespace Tetris
             this.i = i;
             this.j = j;
 
+            #region Третья часть метода: проверяет условие заполненности матрицы
+            if (i2 == (Model.vertLength - 1))
+            {
+                i = i2; // замена значений необходима для корректной работы методов класса Model
+                return false;
+            }
+            else if (onOff[i2 + 1, j] == Model.On ||
+                     onOff[i2 + 1, j2] == Model.On)
+            {
+                i = i2;
+                return false;
+            }
+            #endregion
+
             #region Первая часть метода, отвечает за очистку вверхних ячеек при перемещении объекта вниз
 
             mainScreen[i, j].Image = mainScreen[i, j2].Image = Model.IsNull.Image;
@@ -65,27 +79,17 @@ namespace Tetris
 
             #endregion
 
-            #region Третья часть метода: проверяет условие заполненности матрицы
-            if (i2 == (Model.vertLength - 1))
-            {
-                i = i2; // замена значений необходима для корректной работы методов класса Model
-                return false;
-            }
-            else if (onOff[i2 + 1, j] == Model.On ||
-                     onOff[i2 + 1, j2] == Model.On)
-            {
-                i = i2;
-                return false;
-            }
             return true;
-            #endregion
-
         } 
 
         internal void RightMove(ref int i, ref int j)
         {
-            if (j2 == Model.gorizontLength - 1)
+            if (j2 == Model.gorizontLength - 1 ||
+                   onOff[i, j2 + 1] == Model.On ||
+                   onOff[i2, j2 + 1] == Model.On)
+            {
                 return;
+            }
 
             this.i = i;
             this.j = j;
@@ -113,7 +117,9 @@ namespace Tetris
 
         internal void LeftMove(ref int i , ref int j)
         {
-            if (j2 == 1)
+            if ( j2 == 1 ||
+                 onOff[i, j - 1] == Model.On ||
+                 onOff[i2, j - 1] == Model.On)
                 return;
 
             this.i = i;
