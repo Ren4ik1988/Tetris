@@ -44,7 +44,8 @@ namespace Tetris
         TimerCallback moveBlock;
         Screen screen;
         Figure figure;
-        bool navigator;
+        bool navigatorStatus;
+        NavigateType navigateType;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
         short[,] onOff;
@@ -52,9 +53,10 @@ namespace Tetris
         public Model()
         {
             GameStatus = GameStatus.Paused;
+            navigateType = NavigateType.Right;
             random = new Random();
             checkStatus = true;
-            navigator = false;
+            navigatorStatus = false;
             FillMatrix();
         }
 
@@ -68,7 +70,7 @@ namespace Tetris
         internal BackGraundMatrix[,] MainScreen { get => mainScreen; set => mainScreen = value; }
         public int GameLevel { set => gameLevel = value; }
 
-        
+
 
         public void FillMatrix() //изначальное построение матрицы экрана
         {
@@ -114,16 +116,38 @@ namespace Tetris
         {
             if (checkStatus)
             {
-                if (!navigator)
+                if (!navigatorStatus)
                 {
                     checkStatus = figure.Run(ref i, ref j);
                     screen.Invalidate();
                 }
                 else
                 {
-                    navigator = false;
-                    figure.RightMove(ref i, ref j);
-                    screen.Invalidate();
+                    navigatorStatus = false;
+
+                    switch (navigateType)
+                    {
+                        case NavigateType.Right:
+                            figure.RightMove(ref i, ref j);
+                            screen.Invalidate();
+                            break;
+
+                        case NavigateType.Left:
+                            figure.LeftMove(ref i, ref j);
+                            screen.Invalidate();
+                            break;
+
+                        case NavigateType.Down:
+                            figure.DownMove(ref i, ref j);
+                            screen.Invalidate();
+                            break;
+
+                        case NavigateType.Turn:
+                            figure.TurnMove(ref i, ref j);
+                            screen.Invalidate();
+                            break;
+                    }
+
                 }
             }
             else
@@ -136,9 +160,12 @@ namespace Tetris
 
         private void TestAllFull() //проверяет вся ли линия заполнена
         {
+            if (i == 0)
+                return;
+
             for (j = 0; j < gorizontLength; j++)
             {
-                if (onOff[i,j] == Off)
+                if (onOff[i, j] == Off)
                     return;
                 else
                     checkStatus = true;
@@ -152,38 +179,65 @@ namespace Tetris
         {
             for (j = 0; j < gorizontLength; j++)
             {
-                mainScreen[i, j].PutImg();
-                mainScreen[i, j].Image = mainScreen[i, j].Image;
+                mainScreen[i, j].Image = IsNull.Image;
                 onOff[i, j] = Off;
-
             }
 
-            //while (i > 0)
-            //{
-            //    for (j = 0; j < gorizontLength; j++)
-            //    {
-            //        if (mainScreen[i - 1, j].Image != mainScreen[i - 1, j].Images.MainImage)
-            //        {
-            //            mainScreen[i, j].PutImg();
-            //            mainScreen[i - 1, j].PutImg();
-            //        }
-            //    }
-            //    i--;
-            //}
+            for (int k = i; k > 0; k--)
+            {
+                for (j = 0; j < gorizontLength; j++)
+                {
+                    if (onOff[k - 1, j] == On)
+                    {
+                        mainScreen[k, j].Image = IsNotNull.Image;
+                        mainScreen[k - 1, j].Image = IsNull.Image;
+                        onOff[k, j] = On;
+                        onOff[k - 1, j] = Off;
+                    }
+                }
+            }
+
+            TestAllFull();
         }
+
 
         internal void Navigator()
         {
             if (GameStatus == GameStatus.Started)
-            { 
-                navigator = true;
+            {
+                navigatorStatus = true;
+                navigateType = NavigateType.Right;
             }
         }
 
         internal void LeftMove()
         {
-            navigator = true;
+            if (GameStatus == GameStatus.Started)
+            {
+                navigatorStatus = true;
+                navigateType = NavigateType.Left;
+            }
+        }
+
+        internal void DownMove()
+        {
+            if (GameStatus == GameStatus.Started)
+            {
+                navigatorStatus = true;
+                navigateType = NavigateType.Down;
+            }
+        }
+
+        internal void TurnMove()
+        {
+            if (GameStatus == GameStatus.Started)
+            {
+                navigatorStatus = true;
+                navigateType = NavigateType.Turn;
+            }
         }
     }
+
 }
+
 

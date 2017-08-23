@@ -56,6 +56,7 @@
       <DependentUpon>Controller.cs</DependentUpon>
     </Compile>
     <Compile Include="Model.cs" />
+    <Compile Include="Navigator.cs" />
     <Compile Include="PositionOfBlocks.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

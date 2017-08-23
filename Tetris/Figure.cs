@@ -139,6 +139,16 @@ namespace Tetris
 
             #endregion
         }
+
+        internal void DownMove(ref int i, ref int j)
+        {
+            // to do
+        }
+
+        internal void TurnMove(ref int i, ref int j)
+        {
+            return;
+        }
     }
 }
 
