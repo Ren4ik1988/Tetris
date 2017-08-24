@@ -37,7 +37,7 @@ namespace Tetris
 
             mainScreen[i, j].Image =
                 mainScreen[i, j2].Image =
-                    mainScreen[i2, j].Image = 
+                    mainScreen[i2, j].Image =
                         mainScreen[i2, j2].Image = Model.IsNotNull.Image;
 
             onOff[i, j] = onOff[i, j2] = onOff[i2, j] = onOff[i2, j2] = Model.On;
@@ -51,7 +51,7 @@ namespace Tetris
             #region Третья часть метода: проверяет условие заполненности матрицы
             if (i2 == (Model.vertLength - 1) ||
                     onOff[i2 + 1, j] == Model.On ||
-                        onOff[i2 + 1, j2] == Model.On )
+                        onOff[i2 + 1, j2] == Model.On)
             {
                 return false;
             }
@@ -69,9 +69,9 @@ namespace Tetris
             ++i;
             ++i2;
 
-            mainScreen[i, j].Image = 
-                mainScreen[i, j2].Image = 
-                    mainScreen[i2, j].Image = 
+            mainScreen[i, j].Image =
+                mainScreen[i, j2].Image =
+                    mainScreen[i2, j].Image =
                         mainScreen[i2, j2].Image = Model.IsNotNull.Image;
 
             onOff[i, j] = onOff[i, j2] = onOff[i2, j] = onOff[i2, j2] = Model.On;
@@ -80,15 +80,15 @@ namespace Tetris
             #endregion
 
             return true;
-        } 
+        }
 
         internal void RightMove(ref int i, ref int j)
         {
             #region Первое условие, проверяет свободны ли боковые ячейки для перемещения
 
-            if ( j2 == Model.gorizontLength - 1 ||
+            if (j2 == Model.gorizontLength - 1 ||
                     onOff[i, j2 + 1] == Model.On ||
-                        onOff[i2, j2 + 1] == Model.On )
+                        onOff[i2, j2 + 1] == Model.On)
             {
                 Model.CanNavigateRight = false;
                 return;
@@ -97,10 +97,10 @@ namespace Tetris
 
             this.i = i;
             this.j = j;
-            
+
             #region Сбарсываем элементы левого столбца фигуры
 
-            mainScreen[i, j].Image = 
+            mainScreen[i, j].Image =
                 mainScreen[i2, j].Image = Model.IsNull.Image;
 
             onOff[i, j] = onOff[i2, j] = Model.Off;
@@ -111,19 +111,19 @@ namespace Tetris
             j++;
             j2++;
 
-            mainScreen[i, j2].Image = 
+            mainScreen[i, j2].Image =
                 mainScreen[i2, j2].Image = Model.IsNotNull.Image;
 
             onOff[i, j2] = onOff[i2, j2] = Model.On;
 
             #endregion
-            
+
             //Дублирование кода из начала метода необходимо для улучшения логики игры,
             //если квадрат уже упал на повехность, остается еще возможность сместить его на одну ячейку вправо
             #region Второе условие позволяет перенести объект на одну клетку влево, если даже по горизонтальной линии уже достигнут предел.
-            if ( i2 == (Model.vertLength - 1) ||
+            if (i2 == (Model.vertLength - 1) ||
                     onOff[i2 + 1, j] == Model.On ||
-                        onOff[i2 + 1, j2] == Model.On )
+                        onOff[i2 + 1, j2] == Model.On)
             {
                 Model.CanNavigateRight = false;
                 return;
@@ -131,12 +131,12 @@ namespace Tetris
             #endregion
         }
 
-        internal void LeftMove(ref int i , ref int j)
+        internal void LeftMove(ref int i, ref int j)
         {
             #region Первое условие, проверяет свободны ли боковые ячейки для перемещения
-            if ( j2 == 1 ||
+            if (j2 == 1 ||
                  onOff[i, j - 1] == Model.On ||
-                     onOff[i2, j - 1] == Model.On )
+                     onOff[i2, j - 1] == Model.On)
             {
                 Model.CanNavigateLeft = false;
                 return;
@@ -168,9 +168,9 @@ namespace Tetris
 
             #region Второе условие позволяет перенести объект на одну клетку влево, если даже по горизонтальной линии уже достигнут предел.
 
-            if ( i2 == (Model.vertLength - 1) ||
+            if (i2 == (Model.vertLength - 1) ||
                     onOff[i2 + 1, j] == Model.On ||
-                        onOff[i2 + 1, j2] == Model.On )
+                        onOff[i2 + 1, j2] == Model.On)
             {
                 Model.CanNavigateLeft = false;
                 return;
@@ -180,13 +180,15 @@ namespace Tetris
 
         internal void DownMove(ref int i, ref int j)
         {
-            // to do
+            //реализуется через метод Run()
         }
+
 
         internal void TurnMove(ref int i, ref int j)
         {
             return;
         }
     }
+    
 }
 

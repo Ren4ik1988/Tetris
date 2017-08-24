@@ -260,7 +260,8 @@ namespace Tetris
                     break;
 
                 case NavigateType.Down:
-                    //to do
+                    figure.Run(ref i, ref j);
+                    screen.Invalidate();
                     break;
 
                 case NavigateType.Turn:
