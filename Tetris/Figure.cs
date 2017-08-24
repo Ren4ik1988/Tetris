@@ -19,6 +19,11 @@ namespace Tetris
             this.onOff = onOff;
         }
 
+        internal int Current_i()
+        {
+            return i2;
+        }
+
         public void Random(ref int i, ref int j) // метод вызывается когда необходимо создать фигуру "квадрат"
         {
             this.i = i;
@@ -44,15 +49,10 @@ namespace Tetris
             this.j = j;
 
             #region Третья часть метода: проверяет условие заполненности матрицы
-            if (i2 == (Model.vertLength - 1))
+            if (i2 == (Model.vertLength - 1) ||
+                    onOff[i2 + 1, j] == Model.On ||
+                        onOff[i2 + 1, j2] == Model.On )
             {
-                i = i2; // замена значений необходима для корректной работы методов класса Model
-                return false;
-            }
-            else if (onOff[i2 + 1, j] == Model.On ||
-                     onOff[i2 + 1, j2] == Model.On)
-            {
-                i = i2;
                 return false;
             }
             #endregion
@@ -84,13 +84,16 @@ namespace Tetris
 
         internal void RightMove(ref int i, ref int j)
         {
-            if (j2 == Model.gorizontLength - 1 ||
-                   onOff[i, j2 + 1] == Model.On ||
-                   onOff[i2, j2 + 1] == Model.On)
+            #region Первое условие, проверяет свободны ли боковые ячейки для перемещения
+
+            if ( j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j2 + 1] == Model.On ||
+                        onOff[i2, j2 + 1] == Model.On )
             {
                 Model.CanNavigateRight = false;
                 return;
             }
+            #endregion
 
             this.i = i;
             this.j = j;
@@ -114,17 +117,31 @@ namespace Tetris
             onOff[i, j2] = onOff[i2, j2] = Model.On;
 
             #endregion
+            
+            //Дублирование кода из начала метода необходимо для улучшения логики игры,
+            //если квадрат уже упал на повехность, остается еще возможность сместить его на одну ячейку вправо
+            #region Второе условие позволяет перенести объект на одну клетку влево, если даже по горизонтальной линии уже достигнут предел.
+            if ( i2 == (Model.vertLength - 1) ||
+                    onOff[i2 + 1, j] == Model.On ||
+                        onOff[i2 + 1, j2] == Model.On )
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+            #endregion
         }
 
         internal void LeftMove(ref int i , ref int j)
         {
-            if (j2 == 1 ||
+            #region Первое условие, проверяет свободны ли боковые ячейки для перемещения
+            if ( j2 == 1 ||
                  onOff[i, j - 1] == Model.On ||
-                 onOff[i2, j - 1] == Model.On)
+                     onOff[i2, j - 1] == Model.On )
             {
                 Model.CanNavigateLeft = false;
                 return;
             }
+            #endregion
 
             this.i = i;
             this.j = j;
@@ -147,6 +164,17 @@ namespace Tetris
 
             onOff[i, j] = onOff[i2, j] = Model.On;
 
+            #endregion
+
+            #region Второе условие позволяет перенести объект на одну клетку влево, если даже по горизонтальной линии уже достигнут предел.
+
+            if ( i2 == (Model.vertLength - 1) ||
+                    onOff[i2 + 1, j] == Model.On ||
+                        onOff[i2 + 1, j2] == Model.On )
+            {
+                Model.CanNavigateLeft = false;
+                return;
+            }
             #endregion
         }
 

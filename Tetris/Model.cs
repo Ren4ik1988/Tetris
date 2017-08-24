@@ -19,8 +19,8 @@ namespace Tetris
 
         #region Constants: константы уровней игры
         public const int Easy = 1000;
-        public const int Middle = 300;
-        public const int Hard = 100;
+        public const int Middle = 500;
+        public const int Hard = 300;
         #endregion
 
         #region Constants: константа включена для удобства определния наличия в ячейке изображения
@@ -138,10 +138,6 @@ namespace Tetris
                     checkStatus = figure.Run(ref i, ref j);
                     screen.Invalidate();
                 }
-                    
-                    
-
-                
             }
             else
             {
@@ -153,6 +149,7 @@ namespace Tetris
 
         private void TestAllFull() //проверяет вся ли линия заполнена
         {
+            i = figure.Current_i();
             if (i == 0)
                 return;
 
