@@ -18,7 +18,7 @@ namespace Tetris
         #endregion
 
         #region Constants: константы уровней игры
-        public const int Easy = 500;
+        public const int Easy = 1000;
         public const int Middle = 300;
         public const int Hard = 100;
         #endregion
@@ -138,33 +138,10 @@ namespace Tetris
                     checkStatus = figure.Run(ref i, ref j);
                     screen.Invalidate();
                 }
-                else
-                {
-                    navigatorStatus = false;
+                    
+                    
 
-                    switch (navigateType)
-                    {
-                        case NavigateType.Right:
-                            figure.RightMove(ref i, ref j);
-                            screen.Invalidate();
-                            break;
-
-                        case NavigateType.Left:
-                            figure.LeftMove(ref i, ref j);
-                            screen.Invalidate();
-                            break;
-
-                        case NavigateType.Down:
-                            timer.Change(0, 50);
-                            break;
-
-                        case NavigateType.Turn:
-                            figure.TurnMove(ref i, ref j);
-                            screen.Invalidate();
-                            break;
-                    }
-
-                }
+                
             }
             else
             {
@@ -230,6 +207,7 @@ namespace Tetris
 
                 navigatorStatus = true;
                 navigateType = NavigateType.Right;
+                MoveFigure();
             }
         }
 
@@ -245,6 +223,7 @@ namespace Tetris
                 }
                 navigatorStatus = true;
                 navigateType = NavigateType.Left;
+                MoveFigure();
             }
         }
 
@@ -254,6 +233,7 @@ namespace Tetris
             {
                 navigatorStatus = true;
                 navigateType = NavigateType.Down;
+                MoveFigure();
             }
         }
 
@@ -263,6 +243,33 @@ namespace Tetris
             {
                 navigatorStatus = true;
                 navigateType = NavigateType.Turn;
+            }
+        }
+
+        private void MoveFigure()
+        {
+            navigatorStatus = false;
+
+            switch (navigateType)
+            {
+                case NavigateType.Right:
+                    figure.RightMove(ref i, ref j);
+                    screen.Invalidate();
+                    break;
+
+                case NavigateType.Left:
+                    figure.LeftMove(ref i, ref j);
+                    screen.Invalidate();
+                    break;
+
+                case NavigateType.Down:
+                    //to do
+                    break;
+
+                case NavigateType.Turn:
+                    figure.TurnMove(ref i, ref j);
+                    screen.Invalidate();
+                    break;
             }
         }
     }
