@@ -81,7 +81,10 @@ namespace Tetris
             onOff = new short[vertLength, gorizontLength];
 
             if (timer != null)
-                StartTimer(screen);
+            {
+                timer.Dispose();
+                timer = null;
+            }
 
             for (int i = 0; i < vertLength; i++)
                 for (int j = 0; j < gorizontLength; j++)
@@ -110,14 +113,20 @@ namespace Tetris
 
         public void StartTimer(Screen screen)
         {
-            if (GameStatus == GameStatus.Started)
+            if (GameStatus == GameStatus.NewGame)
             {
+                GameStatus = GameStatus.Started;
                 this.screen = screen;
-                moveBlock = new TimerCallback(Run);
+
+                if(moveBlock == null)
+                    moveBlock = new TimerCallback(Run);
                 timer = new Timer(moveBlock, null, 0, gameLevel);
+                return;
             }
-            else
+            if (GameStatus == GameStatus.Paused)
                 timer.Change(Timeout.Infinite, 0);
+            if (GameStatus == GameStatus.Started)
+                timer.Change(0, gameLevel);
         }
 
         void Run(object obj) //отвечает за запуск движения фигуры

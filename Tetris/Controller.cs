@@ -39,7 +39,6 @@ namespace Tetris
             if (model.GameStatus == GameStatus.NewGame)
             {
                 StartPause_Btn.Text = pause;
-                model.GameStatus = GameStatus.Started;
                 Level_btn.Enabled = false;
                 model.Random();
                 screen.Invalidate();
