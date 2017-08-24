@@ -46,6 +46,8 @@ namespace Tetris
         Figure figure;
         bool navigatorStatus;
         NavigateType navigateType;
+        static bool canNavigateRight;
+        static bool canNavigateLeft;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
         short[,] onOff;
@@ -69,8 +71,8 @@ namespace Tetris
 
         internal BackGraundMatrix[,] MainScreen { get => mainScreen; set => mainScreen = value; }
         public int GameLevel { set => gameLevel = value; }
-
-
+        public static bool CanNavigateRight { get => canNavigateRight; set => canNavigateRight = value; }
+        public static bool CanNavigateLeft { get => canNavigateLeft; set => canNavigateLeft = value; }
 
         public void FillMatrix() //изначальное построение матрицы экрана
         {
@@ -103,6 +105,7 @@ namespace Tetris
                 timer.Change(0, gameLevel);
             }
             figure.Random(ref i, ref j);
+            CanNavigateRight = canNavigateLeft = true;
         }
 
         public void StartTimer(Screen screen)
@@ -209,6 +212,13 @@ namespace Tetris
         {
             if (GameStatus == GameStatus.Started)
             {
+                canNavigateLeft = true;
+
+                if (!CanNavigateRight)
+                {
+                    return;
+                }
+
                 navigatorStatus = true;
                 navigateType = NavigateType.Right;
             }
@@ -218,6 +228,12 @@ namespace Tetris
         {
             if (GameStatus == GameStatus.Started)
             {
+                canNavigateRight = true;
+
+                if (!CanNavigateLeft)
+                {
+                    return;
+                }
                 navigatorStatus = true;
                 navigateType = NavigateType.Left;
             }

@@ -88,6 +88,7 @@ namespace Tetris
                    onOff[i, j2 + 1] == Model.On ||
                    onOff[i2, j2 + 1] == Model.On)
             {
+                Model.CanNavigateRight = false;
                 return;
             }
 
@@ -117,10 +118,13 @@ namespace Tetris
 
         internal void LeftMove(ref int i , ref int j)
         {
-            if ( j2 == 1 ||
+            if (j2 == 1 ||
                  onOff[i, j - 1] == Model.On ||
                  onOff[i2, j - 1] == Model.On)
+            {
+                Model.CanNavigateLeft = false;
                 return;
+            }
 
             this.i = i;
             this.j = j;
