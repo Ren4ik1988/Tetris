@@ -28,8 +28,6 @@ namespace Tetris
         {
             model = new Model();
             screen = new Screen(model);
-            model.GameStatus = GameStatus.NewGame;
-            model.GameLevel = Model.Easy;
             InitializeComponent();
             this.Controls.Add(screen);
         }

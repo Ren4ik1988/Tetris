@@ -54,7 +54,8 @@ namespace Tetris
 
         public Model()
         {
-            GameStatus = GameStatus.Paused;
+            GameStatus = GameStatus.NewGame;
+            gameLevel = Easy;
             navigateType = NavigateType.Right;
             random = new Random();
             checkStatus = true;
@@ -103,11 +104,11 @@ namespace Tetris
             i = 0;
             j = random.Next(0, 10); //определяет рандомную позицию блока по горизонтальной координате
 
-            if (timer != null)
-            {
-                timer.Change(0, gameLevel);
-            }
             figure.Random(ref i, ref j);
+
+            if (screen != null)
+                screen.Invalidate();
+
             CanNavigateRight = canNavigateLeft = true;
         }
 
@@ -117,10 +118,15 @@ namespace Tetris
             {
                 GameStatus = GameStatus.Started;
                 this.screen = screen;
-
+            
                 if(moveBlock == null)
                     moveBlock = new TimerCallback(Run);
-                timer = new Timer(moveBlock, null, 0, gameLevel);
+
+                if (timer == null)
+                    timer = new Timer(moveBlock, null, 0, gameLevel);
+                else
+                    timer.Change(0, gameLevel);
+
                 return;
             }
             if (GameStatus == GameStatus.Paused)
@@ -131,13 +137,11 @@ namespace Tetris
 
         void Run(object obj) //отвечает за запуск движения фигуры
         {
-            if (checkStatus)
+            if (checkStatus && !navigatorStatus)
             {
-                if (!navigatorStatus)
-                {
-                    checkStatus = figure.Run(ref i, ref j);
-                    screen.Invalidate();
-                }
+                checkStatus = figure.Run(ref i, ref j);
+                canNavigateRight = canNavigateLeft = true;
+                screen.Invalidate();
             }
             else
             {
@@ -195,8 +199,6 @@ namespace Tetris
         {
             if (GameStatus == GameStatus.Started)
             {
-                canNavigateLeft = true;
-
                 if (!CanNavigateRight)
                 {
                     return;
@@ -212,8 +214,6 @@ namespace Tetris
         {
             if (GameStatus == GameStatus.Started)
             {
-                canNavigateRight = true;
-
                 if (!CanNavigateLeft)
                 {
                     return;
@@ -240,6 +240,7 @@ namespace Tetris
             {
                 navigatorStatus = true;
                 navigateType = NavigateType.Turn;
+                MoveFigure();
             }
         }
 
