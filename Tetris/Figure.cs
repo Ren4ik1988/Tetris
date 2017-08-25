@@ -10,9 +10,9 @@ namespace Tetris
     {
         protected int i, j, randomTurnCode; // поля совместимы с полями из класса Model
         protected Random randomTurn;
-        static int i2, i3, i4, j2, j3, j4; // вспомогательные поля для обозначения позиций дополнительных элементов фигуры
-        BackGraundMatrix[,] mainScreen;
-        short[,] onOff;
+        static protected int i2, i3, i4, j2, j3, j4; // вспомогательные поля для обозначения позиций дополнительных элементов фигуры
+        protected BackGraundMatrix[,] mainScreen;
+        protected short[,] onOff;
 
         public Figure(BackGraundMatrix[,] mainScreen, short[,] onOff)
         {
@@ -30,7 +30,7 @@ namespace Tetris
         {
             this.i = i;
 
-            if (j > 8)  //условия исключает возможность выхода значения квадрата за пределы массива по горизонатльной линии
+            if (j > Model.gorizontLength -2)  //условия исключает возможность выхода значения квадрата за пределы массива по горизонатльной линии
                 this.j = --j;
             else
                 this.j = j;

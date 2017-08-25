@@ -98,6 +98,8 @@ namespace Tetris
                 screen.Invalidate();
 
             figure = new Figure(mainScreen, onOff);
+            line = new Line(mainScreen, onOff);
+            figure = line;
         }
 
         public void Random()

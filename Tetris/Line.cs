@@ -13,20 +13,36 @@ namespace Tetris
         public override void Random(ref int i, ref int j)
         {
             this.i = i;
-            this.j = j;
 
             randomTurnCode = randomTurn.Next(0, 2);
 
-            if(randomTurnCode == 0)
+            if (randomTurnCode == 0)
             {
+                #region Проверяем не выходит ли линия за пределы боковых границ
+                if (j > Model.gorizontLength - 4)
+                {
+                    j = j - 3;
+                }
+                #endregion
 
+                j2 = j + 3;
+
+                for (int k = j; k <= j2; k++)
+                {
+                    mainScreen[i, k].Image = Model.IsNotNull.Image;
+                    onOff[i, k] = Model.On;
+                }
             }
             else
             {
+                i2 = i + 3;
 
+                for (int k = i; k <= i2; k++)
+                {
+                    mainScreen[k, j].Image = Model.IsNotNull.Image;
+                    onOff[k, j] = Model.On;
+                }
             }
-
-
         }
 
         internal override int Current_i()
