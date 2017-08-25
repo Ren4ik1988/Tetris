@@ -8,8 +8,9 @@ namespace Tetris
 {
     class Figure
     {
-        int i, j; // поля совместимы с полями из класса Model
-        static int i2, j2; // вспомогательные поля для обозначения позиций дополнительных элементов фигуры
+        protected int i, j, randomTurnCode; // поля совместимы с полями из класса Model
+        protected Random randomTurn;
+        static int i2, i3, i4, j2, j3, j4; // вспомогательные поля для обозначения позиций дополнительных элементов фигуры
         BackGraundMatrix[,] mainScreen;
         short[,] onOff;
 
@@ -17,14 +18,15 @@ namespace Tetris
         {
             this.mainScreen = mainScreen;
             this.onOff = onOff;
+            randomTurn = new Random();
         }
 
-        internal int Current_i()
+        internal virtual int Current_i()
         {
             return i2;
         }
 
-        public void Random(ref int i, ref int j) // метод вызывается когда необходимо создать фигуру "квадрат"
+        public virtual void Random(ref int i, ref int j) // метод вызывается когда необходимо создать фигуру "квадрат"
         {
             this.i = i;
 
@@ -43,7 +45,7 @@ namespace Tetris
             onOff[i, j] = onOff[i, j2] = onOff[i2, j] = onOff[i2, j2] = Model.On;
         }
 
-        internal bool Run(ref int i, ref int j) //метод определяет логику движения квадрата и заполнение игрового поля
+        internal virtual bool Run(ref int i, ref int j) //метод определяет логику движения квадрата и заполнение игрового поля
         {
             this.i = i;
             this.j = j;
@@ -82,7 +84,7 @@ namespace Tetris
             return true;
         }
 
-        internal void RightMove(ref int i, ref int j)
+        internal virtual void RightMove(ref int i, ref int j)
         {
             #region Первое условие, проверяет свободны ли боковые ячейки для перемещения
 
@@ -131,7 +133,7 @@ namespace Tetris
             #endregion
         }
 
-        internal void LeftMove(ref int i, ref int j)
+        internal virtual void LeftMove(ref int i, ref int j)
         {
             #region Первое условие, проверяет свободны ли боковые ячейки для перемещения
             if (j2 == 1 ||
@@ -178,13 +180,13 @@ namespace Tetris
             #endregion
         }
 
-        internal void DownMove(ref int i, ref int j)
+        internal virtual void DownMove(ref int i, ref int j)
         {
             //реализуется через метод Run()
         }
 
 
-        internal void TurnMove(ref int i, ref int j)
+        internal virtual void TurnMove(ref int i, ref int j)
         {
             return;
         }

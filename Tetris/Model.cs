@@ -44,6 +44,7 @@ namespace Tetris
         TimerCallback moveBlock;
         Screen screen;
         Figure figure;
+        Line line;
         bool navigatorStatus;
         NavigateType navigateType;
         static bool canNavigateRight;

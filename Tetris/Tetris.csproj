@@ -55,6 +55,7 @@
     <Compile Include="Controller.Designer.cs">
       <DependentUpon>Controller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Line.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Navigator.cs" />
     <Compile Include="PositionOfBlocks.cs" />
