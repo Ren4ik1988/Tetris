@@ -94,8 +94,7 @@ namespace Tetris
             {
                 #region Первая часть метода: проверяет условие заполненности матрицы
                 if (i2 == (Model.vertLength - 1) ||
-                        onOff[i2 + 1, j] == Model.On ||
-                            onOff[i2 + 1, j2] == Model.On)
+                        onOff[i2 + 1, j] == Model.On )
                 {
                     return false;
                 }
