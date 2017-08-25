@@ -50,6 +50,81 @@ namespace Tetris
             return base.Current_i();
         }
 
+        internal override bool Run(ref int i, ref int j)
+        {
+            if (randomTurnCode == 0)
+            {
+                #region Первая часть метода: проверяет условие заполненности матрицы
+                if (i == (Model.vertLength - 1) )
+                    return false;
+
+                for (int k = j; k <= j2; k++)
+                {
+                    if (onOff[i + 1, k] == Model.On)
+                        return false;
+                }
+                #endregion
+
+                #region Вторая часть метода, отвечает за очистку вверхних ячеек при перемещении объекта вниз
+
+                for (int k = j; k <= j2; k++)
+                {
+                    mainScreen[i, k].Image = Model.IsNull.Image;
+                    onOff[i, k] = Model.Off;
+                }
+
+                #endregion
+
+                #region Третья часть метода: отвечает за пермещение элементов массива на уровень ниже(шаг один квадрат)
+
+                ++i;
+
+                for (int k = j; k <= j2; k++)
+                {
+                    mainScreen[i, k].Image = Model.IsNotNull.Image;
+                    onOff[i, k] = Model.On;
+                }
+
+                #endregion
+
+                return true;
+
+            }
+            else
+            {
+                #region Первая часть метода: проверяет условие заполненности матрицы
+                if (i2 == (Model.vertLength - 1) ||
+                        onOff[i2 + 1, j] == Model.On ||
+                            onOff[i2 + 1, j2] == Model.On)
+                {
+                    return false;
+                }
+                #endregion
+
+                #region Вторая часть метода, отвечает за очистку вверхних ячеек при перемещении объекта вниз
+
+                mainScreen[i, j].Image = Model.IsNull.Image;
+                onOff[i, j] = Model.Off;
+
+                #endregion
+
+                #region Третья часть метода: отвечает за пермещение элементов массива на уровень ниже(шаг один квадрат)
+
+                ++i;
+                ++i2;
+
+                for (int k = i; k <= i2; k++)
+                {
+                    mainScreen[k, j].Image = Model.IsNotNull.Image;
+                    onOff[k, j] = Model.On;
+                }
+
+                #endregion
+
+                return true;
+            }
+        }
+
         internal override void DownMove(ref int i, ref int j)
         {
             base.DownMove(ref i, ref j);
@@ -63,11 +138,6 @@ namespace Tetris
         internal override void RightMove(ref int i, ref int j)
         {
             base.RightMove(ref i, ref j);
-        }
-
-        internal override bool Run(ref int i, ref int j)
-        {
-            return base.Run(ref i, ref j);
         }
 
         internal override void TurnMove(ref int i, ref int j)
