@@ -96,9 +96,7 @@ namespace Tetris
                 return;
             }
             #endregion
-
-            this.i = i;
-            this.j = j;
+            
 
             #region Сбарсываем элементы левого столбца фигуры
 

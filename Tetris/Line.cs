@@ -131,12 +131,87 @@ namespace Tetris
 
         internal override void LeftMove(ref int i, ref int j)
         {
-            base.LeftMove(ref i, ref j);
+            
         }
 
         internal override void RightMove(ref int i, ref int j)
         {
-            base.RightMove(ref i, ref j);
+            if (randomTurnCode == 0)
+            {
+                #region Проверка свободна ли боковая ячейка для перемещения
+                j2 = j + 3;
+
+                if (j2 == Model.gorizontLength - 1 ||
+                        onOff[i, j2 + 1] == Model.On)
+                {
+                    Model.CanNavigateRight = false;
+                    return;
+                }
+                #endregion
+
+                #region Сброс крайней левой ячейки фигуры
+
+                mainScreen[i, j].Image = Model.IsNull.Image;
+                onOff[i, j] = Model.Off;
+
+                #endregion
+
+                #region Построение фигуры по новым координатам
+
+                j++;
+                j2++;
+
+                for (int k = j; k <= j2; k++)
+                {
+                    mainScreen[i, k].Image = Model.IsNotNull.Image;
+                    onOff[i, j] = Model.On;
+                }
+
+                #endregion
+            }
+            else
+            {
+                #region Проверка свободна ли боковая ячейка для перемещения
+                i2 = i + 3;
+
+                if (j == Model.gorizontLength - 1)
+                {
+                    Model.CanNavigateRight = false;
+                    return;
+                }
+
+                for (int k = i; k <= i2; k++)
+                {
+                    if (onOff[k,j+1] == Model.On)
+                    {
+                        Model.CanNavigateRight = false;
+                        return;
+                    }
+                }
+                #endregion
+
+                #region Сброс ячеек текущего расположения фигуры
+
+                for (int k = i; k <= i2; k++)
+                {
+                    mainScreen[k, j].Image = Model.IsNull.Image;
+                    onOff[k, j] = Model.Off;
+                }
+
+                #endregion
+
+                #region Построение фигуры по новым координатам
+
+                j++;
+
+                for (int k = i; k <= i2; k++)
+                {
+                    mainScreen[k, j].Image = Model.IsNotNull.Image;
+                    onOff[k, j] = Model.On;
+                }
+
+                #endregion
+            }
         }
 
         internal override void TurnMove(ref int i, ref int j)
