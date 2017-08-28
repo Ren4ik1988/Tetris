@@ -14,7 +14,7 @@ namespace Tetris
         {
             this.i = i;
 
-            randomTurnCode = 1; // randomTurn.Next(0, 2);
+            randomTurnCode = randomTurn.Next(0, 2);
 
             if (randomTurnCode == 0)
             {
@@ -55,8 +55,11 @@ namespace Tetris
             if (randomTurnCode == 0)
             {
                 #region Первая часть метода: проверяет условие заполненности матрицы
-                if (i == (Model.vertLength - 1) )
+                if (i == (Model.vertLength - 1))
+                {
+                    i2 = i;
                     return false;
+                }
 
                 for (int k = j; k <= j2; k++)
                 {
@@ -206,24 +209,6 @@ namespace Tetris
                 }
 
                 #endregion
-
-               /* #region Второе условие позволяет перенести объект на одну клетку влево, если даже по горизонтальной линии уже достигнут предел.
-                if (j == 0)
-                {
-                    Model.CanNavigateRight = false;
-                    return;
-                }
-
-                for (int k = i; k <= i2; k++)
-                {
-                    if (onOff[k, j - 1] == Model.On)
-                    {
-                        Model.CanNavigateRight = false;
-                        return;
-                    }
-                }
-
-                #endregion*/
             
             }
         }
