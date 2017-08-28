@@ -10,10 +10,9 @@ namespace Tetris
     {
         public Line(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff){}
 
+        #region Определяем начальную позицию фигуры и ее поворот: 0 - линия горизонтальная, 1 - вертикальная
         public override void Random(ref int i, ref int j)
         {
-            this.i = i;
-
             randomTurnCode = randomTurn.Next(0, 2);
 
             if (randomTurnCode == 0)
@@ -44,6 +43,7 @@ namespace Tetris
                 }
             }
         }
+        #endregion
 
         internal override int Current_i()
         {
@@ -295,7 +295,76 @@ namespace Tetris
 
         internal override void TurnMove(ref int i, ref int j)
         {
-            base.TurnMove(ref i, ref j);
+            if (randomTurnCode == 0)
+            {
+                #region Проверяем условия возможности поворота с горизонтали на вертикаль
+
+                i2 = i + 3;
+
+                if (i2 > Model.vertLength - 1 || onOff[i2, j] == Model.On)
+                {
+                    Model.CanNavigateRight = false;
+                    return;
+                }
+                #endregion
+
+                #region Сбрасываем горизонталь
+
+                j2 = j + 3;
+                randomTurnCode = 1;
+
+                for (int k = j; k <= j2; k++)
+                {
+                    mainScreen[i, k].Image = Model.IsNull.Image;
+                    onOff[i, k] = Model.Off;
+                }
+                #endregion
+                 
+                #region Заполняем вертикаль 
+
+                for (int k = i; k <= i2; k++)
+                {
+                    mainScreen[k, j].Image = Model.IsNotNull.Image;
+                    onOff[k, j] = Model.On;
+                }
+
+                #endregion
+            }
+            else
+            {
+                #region Проверяем условия возможности поворота с вертикали на горизонталь
+
+                j2 = j + 3;
+
+                if (j2 > Model.gorizontLength - 1 || onOff[i, j2] == Model.On)
+                {
+                    Model.CanNavigateRight = false;
+                    return;
+                }
+                #endregion
+
+                #region Сбрасываем вертикаль
+
+                i2 = i + 3;
+                randomTurnCode = 0;
+
+                for (int k = i; k <= i2; k++)
+                {
+                    mainScreen[k, j].Image = Model.IsNull.Image;
+                    onOff[k, j] = Model.Off;
+                }
+
+                #endregion
+
+                #region Заполняем горизонталь
+
+                for (int k = j; k <= j2; k++)
+                {
+                    mainScreen[i, k].Image = Model.IsNotNull.Image;
+                    onOff[i, k] = Model.On;
+                }
+                #endregion
+            }
         }
     }
 }
