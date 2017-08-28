@@ -28,12 +28,9 @@ namespace Tetris
 
         public virtual void Random(ref int i, ref int j) // метод вызывается когда необходимо создать фигуру "квадрат"
         {
-            this.i = i;
-
             if (j > Model.gorizontLength -2)  //условия исключает возможность выхода значения квадрата за пределы массива по горизонатльной линии
-                this.j = --j;
-            else
-                this.j = j;
+                --j;
+
             i2 = i + 1;
             j2 = j + 1;
 
@@ -47,9 +44,6 @@ namespace Tetris
 
         internal virtual bool Run(ref int i, ref int j) //метод определяет логику движения квадрата и заполнение игрового поля
         {
-            this.i = i;
-            this.j = j;
-
             #region Третья часть метода: проверяет условие заполненности матрицы
             if (i2 == (Model.vertLength - 1) ||
                     onOff[i2 + 1, j] == Model.On ||

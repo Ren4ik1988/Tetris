@@ -43,10 +43,13 @@ namespace Tetris
         Timer timer;
         TimerCallback moveBlock;
         Screen screen;
+        Figure mainFigure;
         Figure figure;
         Line line;
+        Stallion1 stallion1;
         bool navigatorStatus;
         NavigateType navigateType;
+        FigureList figurelist;
         static bool canNavigateRight;
         static bool canNavigateLeft;
 
@@ -62,6 +65,8 @@ namespace Tetris
             checkStatus = true;
             navigatorStatus = false;
             FillMatrix();
+            figure = new Figure(mainScreen, onOff);
+            line = new Line(mainScreen, onOff);
         }
 
         static Model()
@@ -97,9 +102,7 @@ namespace Tetris
             if (screen != null)
                 screen.Invalidate();
 
-            figure = new Figure(mainScreen, onOff);
-            line = new Line(mainScreen, onOff);
-            figure = line;
+            stallion1 = new Stallion1(mainScreen, onOff);
         }
 
         public void Random()
@@ -107,12 +110,25 @@ namespace Tetris
             i = 0;
             j = random.Next(0, 10); //определяет рандомную позицию блока по горизонтальной координате
 
-            figure.Random(ref i, ref j);
+            //ChooseFigure();
+
+            mainFigure.Random(ref i, ref j);
 
             if (screen != null)
                 screen.Invalidate();
 
             CanNavigateRight = canNavigateLeft = true;
+        }
+
+        private void ChooseFigure()
+        {
+            figurelist = (FigureList)random.Next(0,2);
+
+            switch (figurelist)
+            {
+                case FigureList.rectangle: mainFigure = figure; break;
+                case FigureList.line: mainFigure = line; break;
+            }
         }
 
         public void StartTimer(Screen screen)
@@ -142,7 +158,7 @@ namespace Tetris
         {
             if (checkStatus && !navigatorStatus)
             {
-                checkStatus = figure.Run(ref i, ref j);
+                checkStatus = mainFigure.Run(ref i, ref j);
                 canNavigateRight = canNavigateLeft = true;
                 screen.Invalidate();
             }
@@ -156,7 +172,7 @@ namespace Tetris
 
         private void TestAllFull() //проверяет вся ли линия заполнена
         {
-            i = figure.Current_i();
+            i = mainFigure.Current_i();
             if (i == 0)
                 return;
 
@@ -254,22 +270,22 @@ namespace Tetris
             switch (navigateType)
             {
                 case NavigateType.Right:
-                    figure.RightMove(ref i, ref j);
+                    mainFigure.RightMove(ref i, ref j);
                     screen.Invalidate();
                     break;
 
                 case NavigateType.Left:
-                    figure.LeftMove(ref i, ref j);
+                    mainFigure.LeftMove(ref i, ref j);
                     screen.Invalidate();
                     break;
 
                 case NavigateType.Down:
-                    figure.Run(ref i, ref j);
+                    mainFigure.Run(ref i, ref j);
                     screen.Invalidate();
                     break;
 
                 case NavigateType.Turn:
-                    figure.TurnMove(ref i, ref j);
+                    mainFigure.TurnMove(ref i, ref j);
                     screen.Invalidate();
                     break;
             }

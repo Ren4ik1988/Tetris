@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="BackGraundMatrix.cs" />
     <Compile Include="Figure.cs" />
+    <Compile Include="FigureList.cs" />
     <Compile Include="GameStatus.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="Controller.cs">
@@ -67,6 +68,7 @@
     <Compile Include="Screen.Designer.cs">
       <DependentUpon>Screen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stallion1.cs" />
     <EmbeddedResource Include="Controller.resx">
       <DependentUpon>Controller.cs</DependentUpon>
     </EmbeddedResource>
