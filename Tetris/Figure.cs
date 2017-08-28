@@ -55,6 +55,7 @@ namespace Tetris
                     onOff[i2 + 1, j] == Model.On ||
                         onOff[i2 + 1, j2] == Model.On)
             {
+                i = i2;
                 return false;
             }
             #endregion
