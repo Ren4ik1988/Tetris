@@ -108,10 +108,9 @@ namespace Tetris
         public void Random()
         {
             i = 0;
-            j = random.Next(0, 10); //определяет рандомную позицию блока по горизонтальной координате
 
             //ChooseFigure();
-
+            mainFigure = stallion1;
             mainFigure.Random(ref i, ref j);
 
             if (screen != null)

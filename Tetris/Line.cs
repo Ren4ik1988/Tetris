@@ -13,16 +13,11 @@ namespace Tetris
         #region Определяем начальную позицию фигуры и ее поворот: 0 - линия горизонтальная, 1 - вертикальная
         public override void Random(ref int i, ref int j)
         {
-            randomTurnCode = randomTurn.Next(0, 2);
+            randomTurnCode = random.Next(0, 2);
 
             if (randomTurnCode == 0)
             {
-                #region Проверяем не выходит ли линия за пределы боковых границ
-                if (j > Model.gorizontLength - 4)
-                {
-                    j = j - 3;
-                }
-                #endregion
+                j = random.Next(0, 6);
 
                 j2 = j + 3;
 
@@ -35,6 +30,7 @@ namespace Tetris
             else
             {
                 i2 = i + 3;
+                j = random.Next(0, 10);
 
                 for (int k = i; k <= i2; k++)
                 {

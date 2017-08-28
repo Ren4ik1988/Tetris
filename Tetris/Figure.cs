@@ -9,7 +9,7 @@ namespace Tetris
     class Figure
     {
         protected int i, j, randomTurnCode; // поля совместимы с полями из класса Model
-        protected Random randomTurn;
+        protected Random random;
         static protected int i2, i3, i4, j2, j3, j4; // вспомогательные поля для обозначения позиций дополнительных элементов фигуры
         protected BackGraundMatrix[,] mainScreen;
         protected short[,] onOff;
@@ -18,7 +18,7 @@ namespace Tetris
         {
             this.mainScreen = mainScreen;
             this.onOff = onOff;
-            randomTurn = new Random();
+            random = new Random();
         }
 
         internal virtual int Current_i()
@@ -28,8 +28,7 @@ namespace Tetris
 
         public virtual void Random(ref int i, ref int j) // метод вызывается когда необходимо создать фигуру "квадрат"
         {
-            if (j > Model.gorizontLength -2)  //условия исключает возможность выхода значения квадрата за пределы массива по горизонатльной линии
-                --j;
+            j = random.Next(0,9);
 
             i2 = i + 1;
             j2 = j + 1;
