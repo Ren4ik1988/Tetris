@@ -69,6 +69,7 @@
       <DependentUpon>Screen.cs</DependentUpon>
     </Compile>
     <Compile Include="Stallion1.cs" />
+    <Compile Include="Stallion2.cs" />
     <EmbeddedResource Include="Controller.resx">
       <DependentUpon>Controller.cs</DependentUpon>
     </EmbeddedResource>

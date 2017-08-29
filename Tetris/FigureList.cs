@@ -10,6 +10,7 @@ namespace Tetris
     {
         rectangle,
         line,
-        stallion1
+        stallion1,
+        stallion2
     }
 }

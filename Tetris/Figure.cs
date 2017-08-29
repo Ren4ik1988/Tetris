@@ -8,11 +8,15 @@ namespace Tetris
 {
     class Figure
     {
-        protected int i, j, randomTurnCode; // поля совместимы с полями из класса Model
+        #region Protected fields
+
+        protected int randomTurnCode;
         protected Random random;
-        static protected int i2, i3, i4, j2, j3, j4; // вспомогательные поля для обозначения позиций дополнительных элементов фигуры
+        static protected int i2, j2;
         protected BackGraundMatrix[,] mainScreen;
         protected short[,] onOff;
+
+        #endregion
 
         public Figure(BackGraundMatrix[,] mainScreen, short[,] onOff)
         {

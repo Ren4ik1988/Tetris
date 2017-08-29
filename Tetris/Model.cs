@@ -41,6 +41,7 @@ namespace Tetris
         Figure figure;
         Line line;
         Stallion1 stallion1;
+        Stallion2 stallion2;
 
         #endregion
 
@@ -120,9 +121,15 @@ namespace Tetris
             if (screen != null)
                 screen.Invalidate();
 
+            #region Создание объектов всех игровых фигур
+
             stallion1 = new Stallion1(mainScreen, onOff);
             figure = new Figure(mainScreen, onOff);
             line = new Line(mainScreen, onOff);
+            stallion2 = new Stallion2(mainScreen, onOff);
+
+            #endregion
+
         }
 
         public void Random()
@@ -141,6 +148,7 @@ namespace Tetris
 
         private void ChooseFigure()
         {
+            //mainFigure = stallion2;
             figurelist = (FigureList)random.Next(0,3);
 
             switch (figurelist)
