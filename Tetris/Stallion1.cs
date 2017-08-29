@@ -162,7 +162,7 @@ namespace Tetris
 
             #endregion
 
-            #region Вторая часть метода, отвечает за очистку вверхних ячеек при перемещении объекта вниз
+            #region Сбрасываем ячейки на ноль
 
             mainScreen[i, j].Image = Model.IsNull.Image;
             onOff[i, j] = Model.Off;
@@ -249,7 +249,7 @@ namespace Tetris
 
             #endregion
 
-            #region Вторая часть метода, отвечает за очистку вверхних ячеек при перемещении объекта вниз
+            #region Вторая часть метода, отвечает за очистку ячеек фигуры
 
             for (int k = i; k <= i2; k++)
             {
@@ -282,19 +282,589 @@ namespace Tetris
 
         #endregion
 
+        #region Отвечает за перемещение фигуры влево
         internal override void LeftMove(ref int i, ref int j)
         {
-            base.LeftMove(ref i, ref j);
+            switch (randomTurnCode)
+            {
+                case 0: LeftMove_0(ref i, ref j); break;
+                case 1: LeftMove_1(ref i, ref j); break;
+                case 2: LeftMove_2(ref i, ref j); break;
+                case 3: LeftMove_3(ref i, ref j); break;
+            }
         }
 
+        private void LeftMove_1(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 1;
+            j2 = j + 2;
+
+            if (j == 0 ||
+                    onOff[i2, j - 1] == Model.On ||
+                        onOff[i, j2 - 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+            
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i2, k].Image = Model.IsNull.Image;
+                onOff[i2, k] = Model.Off;
+            }
+
+            mainScreen[i, j2].Image = Model.IsNull.Image;
+            onOff[i, j2] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j--;
+            j2--;
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i2, k].Image = Model.IsNotNull.Image;
+                onOff[i2, k] = Model.On;
+            }
+
+            mainScreen[i, j2].Image = Model.IsNotNull.Image;
+            onOff[i, j2] = Model.On;
+
+            #endregion
+        }
+
+        private void LeftMove_2(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 2;
+            j2 = j + 1;
+
+            if ( j == 0 ||
+                    onOff[i, j - 1] == Model.On ||
+                        onOff[i + 1, j2 - 1] == Model.On ||
+                            onOff[i2, j2 - 1] == Model.On )
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            mainScreen[i, j].Image = Model.IsNull.Image;
+            onOff[i, j] = Model.Off;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j2].Image = Model.IsNull.Image;
+                onOff[k, j2] = Model.Off;
+            }
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j--;
+            j2--;
+
+            mainScreen[i, j].Image = Model.IsNotNull.Image;
+            onOff[i, j] = Model.On;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j2].Image = Model.IsNotNull.Image;
+                onOff[k, j2] = Model.On;
+            }
+
+            #endregion
+        } 
+
+        private void LeftMove_3(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 1;
+            j2 = j + 2;
+
+            if (j == 0 ||
+                    onOff[i, j - 1] == Model.On ||
+                        onOff[i2, j2 - 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+            
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i, k].Image = Model.IsNull.Image;
+                onOff[i, k] = Model.Off;
+            }
+
+            mainScreen[i2, j].Image = Model.IsNull.Image;
+            onOff[i2, j] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j--;
+            j2--;
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i, k].Image = Model.IsNotNull.Image;
+                onOff[i, k] = Model.On;
+            }
+
+            mainScreen[i2, j].Image = Model.IsNotNull.Image;
+            onOff[i2, j] = Model.On;
+
+            #endregion
+        }
+
+        private void LeftMove_0(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 2;
+            j2 = j + 1;
+
+            for (int k = i; k <= i2; k++)
+                if (j == 0 || 
+                        onOff[k, j - 1] == Model.On)
+                {
+                    Model.CanNavigateRight = false;
+                    return;
+                }
+
+            #endregion
+
+            #region Сброс фигуры
+            
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j].Image = Model.IsNull.Image;
+                onOff[k, j] = Model.Off;
+            }
+
+            mainScreen[i2, j2].Image = Model.IsNull.Image;
+            onOff[i2, j2] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j--;
+            j2--;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j].Image = Model.IsNotNull.Image;
+                onOff[k, j] = Model.On;
+            }
+
+            mainScreen[i2, j2].Image = Model.IsNotNull.Image;
+            onOff[i2, j2] = Model.On;
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Отвечает за перемещение фигуры вправо
         internal override void RightMove(ref int i, ref int j)
         {
-            base.RightMove(ref i, ref j);
+            switch (randomTurnCode)
+            {
+                case 0: RightMove_0(ref i, ref j); break;
+                case 1: RightMove_1(ref i, ref j); break;
+                case 2: RightMove_2(ref i, ref j); break;
+                case 3: RightMove_3(ref i, ref j); break;
+            }
         }
+
+        private void RightMove_1(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 1;
+            j2 = j + 2;
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i2, j2 + 1] == Model.On ||
+                        onOff[i, j2 + 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i2, k].Image = Model.IsNull.Image;
+                onOff[i2, k] = Model.Off;
+            }
+
+            mainScreen[i, j2].Image = Model.IsNull.Image;
+            onOff[i, j2] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j++;
+            j2++;
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i2, k].Image = Model.IsNotNull.Image;
+                onOff[i2, k] = Model.On;
+            }
+
+            mainScreen[i, j2].Image = Model.IsNotNull.Image;
+            onOff[i, j2] = Model.On;
+
+            #endregion
+        }
+
+        private void RightMove_2(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 2;
+            j2 = j + 1;
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j2 + 1] == Model.On ||
+                        onOff[i + 1, j2 + 1] == Model.On ||
+                            onOff[i2, j2 + 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            mainScreen[i, j].Image = Model.IsNull.Image;
+            onOff[i, j] = Model.Off;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j2].Image = Model.IsNull.Image;
+                onOff[k, j2] = Model.Off;
+            }
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j++;
+            j2++;
+
+            mainScreen[i, j].Image = Model.IsNotNull.Image;
+            onOff[i, j] = Model.On;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j2].Image = Model.IsNotNull.Image;
+                onOff[k, j2] = Model.On;
+            }
+
+            #endregion
+        }
+
+        private void RightMove_3(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 1;
+            j2 = j + 2;
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j2 + 1] == Model.On ||
+                        onOff[i2, j + 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i, k].Image = Model.IsNull.Image;
+                onOff[i, k] = Model.Off;
+            }
+
+            mainScreen[i2, j].Image = Model.IsNull.Image;
+            onOff[i2, j] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j++;
+            j2++;
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i, k].Image = Model.IsNotNull.Image;
+                onOff[i, k] = Model.On;
+            }
+
+            mainScreen[i2, j].Image = Model.IsNotNull.Image;
+            onOff[i2, j] = Model.On;
+
+            #endregion
+        }
+
+        private void RightMove_0(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 2;
+            j2 = j + 1;
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j + 1] == Model.On ||
+                        onOff[i + 1, j + 1] == Model.On ||
+                            onOff[i2, j2 + 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j].Image = Model.IsNull.Image;
+                onOff[k, j] = Model.Off;
+            }
+
+            mainScreen[i2, j2].Image = Model.IsNull.Image;
+            onOff[i2, j2] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j++;
+            j2++;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j].Image = Model.IsNotNull.Image;
+                onOff[k, j] = Model.On;
+            }
+
+            mainScreen[i2, j2].Image = Model.IsNotNull.Image;
+            onOff[i2, j2] = Model.On;
+
+            #endregion
+        }
+
+        #endregion
 
         internal override void TurnMove(ref int i, ref int j)
         {
             base.TurnMove(ref i, ref j);
+        }
+
+        private void TurnMove_0(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i2, j2 + 1] == Model.On ||
+                        onOff[i, j2 + 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i2, k].Image = Model.IsNull.Image;
+                onOff[i2, k] = Model.Off;
+            }
+
+            mainScreen[i, j2].Image = Model.IsNull.Image;
+            onOff[i, j2] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j++;
+            j2++;
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i2, k].Image = Model.IsNotNull.Image;
+                onOff[i2, k] = Model.On;
+            }
+
+            mainScreen[i, j2].Image = Model.IsNotNull.Image;
+            onOff[i, j2] = Model.On;
+
+            #endregion
+        }
+
+        private void TurnMove_1(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 2;
+            j2 = j + 1;
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j2 + 1] == Model.On ||
+                        onOff[i + 1, j2 + 1] == Model.On ||
+                            onOff[i2, j2 + 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            mainScreen[i, j].Image = Model.IsNull.Image;
+            onOff[i, j] = Model.Off;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j2].Image = Model.IsNull.Image;
+                onOff[k, j2] = Model.Off;
+            }
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+            
+            mainScreen[i, j].Image = Model.IsNotNull.Image;
+            onOff[i, j] = Model.On;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j2].Image = Model.IsNotNull.Image;
+                onOff[k, j2] = Model.On;
+            }
+
+            #endregion
+        }
+
+        private void TurnMove_2(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 1;
+            j2 = j + 2;
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j2 + 1] == Model.On ||
+                        onOff[i2, j + 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i, k].Image = Model.IsNull.Image;
+                onOff[i, k] = Model.Off;
+            }
+
+            mainScreen[i2, j].Image = Model.IsNull.Image;
+            onOff[i2, j] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j++;
+            j2++;
+
+            for (int k = j; k <= j2; k++)
+            {
+                mainScreen[i, k].Image = Model.IsNotNull.Image;
+                onOff[i, k] = Model.On;
+            }
+
+            mainScreen[i2, j].Image = Model.IsNotNull.Image;
+            onOff[i2, j] = Model.On;
+
+            #endregion
+        }
+
+        private void TurnMove_3(ref int i, ref int j)
+        {
+            #region Проверка свободна ли боковая ячейка для перемещения
+            i2 = i + 2;
+            j2 = j + 1;
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j + 1] == Model.On ||
+                        onOff[i + 1, j + 1] == Model.On ||
+                            onOff[i2, j2 + 1] == Model.On)
+            {
+                Model.CanNavigateRight = false;
+                return;
+            }
+
+            #endregion
+
+            #region Сброс фигуры
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j].Image = Model.IsNull.Image;
+                onOff[k, j] = Model.Off;
+            }
+
+            mainScreen[i2, j2].Image = Model.IsNull.Image;
+            onOff[i2, j2] = Model.Off;
+
+            #endregion
+
+            #region Построение фигуры по новым координатам
+
+            j++;
+            j2++;
+
+            for (int k = i; k <= i2; k++)
+            {
+                mainScreen[k, j].Image = Model.IsNotNull.Image;
+                onOff[k, j] = Model.On;
+            }
+
+            mainScreen[i2, j2].Image = Model.IsNotNull.Image;
+            onOff[i2, j2] = Model.On;
+
+            #endregion
         }
     }
 }
