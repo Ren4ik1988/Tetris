@@ -41,21 +41,13 @@ namespace Tetris
         }
         #endregion
 
-        internal override int Current_i()
-        {
-            return base.Current_i();
-        }
-
         internal override bool Run(ref int i, ref int j)
         {
             if (randomTurnCode == 0)
             {
                 #region Первая часть метода: проверяет условие заполненности матрицы
                 if (i == (Model.vertLength - 1))
-                {
-                    i2 = i;
                     return false;
-                }
 
                 for (int k = j; k <= j2; k++)
                 {
@@ -77,6 +69,7 @@ namespace Tetris
                 #region Третья часть метода: отвечает за пермещение элементов массива на уровень ниже(шаг один квадрат)
 
                 ++i;
+                i2 = i;
 
                 for (int k = j; k <= j2; k++)
                 {
@@ -92,11 +85,11 @@ namespace Tetris
             else
             {
                 #region Первая часть метода: проверяет условие заполненности матрицы
+
                 if (i2 == (Model.vertLength - 1) ||
                         onOff[i2 + 1, j] == Model.On )
-                {
                     return false;
-                }
+
                 #endregion
 
                 #region Вторая часть метода, отвечает за очистку вверхних ячеек при перемещении объекта вниз
@@ -121,11 +114,6 @@ namespace Tetris
 
                 return true;
             }
-        }
-
-        internal override void DownMove(ref int i, ref int j)
-        {
-            base.DownMove(ref i, ref j);
         }
 
         internal override void LeftMove(ref int i, ref int j)

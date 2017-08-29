@@ -108,7 +108,7 @@ namespace Tetris
         {
             #region Первая часть метода: проверяет условие заполненности матрицы
             if (i2 == (Model.vertLength - 1) ||
-                    onOff[i2 + 1, j] == Model.On )
+                    onOff[i2 + 1, j] == Model.On)
                 return false;
 
             for (int k = j+1; k <= j2; k++)
@@ -157,7 +157,7 @@ namespace Tetris
 
             if (i2 == (Model.vertLength - 1) ||
                     onOff[i2 + 1, j2] == Model.On ||
-                        onOff[i+1, j] == Model.On )
+                        onOff[i + 1, j] == Model.On)
                 return false;
 
             #endregion
@@ -196,7 +196,7 @@ namespace Tetris
         private bool Run_1(ref int i, ref int j)
         {
             #region Первая часть метода: проверяет условие заполненности матрицы
-            if (i2 == (Model.vertLength - 1) ) 
+            if (i2 == (Model.vertLength - 1))
                 return false;
 
             for(int k = j; k <= j2; k++)
@@ -681,18 +681,26 @@ namespace Tetris
 
         #endregion
 
+        #region Отвечает за поворот фигуры вокруг своей оси
         internal override void TurnMove(ref int i, ref int j)
         {
-            base.TurnMove(ref i, ref j);
+            switch (randomTurnCode)
+            {
+                case 0: TurnMove_0(ref i, ref j); break;
+                case 1: TurnMove_1(ref i, ref j); break;
+                case 2: TurnMove_2(ref i, ref j); break;
+                case 3: TurnMove_3(ref i, ref j); break;
+            }
         }
 
         private void TurnMove_0(ref int i, ref int j)
         {
-            #region Проверка свободна ли боковая ячейка для перемещения
-
-            if (j2 == Model.gorizontLength - 1 ||
-                    onOff[i2, j2 + 1] == Model.On ||
-                        onOff[i, j2 + 1] == Model.On)
+            #region Проверка возможности поворота
+            int tmp_j2 = j + 2;
+            int tmp_i2 = i + 1;
+            if ( tmp_j2 > (Model.gorizontLength - 1) ||
+                    onOff[i, tmp_j2] == Model.On ||
+                        onOff[tmp_i2, tmp_j2] == Model.On)
             {
                 Model.CanNavigateRight = false;
                 return;
@@ -701,22 +709,23 @@ namespace Tetris
             #endregion
 
             #region Сброс фигуры
+            randomTurnCode++;
 
-            for (int k = j; k <= j2; k++)
+            for (int k = i; k <= i2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNull.Image;
-                onOff[i2, k] = Model.Off;
+                mainScreen[k, j].Image = Model.IsNull.Image;
+                onOff[k, j] = Model.Off;
             }
 
-            mainScreen[i, j2].Image = Model.IsNull.Image;
-            onOff[i, j2] = Model.Off;
+            mainScreen[i2, j2].Image = Model.IsNull.Image;
+            onOff[i2, j2] = Model.Off;
 
             #endregion
 
             #region Построение фигуры по новым координатам
 
-            j++;
-            j2++;
+            j2 = tmp_j2;
+            i2 = tmp_i2;
 
             for (int k = j; k <= j2; k++)
             {
@@ -733,13 +742,13 @@ namespace Tetris
         private void TurnMove_1(ref int i, ref int j)
         {
             #region Проверка свободна ли боковая ячейка для перемещения
-            i2 = i + 2;
-            j2 = j + 1;
 
-            if (j2 == Model.gorizontLength - 1 ||
-                    onOff[i, j2 + 1] == Model.On ||
-                        onOff[i + 1, j2 + 1] == Model.On ||
-                            onOff[i2, j2 + 1] == Model.On)
+            int tmp_j2 = j + 1;
+            int tmp_i2 = i + 2;
+            if (tmp_j2 > (Model.gorizontLength - 1) ||
+                    onOff[i,j] == Model.On ||
+                        onOff[i, tmp_j2] == Model.On ||
+                            onOff[tmp_i2,tmp_j2] == Model.On)
             {
                 Model.CanNavigateRight = false;
                 return;
@@ -748,20 +757,23 @@ namespace Tetris
             #endregion
 
             #region Сброс фигуры
+            randomTurnCode++;
 
-            mainScreen[i, j].Image = Model.IsNull.Image;
-            onOff[i, j] = Model.Off;
-
-            for (int k = i; k <= i2; k++)
+            for (int k = j; k <= j2; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNull.Image;
-                onOff[k, j2] = Model.Off;
+                mainScreen[i2, k].Image = Model.IsNull.Image;
+                onOff[i2, k] = Model.Off;
             }
+
+            mainScreen[i, j2].Image = Model.IsNull.Image;
+            onOff[i, j2] = Model.Off;
 
             #endregion
 
             #region Построение фигуры по новым координатам
-            
+            j2 = tmp_j2;
+            i2 = tmp_i2;
+
             mainScreen[i, j].Image = Model.IsNotNull.Image;
             onOff[i, j] = Model.On;
 
@@ -777,12 +789,12 @@ namespace Tetris
         private void TurnMove_2(ref int i, ref int j)
         {
             #region Проверка свободна ли боковая ячейка для перемещения
-            i2 = i + 1;
-            j2 = j + 2;
+            int tmp_i2 = i + 1;
+            int tmp_j2 = j + 2;
 
-            if (j2 == Model.gorizontLength - 1 ||
-                    onOff[i, j2 + 1] == Model.On ||
-                        onOff[i2, j + 1] == Model.On)
+            if (tmp_j2 > Model.gorizontLength - 1 ||
+                    onOff[i, tmp_j2] == Model.On ||
+                        onOff[tmp_i2, j] == Model.On)
             {
                 Model.CanNavigateRight = false;
                 return;
@@ -791,22 +803,23 @@ namespace Tetris
             #endregion
 
             #region Сброс фигуры
+            randomTurnCode++;
 
-            for (int k = j; k <= j2; k++)
+            mainScreen[i, j].Image = Model.IsNull.Image;
+            onOff[i, j] = Model.Off;
+
+            for (int k = i; k <= i2; k++)
             {
-                mainScreen[i, k].Image = Model.IsNull.Image;
-                onOff[i, k] = Model.Off;
+                mainScreen[k, j2].Image = Model.IsNull.Image;
+                onOff[k, j2] = Model.Off;
             }
-
-            mainScreen[i2, j].Image = Model.IsNull.Image;
-            onOff[i2, j] = Model.Off;
 
             #endregion
 
             #region Построение фигуры по новым координатам
 
-            j++;
-            j2++;
+            i2 = tmp_i2;
+            j2 = tmp_j2;
 
             for (int k = j; k <= j2; k++)
             {
@@ -823,13 +836,12 @@ namespace Tetris
         private void TurnMove_3(ref int i, ref int j)
         {
             #region Проверка свободна ли боковая ячейка для перемещения
-            i2 = i + 2;
-            j2 = j + 1;
+            int tmp_i2 = i + 2;
+            int tmp_j2 = j + 1;
 
-            if (j2 == Model.gorizontLength - 1 ||
-                    onOff[i, j + 1] == Model.On ||
-                        onOff[i + 1, j + 1] == Model.On ||
-                            onOff[i2, j2 + 1] == Model.On)
+            if (tmp_j2 > Model.gorizontLength - 1 ||
+                    onOff[tmp_i2, tmp_j2] == Model.On ||
+                        onOff[tmp_i2, j] == Model.On)
             {
                 Model.CanNavigateRight = false;
                 return;
@@ -838,22 +850,23 @@ namespace Tetris
             #endregion
 
             #region Сброс фигуры
+            randomTurnCode = 0;
 
-            for (int k = i; k <= i2; k++)
+            for (int k = j; k <= j2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNull.Image;
-                onOff[k, j] = Model.Off;
+                mainScreen[i, k].Image = Model.IsNull.Image;
+                onOff[i, k] = Model.Off;
             }
 
-            mainScreen[i2, j2].Image = Model.IsNull.Image;
-            onOff[i2, j2] = Model.Off;
+            mainScreen[i2, j].Image = Model.IsNull.Image;
+            onOff[i2, j] = Model.Off;
 
             #endregion
 
             #region Построение фигуры по новым координатам
 
-            j++;
-            j2++;
+            j2 = tmp_j2;
+            i2 = tmp_i2;
 
             for (int k = i; k <= i2; k++)
             {
@@ -866,5 +879,7 @@ namespace Tetris
 
             #endregion
         }
+
+        #endregion
     }
 }

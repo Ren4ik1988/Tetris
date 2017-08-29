@@ -23,17 +23,28 @@ namespace Tetris
         public const int Hard = 300;
         #endregion
 
-        #region Constants: константа включена для удобства определния наличия в ячейке изображения
+        #region Constants: показывает состояние элемента матрицы
         public const short On = 1;
         public const short Off = 0;
         #endregion
 
-        #region Readonly: поля ридонли для обозначения пустой ячейки и заполненной соответственно
+        #region Readonly: для обозначения пустой ячейки и заполненной соответственно
         static readonly BackGraundMatrix isNull;
         static readonly BackGraundMatrix isNotNull;
         internal static BackGraundMatrix IsNull => isNull;
         internal static BackGraundMatrix IsNotNull => isNotNull;
         #endregion
+
+        #region Переменные для объектов фигур
+
+        Figure mainFigure;
+        Figure figure;
+        Line line;
+        Stallion1 stallion1;
+
+        #endregion
+
+        #region Поля
 
         public GameStatus GameStatus;
         Random random;
@@ -43,10 +54,6 @@ namespace Tetris
         Timer timer;
         TimerCallback moveBlock;
         Screen screen;
-        Figure mainFigure;
-        Figure figure;
-        Line line;
-        Stallion1 stallion1;
         bool navigatorStatus;
         NavigateType navigateType;
         FigureList figurelist;
@@ -56,6 +63,9 @@ namespace Tetris
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
         short[,] onOff;
 
+        #endregion
+
+        #region Constructors
         public Model()
         {
             GameStatus = GameStatus.NewGame;
@@ -76,10 +86,18 @@ namespace Tetris
             isNotNull.PutImg();
         }
 
+        #endregion
+
+        #region Свойства
+
         internal BackGraundMatrix[,] MainScreen { get => mainScreen; set => mainScreen = value; }
         public int GameLevel { set => gameLevel = value; }
         public static bool CanNavigateRight { get => canNavigateRight; set => canNavigateRight = value; }
         public static bool CanNavigateLeft { get => canNavigateLeft; set => canNavigateLeft = value; }
+
+        #endregion
+
+        #region Построение сетки/очистка игрового поля, выбор случайной фигуры и запуск ее обрисовки
 
         public void FillMatrix() //изначальное построение матрицы экрана
         {
@@ -103,14 +121,16 @@ namespace Tetris
                 screen.Invalidate();
 
             stallion1 = new Stallion1(mainScreen, onOff);
+            figure = new Figure(mainScreen, onOff);
+            line = new Line(mainScreen, onOff);
         }
 
         public void Random()
         {
             i = 0;
 
-            //ChooseFigure();
-            mainFigure = stallion1;
+            ChooseFigure();
+            //mainFigure = stallion1;
             mainFigure.Random(ref i, ref j);
 
             if (screen != null)
@@ -121,14 +141,19 @@ namespace Tetris
 
         private void ChooseFigure()
         {
-            figurelist = (FigureList)random.Next(0,2);
+            figurelist = (FigureList)random.Next(0,3);
 
             switch (figurelist)
             {
                 case FigureList.rectangle: mainFigure = figure; break;
                 case FigureList.line: mainFigure = line; break;
+                case FigureList.stallion1: mainFigure = stallion1; break;
             }
         }
+
+        #endregion
+
+        #region Скорость игры и движение фигур
 
         public void StartTimer(Screen screen)
         {
@@ -168,6 +193,10 @@ namespace Tetris
                 Random();
             }
         }
+
+        #endregion
+
+        #region Проверка заполненности линий, их очистка и смещение блоков после очистки
 
         private void TestAllFull() //проверяет вся ли линия заполнена
         {
@@ -212,6 +241,9 @@ namespace Tetris
             TestAllFull();
         }
 
+        #endregion
+
+        #region Управление поворотом и перемещением
 
         internal void RightMove()
         {
@@ -289,6 +321,8 @@ namespace Tetris
                     break;
             }
         }
+
+        #endregion
     }
 
 }

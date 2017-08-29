@@ -26,7 +26,7 @@ namespace Tetris
             return i2;
         }
 
-        public virtual void Random(ref int i, ref int j) // метод вызывается когда необходимо создать фигуру "квадрат"
+        public virtual void Random(ref int i, ref int j) 
         {
             j = random.Next(0,9);
 
@@ -41,16 +41,15 @@ namespace Tetris
             onOff[i, j] = onOff[i, j2] = onOff[i2, j] = onOff[i2, j2] = Model.On;
         }
 
-        internal virtual bool Run(ref int i, ref int j) //метод определяет логику движения квадрата и заполнение игрового поля
+        internal virtual bool Run(ref int i, ref int j) 
         {
             #region Третья часть метода: проверяет условие заполненности матрицы
+
             if (i2 == (Model.vertLength - 1) ||
                     onOff[i2 + 1, j] == Model.On ||
                         onOff[i2 + 1, j2] == Model.On)
-            {
-                i = i2;
                 return false;
-            }
+
             #endregion
 
             #region Первая часть метода, отвечает за очистку вверхних ячеек при перемещении объекта вниз
@@ -136,9 +135,6 @@ namespace Tetris
                 return;
             }
             #endregion
-
-            this.i = i;
-            this.j = j;
 
             #region Сбарсываем элементы правого столбца фигуры
 
