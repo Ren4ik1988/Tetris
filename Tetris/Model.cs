@@ -197,7 +197,9 @@ namespace Tetris
             else
             {
                 checkStatus = true;
-                TestAllFull();
+                i = mainFigure.Current_i();
+                for (; i > 0; i--)
+                    TestAllFull();
                 Random();
             }
         }
@@ -208,7 +210,6 @@ namespace Tetris
 
         private void TestAllFull() //проверяет вся ли линия заполнена
         {
-            i = mainFigure.Current_i();
             if (i == 0)
                 return;
 
