@@ -312,11 +312,13 @@ namespace Tetris
                 case NavigateType.Right:
                     mainFigure.RightMove(ref i, ref j);
                     screen.Invalidate();
+                    checkStatus = true;
                     break;
 
                 case NavigateType.Left:
                     mainFigure.LeftMove(ref i, ref j);
                     screen.Invalidate();
+                    checkStatus = true;
                     break;
 
                 case NavigateType.Down:
