@@ -37,12 +37,12 @@ namespace Tetris
             i2 = i + 1;
             j2 = j + 1;
 
-            mainScreen[i, j].Image =
-                mainScreen[i, j2].Image =
-                    mainScreen[i2, j].Image =
-                        mainScreen[i2, j2].Image = Model.IsNotNull.Image;
-
-            onOff[i, j] = onOff[i, j2] = onOff[i2, j] = onOff[i2, j2] = Model.On;
+            for ( int k = i; k <= i2; k++)
+                for( int l = j; l <=j2; l++)
+                {
+                    mainScreen[k, l].Image = Model.IsNotNull.Image;
+                    onOff[k, l] = Model.On;
+                }
         }
 
         internal virtual bool Run(ref int i, ref int j) 
@@ -58,8 +58,12 @@ namespace Tetris
 
             #region Первая часть метода, отвечает за очистку вверхних ячеек при перемещении объекта вниз
 
-            mainScreen[i, j].Image = mainScreen[i, j2].Image = Model.IsNull.Image;
-            onOff[i, j] = onOff[i, j2] = Model.Off;
+            for (int k = i; k <= i2; k++)
+                for (int l = j; l <= j2; l++)
+                {
+                    mainScreen[k, l].Image = Model.IsNull.Image;
+                    onOff[k, l] = Model.Off;
+                }
 
             #endregion
 
@@ -68,14 +72,13 @@ namespace Tetris
             ++i;
             ++i2;
 
-            mainScreen[i, j].Image =
-                mainScreen[i, j2].Image =
-                    mainScreen[i2, j].Image =
-                        mainScreen[i2, j2].Image = Model.IsNotNull.Image;
-
-            onOff[i, j] = onOff[i, j2] = onOff[i2, j] = onOff[i2, j2] = Model.On;
-
-
+            for (int k = i; k <= i2; k++)
+                for (int l = j; l <= j2; l++)
+                {
+                    mainScreen[k, l].Image = Model.IsNotNull.Image;
+                    onOff[k, l] = Model.On;
+                }
+            
             #endregion
 
             return true;
@@ -93,25 +96,29 @@ namespace Tetris
                 return;
             }
             #endregion
-            
 
-            #region Сбарсываем элементы левого столбца фигуры
 
-            mainScreen[i, j].Image =
-                mainScreen[i2, j].Image = Model.IsNull.Image;
+            #region Сбарсываем старую фигуру
 
-            onOff[i, j] = onOff[i2, j] = Model.Off;
+            for (int k = i; k <= i2; k++)
+                for (int l = j; l <= j2; l++)
+                {
+                    mainScreen[k, l].Image = Model.IsNull.Image;
+                    onOff[k, l] = Model.Off;
+                }
 
             #endregion
 
-            #region Дополняем правую часть фигуры новыми элементами
+            #region Рисуем новую фигуру
             j++;
             j2++;
 
-            mainScreen[i, j2].Image =
-                mainScreen[i2, j2].Image = Model.IsNotNull.Image;
-
-            onOff[i, j2] = onOff[i2, j2] = Model.On;
+            for (int k = i; k <= i2; k++)
+                for (int l = j; l <= j2; l++)
+                {
+                    mainScreen[k, l].Image = Model.IsNotNull.Image;
+                    onOff[k, l] = Model.On;
+                }
 
             #endregion
 
@@ -142,10 +149,12 @@ namespace Tetris
 
             #region Сбарсываем элементы правого столбца фигуры
 
-            mainScreen[i, j2].Image =
-                mainScreen[i2, j2].Image = Model.IsNull.Image;
-
-            onOff[i, j2] = onOff[i2, j2] = Model.Off;
+            for (int k = i; k <= i2; k++)
+                for (int l = j; l <= j2; l++)
+                {
+                    mainScreen[k, l].Image = Model.IsNull.Image;
+                    onOff[k, l] = Model.Off;
+                }
 
             #endregion
 
@@ -153,10 +162,12 @@ namespace Tetris
             j--;
             j2--;
 
-            mainScreen[i, j].Image =
-                mainScreen[i2, j].Image = Model.IsNotNull.Image;
-
-            onOff[i, j] = onOff[i2, j] = Model.On;
+            for (int k = i; k <= i2; k++)
+                for (int l = j; l <= j2; l++)
+                {
+                    mainScreen[k, l].Image = Model.IsNotNull.Image;
+                    onOff[k, l] = Model.On;
+                }
 
             #endregion
 

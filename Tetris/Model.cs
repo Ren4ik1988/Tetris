@@ -205,8 +205,8 @@ namespace Tetris
             else
             {
                 checkStatus = true;
-                i = mainFigure.Current_i();
-                for (; i > 0; i--)
+
+                for (i = vertLength - 1; i > 0; i--)
                     TestAllFull();
                 Random();
             }
@@ -254,7 +254,7 @@ namespace Tetris
                     }
                 }
             }
-
+            
             TestAllFull();
         }
 

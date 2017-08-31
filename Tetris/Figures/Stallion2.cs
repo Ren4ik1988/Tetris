@@ -734,7 +734,7 @@ namespace Tetris
 
             int tmp_j2 = j + 1;
             int tmp_i2 = i + 2;
-            if (tmp_j2 > (Model.gorizontLength - 1) ||
+            if (tmp_i2 > (Model.vertLength - 1) ||
                     onOff[i+1, j] == Model.On ||
                         onOff[tmp_i2, j] == Model.On )
             {
@@ -827,7 +827,7 @@ namespace Tetris
             int tmp_i2 = i + 2;
             int tmp_j2 = j + 1;
 
-            if (tmp_j2 > Model.gorizontLength - 1 ||
+            if (tmp_i2 > Model.vertLength - 1 ||
                     onOff[i, tmp_j2] == Model.On ||
                         onOff[tmp_i2, j] == Model.On ||
                             onOff[tmp_i2, tmp_j2] == Model.On)
