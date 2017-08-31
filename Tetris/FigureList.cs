@@ -11,6 +11,7 @@ namespace Tetris
         rectangle,
         line,
         stallion1,
-        stallion2
+        stallion2,
+        triangle
     }
 }

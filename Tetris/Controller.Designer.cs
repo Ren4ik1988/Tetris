@@ -107,8 +107,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 511);
+            this.ClientSize = new System.Drawing.Size(434, 611);
             this.Controls.Add(this.MainPanel);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(450, 650);
+            this.MinimumSize = new System.Drawing.Size(450, 650);
             this.Name = "MainForm";
             this.Text = "Tetris";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

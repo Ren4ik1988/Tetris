@@ -12,7 +12,7 @@ namespace Tetris
 
         protected int randomTurnCode;
         protected Random random;
-        static protected int i2, j2;
+        static protected int i2, j2, i3, j3;
         protected BackGraundMatrix[,] mainScreen;
         protected short[,] onOff;
 

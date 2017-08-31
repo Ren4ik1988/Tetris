@@ -12,7 +12,7 @@ namespace Tetris
     {
         #region Constants: разрешение экрана в клетках
 
-        public const int vertLength = 20;
+        public const int vertLength = 24;
         public const int gorizontLength = 10;
 
         #endregion
@@ -42,6 +42,7 @@ namespace Tetris
         Line line;
         Stallion1 stallion1;
         Stallion2 stallion2;
+        Triangle triangle;
 
         #endregion
 
@@ -127,6 +128,7 @@ namespace Tetris
             figure = new Figure(mainScreen, onOff);
             line = new Line(mainScreen, onOff);
             stallion2 = new Stallion2(mainScreen, onOff);
+            triangle = new Triangle(mainScreen, onOff);
 
             #endregion
 
@@ -137,7 +139,6 @@ namespace Tetris
             i = 0;
 
             ChooseFigure();
-            //mainFigure = stallion1;
             mainFigure.Random(ref i, ref j);
 
             if (screen != null)
@@ -148,14 +149,15 @@ namespace Tetris
 
         private void ChooseFigure()
         {
-            //mainFigure = stallion2;
-            figurelist = (FigureList)random.Next(0,3);
+            figurelist = (FigureList)random.Next(0,5);
 
             switch (figurelist)
             {
                 case FigureList.rectangle: mainFigure = figure; break;
                 case FigureList.line: mainFigure = line; break;
                 case FigureList.stallion1: mainFigure = stallion1; break;
+                case FigureList.stallion2: mainFigure = stallion2; break;
+                case FigureList.triangle: mainFigure = triangle; break;
             }
         }
 
