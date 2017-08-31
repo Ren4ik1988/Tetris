@@ -12,6 +12,8 @@ namespace Tetris
         line,
         stallion1,
         stallion2,
-        triangle
+        triangle,
+        zfigure,
+        sfigure
     }
 }

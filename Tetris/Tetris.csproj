@@ -68,6 +68,7 @@
     <Compile Include="Screen.Designer.cs">
       <DependentUpon>Screen.cs</DependentUpon>
     </Compile>
+    <Compile Include="SFigure.cs" />
     <Compile Include="Stallion1.cs" />
     <Compile Include="Stallion2.cs" />
     <Compile Include="Triangle.cs" />

@@ -43,6 +43,8 @@ namespace Tetris
         Stallion1 stallion1;
         Stallion2 stallion2;
         Triangle triangle;
+        ZFigure zFigure;
+        SFigure sFigure;
 
         #endregion
 
@@ -129,6 +131,8 @@ namespace Tetris
             line = new Line(mainScreen, onOff);
             stallion2 = new Stallion2(mainScreen, onOff);
             triangle = new Triangle(mainScreen, onOff);
+            zFigure = new ZFigure(mainScreen, onOff);
+            sFigure = new SFigure(mainScreen, onOff);
 
             #endregion
 
@@ -149,7 +153,7 @@ namespace Tetris
 
         private void ChooseFigure()
         {
-            figurelist = (FigureList)random.Next(0,5);
+            figurelist = (FigureList)random.Next(0,7);
 
             switch (figurelist)
             {
@@ -158,6 +162,8 @@ namespace Tetris
                 case FigureList.stallion1: mainFigure = stallion1; break;
                 case FigureList.stallion2: mainFigure = stallion2; break;
                 case FigureList.triangle: mainFigure = triangle; break;
+                case FigureList.sfigure: mainFigure = sFigure; break;
+                case FigureList.zfigure: mainFigure = zFigure; break;
             }
         }
 
