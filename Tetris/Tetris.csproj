@@ -71,6 +71,7 @@
     <Compile Include="Stallion1.cs" />
     <Compile Include="Stallion2.cs" />
     <Compile Include="Triangle.cs" />
+    <Compile Include="ZFigure.cs" />
     <EmbeddedResource Include="Controller.resx">
       <DependentUpon>Controller.cs</DependentUpon>
     </EmbeddedResource>
