@@ -536,16 +536,16 @@ namespace Tetris
             if (j == 0 ||
                     onOff[i2, j - 1] == Model.On ||
                         onOff[i, j] == Model.On)
-                Model.CanNavigateRight = false;
+                Model.CanNavigateLeft = false;
             else
-                Model.CanNavigateRight = true;
+                Model.CanNavigateLeft = true;
 
             if (j2 == Model.gorizontLength - 1 ||
                     onOff[i, j2 + 1] == Model.On ||
                         onOff[i2, j2] == Model.On)
-                Model.CanNavigateLeft = false;
+                Model.CanNavigateRight = false;
             else
-                Model.CanNavigateLeft = true;
+                Model.CanNavigateRight = true;
         }
 
         private void CanMoveSide_0(ref int i, ref int j)

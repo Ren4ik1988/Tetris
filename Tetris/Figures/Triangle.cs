@@ -92,26 +92,25 @@ namespace Tetris
         #endregion
 
         #region Определяем правила движения для четырех позиций коня
-        internal override bool Run(ref int i, ref int j)
+        internal override void Run(ref int i, ref int j)
         {
             switch (randomTurnCode)
             {
-                case 0: return Run_0(ref i, ref j);
-                case 1: return Run_1(ref i, ref j);
-                case 2: return Run_2(ref i, ref j);
-                case 3: return Run_3(ref i, ref j);
-                default: return true;
+                case 0: Run_0(ref i, ref j); break;
+                case 1: Run_1(ref i, ref j); break;
+                case 2: Run_2(ref i, ref j); break;
+                case 3: Run_3(ref i, ref j); break;
             }
         }
 
-        private bool Run_3(ref int i, ref int j)
+        private void Run_3(ref int i, ref int j)
         {
             #region Первая часть метода: проверяет условие заполненности матрицы
             if (i2 == (Model.vertLength - 1) ||
                     onOff[i2, j] == Model.On ||
                         onOff[i2, j2] == Model.On ||
                             onOff[i2 + 1, j+1] == Model.On )
-                return false;
+                return;
 
             #endregion
 
@@ -142,19 +141,17 @@ namespace Tetris
             mainScreen[i2, j+1].Image = Model.IsNotNull.Image;
             onOff[i2, j+1] = Model.On;
 
-            return true;
-
             #endregion
         }
 
-        private bool Run_2(ref int i, ref int j)
+        private void Run_2(ref int i, ref int j)
         {
             #region Первая часть метода: проверяет условие заполненности матрицы
 
             if (i2 == (Model.vertLength - 1) ||
                     onOff[i2 + 1, j2] == Model.On ||
                         onOff[i2, j] == Model.On)
-                return false;
+                return;
 
             #endregion
 
@@ -185,18 +182,16 @@ namespace Tetris
                 onOff[k, j2] = Model.On;
             }
             #endregion
-
-            return true;
         }
 
-        private bool Run_1(ref int i, ref int j)
+        private void Run_1(ref int i, ref int j)
         {
             #region Первая часть метода: проверяет условие заполненности матрицы
             if (i2 == (Model.vertLength - 1) ||
                     onOff[i2+1, j] == Model.On ||
                         onOff[i2+1, j2] == Model.On ||
                             onOff[i2 + 1, j+1] == Model.On)
-                return false;
+                return;
 
             #endregion
 
@@ -227,17 +222,15 @@ namespace Tetris
             mainScreen[i, j+1].Image = Model.IsNotNull.Image;
             onOff[i, j+1] = Model.On;
             #endregion
-
-            return true;
         }
 
-        private bool Run_0(ref int i, ref int j)
+        private void Run_0(ref int i, ref int j)
         {
             #region Первая часть метода: проверяет условие заполненности матрицы
             if (i2 == (Model.vertLength - 1) ||
                     onOff[i2 + 1, j] == Model.On ||
                         onOff[i2, j2] == Model.On)
-                return false;
+                return;
 
             #endregion
 
@@ -268,8 +261,6 @@ namespace Tetris
             mainScreen[i+1, j2].Image = Model.IsNotNull.Image;
             onOff[i+1, j2] = Model.On;
             #endregion
-
-            return true;
         }
 
         #endregion
@@ -294,7 +285,7 @@ namespace Tetris
                     onOff[i, j] == Model.On ||
                         onOff[i2, j-1] == Model.On)
             {
-                Model.CanNavigateRight = false;
+                Model.CanNavigateLeft = false;
                 return;
             }
 
@@ -339,7 +330,7 @@ namespace Tetris
                         onOff[i + 1, j-1] == Model.On ||
                             onOff[i2, j] == Model.On )
             {
-                Model.CanNavigateRight = false;
+                Model.CanNavigateLeft = false;
                 return;
             }
 
@@ -383,7 +374,7 @@ namespace Tetris
                     onOff[i, j - 1] == Model.On ||
                         onOff[i2, j] == Model.On)
             {
-                Model.CanNavigateRight = false;
+                Model.CanNavigateLeft = false;
                 return;
             }
 
@@ -425,14 +416,14 @@ namespace Tetris
 
             if (j == 0)
             {
-                Model.CanNavigateRight = false;
+                Model.CanNavigateLeft = false;
                 return;
             }
 
             for (int k = i; k <= i2; k++)
                 if (onOff[k, j-1] == Model.On)
                 {
-                    Model.CanNavigateRight = false;
+                    Model.CanNavigateLeft = false;
                     return;
                 }
 
@@ -861,6 +852,147 @@ namespace Tetris
             onOff[i + 1, j2] = Model.On;
 
             #endregion
+        }
+
+        #endregion
+
+        #region Включение/отключение возможности перемещения фигур
+
+        internal override void CanMoveSide(ref int i, ref int j)
+        {
+            switch (randomTurnCode)
+            {
+                case 0: CanMoveSide_0(ref i, ref j); break;
+                case 1: CanMoveSide_1(ref i, ref j); break;
+                case 2: CanMoveSide_2(ref i, ref j); break;
+                case 3: CanMoveSide_3(ref i, ref j); break;
+            }
+        }
+
+        private void CanMoveSide_3(ref int i, ref int j)
+        {
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j2 + 1] == Model.On ||
+                        onOff[i2, j2] == Model.On)
+                Model.CanNavigateRight = false;
+            else
+                Model.CanNavigateRight = true;
+
+            if (j == 0 ||
+                     onOff[i, j - 1] == Model.On ||
+                         onOff[i2, j] == Model.On)
+                Model.CanNavigateLeft = false;
+            else
+                Model.CanNavigateLeft = true;
+        }
+
+        private void CanMoveSide_2(ref int i, ref int j)
+        {
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j2 + 1] == Model.On ||
+                        onOff[i+1, j2 + 1] == Model.On ||
+                            onOff[i2, j2 + 1] == Model.On )
+                Model.CanNavigateRight = false;
+            else
+                Model.CanNavigateRight = true;
+
+            if (j == 0 ||
+                    onOff[i, j] == Model.On ||
+                        onOff[i + 1, j - 1] == Model.On ||
+                            onOff[i2, j] == Model.On)
+                Model.CanNavigateLeft = false;
+            else
+                Model.CanNavigateLeft = true;
+        }
+
+        private void CanMoveSide_1(ref int i, ref int j)
+        {
+            if (j2 == Model.gorizontLength - 1 ||
+                   onOff[i, j] == Model.On ||
+                       onOff[i2, j2 + 1] == Model.On)
+                Model.CanNavigateRight = false;
+            else
+                Model.CanNavigateRight = true;
+
+            if (j == 0 ||
+                    onOff[i, j] == Model.On ||
+                        onOff[i2, j - 1] == Model.On)
+                Model.CanNavigateLeft = false;
+            else
+                Model.CanNavigateLeft = true;
+        }
+
+        private void CanMoveSide_0(ref int i, ref int j)
+        {
+            if (j == 0 ||
+                onOff[i, j - 1] == Model.On ||
+                onOff[i+1, j - 1] == Model.On ||
+                onOff[i2, j - 1] == Model.On )
+                Model.CanNavigateLeft = false;
+            else
+                Model.CanNavigateLeft = true;
+
+            if (j2 == Model.gorizontLength - 1 ||
+                    onOff[i, j2] == Model.On ||
+                        onOff[i + 1, j2 + 1] == Model.On ||
+                            onOff[i2, j2] == Model.On)
+                Model.CanNavigateRight = false;
+            else
+                Model.CanNavigateRight = true;
+        }
+
+        #endregion
+
+        #region Проверка возможности движение фигуры вниз
+
+        internal override bool CanMoveDown(ref int i, ref int j)
+        {
+            switch (randomTurnCode)
+            {
+                case 0: return CanMoveDown_0(ref i, ref j);
+                case 1: return CanMoveDown_1(ref i, ref j);
+                case 2: return CanMoveDown_2(ref i, ref j);
+                case 3: return CanMoveDown_3(ref i, ref j);
+                default: return true;
+            }
+        }
+
+        private bool CanMoveDown_3(ref int i, ref int j)
+        {
+            if (i2 == (Model.vertLength - 1) ||
+                    onOff[i2, j] == Model.On ||
+                        onOff[i2, j2] == Model.On ||
+                            onOff[i2 + 1, j + 1] == Model.On)
+                return false;
+            return true;
+        }
+
+        private bool CanMoveDown_2(ref int i, ref int j)
+        {
+            if (i2 == (Model.vertLength - 1) ||
+                    onOff[i2 + 1, j2] == Model.On ||
+                        onOff[i2, j] == Model.On)
+                return false;
+            return true;
+        }
+
+        private bool CanMoveDown_1(ref int i, ref int j)
+        {
+            if (i2 == (Model.vertLength - 1) ||
+                    onOff[i2 + 1, j] == Model.On ||
+                        onOff[i2 + 1, j2] == Model.On ||
+                            onOff[i2 + 1, j + 1] == Model.On)
+                return false;
+            return true;
+        }
+
+        private bool CanMoveDown_0(ref int i, ref int j)
+        {
+            if (i2 == (Model.vertLength - 1) ||
+                    onOff[i2 + 1, j] == Model.On ||
+                        onOff[i2, j2] == Model.On)
+                return false;
+            return true;
         }
 
         #endregion

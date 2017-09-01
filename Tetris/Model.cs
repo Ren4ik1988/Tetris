@@ -153,19 +153,18 @@ namespace Tetris
 
         private void ChooseFigure()
         {
-            mainFigure = figure;
-            //figurelist = (FigureList)random.Next(0,7);
+            figurelist = (FigureList)random.Next(0, 7);
 
-            //switch (figurelist)
-            //{
-            //    case FigureList.rectangle: mainFigure = figure; break;
-            //    case FigureList.line: mainFigure = line; break;
-            //    case FigureList.stallion1: mainFigure = stallion1; break;
-            //    case FigureList.stallion2: mainFigure = stallion2; break;
-            //    case FigureList.triangle: mainFigure = triangle; break;
-            //    case FigureList.sfigure: mainFigure = sFigure; break;
-            //    case FigureList.zfigure: mainFigure = zFigure; break;
-            //}
+            switch (figurelist)
+            {
+                case FigureList.rectangle: mainFigure = figure; break;
+                case FigureList.line: mainFigure = line; break;
+                case FigureList.stallion1: mainFigure = stallion1; break;
+                case FigureList.stallion2: mainFigure = stallion2; break;
+                case FigureList.triangle: mainFigure = triangle; break;
+                case FigureList.sfigure: mainFigure = sFigure; break;
+                case FigureList.zfigure: mainFigure = zFigure; break;
+            }
         }
 
         #endregion
@@ -201,7 +200,7 @@ namespace Tetris
             checkStatus = mainFigure.CanMoveDown(ref i, ref j);
             if (checkStatus)
             {
-                navigatorStatus = mainFigure.Run(ref i, ref j);
+                mainFigure.Run(ref i, ref j);
                 screen.Invalidate();
             }
             else
