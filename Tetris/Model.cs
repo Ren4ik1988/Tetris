@@ -153,18 +153,19 @@ namespace Tetris
 
         private void ChooseFigure()
         {
-            figurelist = (FigureList)random.Next(0,7);
+            mainFigure = figure;
+            //figurelist = (FigureList)random.Next(0,7);
 
-            switch (figurelist)
-            {
-                case FigureList.rectangle: mainFigure = figure; break;
-                case FigureList.line: mainFigure = line; break;
-                case FigureList.stallion1: mainFigure = stallion1; break;
-                case FigureList.stallion2: mainFigure = stallion2; break;
-                case FigureList.triangle: mainFigure = triangle; break;
-                case FigureList.sfigure: mainFigure = sFigure; break;
-                case FigureList.zfigure: mainFigure = zFigure; break;
-            }
+            //switch (figurelist)
+            //{
+            //    case FigureList.rectangle: mainFigure = figure; break;
+            //    case FigureList.line: mainFigure = line; break;
+            //    case FigureList.stallion1: mainFigure = stallion1; break;
+            //    case FigureList.stallion2: mainFigure = stallion2; break;
+            //    case FigureList.triangle: mainFigure = triangle; break;
+            //    case FigureList.sfigure: mainFigure = sFigure; break;
+            //    case FigureList.zfigure: mainFigure = zFigure; break;
+            //}
         }
 
         #endregion
@@ -196,10 +197,11 @@ namespace Tetris
 
         void Run(object obj) //отвечает за запуск движения фигуры
         {
-            if (checkStatus && !navigatorStatus)
+            mainFigure.CanMoveSide(ref i, ref j);
+            checkStatus = mainFigure.CanMoveDown(ref i, ref j);
+            if (checkStatus)
             {
-                checkStatus = mainFigure.Run(ref i, ref j);
-                canNavigateRight = canNavigateLeft = true;
+                navigatorStatus = mainFigure.Run(ref i, ref j);
                 screen.Invalidate();
             }
             else
@@ -211,7 +213,7 @@ namespace Tetris
                 Random();
             }
         }
-
+    
         #endregion
 
         #region Проверка заполненности линий, их очистка и смещение блоков после очистки
@@ -330,6 +332,9 @@ namespace Tetris
                     break;
 
                 case NavigateType.Down:
+                    checkStatus = mainFigure.CanMoveDown(ref i, ref j);
+                    if (!checkStatus)
+                        return;
                     mainFigure.Run(ref i, ref j);
                     screen.Invalidate();
                     break;

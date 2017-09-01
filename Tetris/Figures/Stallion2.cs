@@ -869,6 +869,16 @@ namespace Tetris
             #endregion
         }
 
+        internal override void CanMoveSide(ref int i, ref int j)
+        {
+            base.CanMoveSide(ref i, ref j);
+        }
+
+        internal override bool CanMoveDown(ref int i, ref int j)
+        {
+            return base.CanMoveDown(ref i, ref j);
+        }
+
         #endregion
     }
 }
