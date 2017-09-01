@@ -904,7 +904,7 @@ namespace Tetris
 
             if (j == 0 ||
                 onOff[i, j - 1] == Model.On ||
-                    onOff[i+i, j - 1] == Model.On ||
+                    onOff[i+1, j - 1] == Model.On ||
                         onOff[i2, j - 1] == Model.On )
                 Model.CanNavigateLeft = false;
             else
@@ -968,7 +968,7 @@ namespace Tetris
             if (i2 == (Model.vertLength - 1))
                 return false;
 
-            for (int k = j + 1; k <= j2; k++)
+            for (int k = j; k <= j2; k++)
             {
                 if (onOff[i2 + 1, k] == Model.On)
                     return false;
