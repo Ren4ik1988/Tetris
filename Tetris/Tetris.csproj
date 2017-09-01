@@ -108,5 +108,29 @@
   <ItemGroup>
     <None Include="Resources\Block.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\figure.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grid.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SFigure.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stallion1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stallion2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\triangle.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZFigure.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

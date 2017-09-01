@@ -12,7 +12,7 @@ namespace Tetris
         static Point[,] position = new Point[Model.vertLength, Model.gorizontLength];
         static int xPos = 0;
         static int yPos = 0;
-        static int sizeOfBlock = 25; // определяет размерность одного квадрата в пикселях
+        static int sizeOfBlock = 30; // определяет размерность одного квадрата в пикселях
 
         static PositionOfBlocks()
         {

@@ -16,8 +16,8 @@ namespace Tetris
 
         public Images()
         {
-            mainImage = Properties.Resources.BackImage;
-            blockImage = Properties.Resources.Block;
+            mainImage = Properties.Resources.grid;
+            blockImage = Properties.Resources.figure;
         }
     }
 }

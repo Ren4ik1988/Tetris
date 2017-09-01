@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.DoubleBuffered = true;
             this.Name = "Screen";
-            this.Size = new System.Drawing.Size(250, 600);
+            this.Size = new System.Drawing.Size(300, 720);
             this.ResumeLayout(false);
 
         }
