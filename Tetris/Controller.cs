@@ -22,19 +22,23 @@ namespace Tetris
 #endregion
 
     #region Private fields
-            Model model; 
-            Screen screen;
+        Model model; 
+        Screen screen;
+        NextFigureScreen nextFigure;
     #endregion
 
     #region Constructor
-            public MainForm()
-            {
-                model = new Model();
-                screen = new Screen(model);
-                InitializeComponent();
-                this.Controls.Add(screen);
-            }
-            #endregion
+        public MainForm()
+        {
+            model = new Model();
+            screen = new Screen(model);
+            nextFigure = new NextFigureScreen(model);
+            InitializeComponent();
+            this.Controls.Add(screen);
+            this.Controls.Add(nextFigure);
+
+        }
+    #endregion
 
     #region Управление с помощью кнопок
             private void StartPause_Btn_Click(object sender, EventArgs e)
@@ -45,20 +49,20 @@ namespace Tetris
                     Level_btn.Enabled = false;
                     model.Random();
                     screen.Invalidate();
-                    model.StartTimer(screen);
+                    model.StartTimer(screen, nextFigure);
                 }
                 else if (model.GameStatus == GameStatus.Started)
                 {
                     StartPause_Btn.Text = resume;
                     model.GameStatus = GameStatus.Paused;
-                    model.StartTimer(screen);
+                    model.StartTimer(screen, nextFigure);
 
                 }
                 else
                 {
                     StartPause_Btn.Text = pause;
                     model.GameStatus = GameStatus.Started;
-                    model.StartTimer(screen);
+                    model.StartTimer(screen, nextFigure);
                 }
             }
 
@@ -102,7 +106,7 @@ namespace Tetris
                 {
                     StartPause_Btn.Text = resume;
                     model.GameStatus = GameStatus.Paused;
-                    model.StartTimer(screen);
+                    model.StartTimer(screen, nextFigure);
                 }
 
                 DialogResult dr = MessageBox.Show("Вы уверены, что хотите выйти из игры?", "Тетрис", MessageBoxButtons.YesNoCancel);

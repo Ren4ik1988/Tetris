@@ -8,7 +8,8 @@ namespace Tetris
 {
     class Line : Figure
     {
-        public Line(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff){}
+        public Line(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff) 
+                    => IsNotNull.Image = (new BackGraundMatrix()).Images.LineImage;
 
         #region Определяем начальную позицию фигуры и ее поворот: 0 - линия горизонтальная, 1 - вертикальная
         public override void Random(ref int i, ref int j)
@@ -23,7 +24,7 @@ namespace Tetris
 
                 for (int k = j; k <= j2; k++)
                 {
-                    mainScreen[i, k].Image = Model.IsNotNull.Image;
+                    mainScreen[i, k].Image = IsNotNull.Image;
                     onOff[i, k] = Model.On;
                 }
             }

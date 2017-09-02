@@ -12,7 +12,10 @@ namespace Tetris
 
         protected int randomTurnCode;
         protected Random random;
-        static protected int i2, j2, i3, j3;
+        static protected int i2, j2;
+        protected int n, m, n2, m2;
+        protected BackGraundMatrix IsNull;
+        protected BackGraundMatrix IsNotNull;
         protected BackGraundMatrix[,] mainScreen;
         protected short[,] onOff;
 
@@ -22,7 +25,22 @@ namespace Tetris
         {
             this.mainScreen = mainScreen;
             this.onOff = onOff;
+            IsNotNull.Image = (new BackGraundMatrix()).Images.BlockImage;
+            IsNull.Image = (new BackGraundMatrix()).Images.MainImage;
             random = new Random();
+        }
+
+        public virtual void Random()
+        {
+            n2 = n + 1;
+            m2 = m + 1;
+
+            for (int k = n; k <= n2; k++)
+                for (int l = m; l <= m2; l++)
+                {
+                    mainScreen[k, l].Image = IsNotNull.Image;
+                    onOff[k, l] = Model.On;
+                }
         }
 
         public virtual void Random(ref int i, ref int j) 
@@ -35,7 +53,7 @@ namespace Tetris
             for ( int k = i; k <= i2; k++)
                 for( int l = j; l <=j2; l++)
                 {
-                    mainScreen[k, l].Image = Model.IsNotNull.Image;
+                    mainScreen[k, l].Image = IsNotNull.Image;
                     onOff[k, l] = Model.On;
                 }
         }
@@ -87,7 +105,7 @@ namespace Tetris
             for (int k = i; k <= i2; k++)
                 for (int l = j; l <= j2; l++)
                 {
-                    mainScreen[k, l].Image = Model.IsNull.Image;
+                    mainScreen[k, l].Image = IsNull.Image;
                     onOff[k, l] = Model.Off;
                 }
 
@@ -100,7 +118,7 @@ namespace Tetris
             for (int k = i; k <= i2; k++)
                 for (int l = j; l <= j2; l++)
                 {
-                    mainScreen[k, l].Image = Model.IsNotNull.Image;
+                    mainScreen[k, l].Image = IsNotNull.Image;
                     onOff[k, l] = Model.On;
                 }
 
@@ -124,7 +142,7 @@ namespace Tetris
             for (int k = i; k <= i2; k++)
                 for (int l = j; l <= j2; l++)
                 {
-                    mainScreen[k, l].Image = Model.IsNull.Image;
+                    mainScreen[k, l].Image = IsNull.Image;
                     onOff[k, l] = Model.Off;
                 }
 
@@ -137,22 +155,12 @@ namespace Tetris
             for (int k = i; k <= i2; k++)
                 for (int l = j; l <= j2; l++)
                 {
-                    mainScreen[k, l].Image = Model.IsNotNull.Image;
+                    mainScreen[k, l].Image = IsNotNull.Image;
                     onOff[k, l] = Model.On;
                 }
 
             #endregion
 
-            //#region Второе условие позволяет перенести объект на одну клетку влево, если даже по горизонтальной линии уже достигнут предел.
-
-            //if (i2 == (Model.vertLength - 1) ||
-            //        onOff[i2 + 1, j] == Model.On ||
-            //            onOff[i2 + 1, j2] == Model.On)
-            //{
-            //    Model.CanNavigateLeft = false;
-            //    return;
-            //}
-            //#endregion
         }
 
         internal virtual void TurnMove(ref int i, ref int j)

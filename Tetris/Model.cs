@@ -28,13 +28,6 @@ namespace Tetris
         public const short Off = 0;
         #endregion
 
-        #region Readonly: для обозначения пустой ячейки и заполненной соответственно
-        static readonly BackGraundMatrix isNull;
-        static readonly BackGraundMatrix isNotNull;
-        internal static BackGraundMatrix IsNull => isNull;
-        internal static BackGraundMatrix IsNotNull => isNotNull;
-        #endregion
-
         #region Переменные для объектов фигур
 
         Figure mainFigure;
@@ -58,7 +51,7 @@ namespace Tetris
         Timer timer;
         TimerCallback moveBlock;
         Screen screen;
-        bool navigatorStatus;
+        NextFigureScreen nextFigure;
         NavigateType navigateType;
         FigureList figurelist;
         static bool canNavigateRight;
@@ -77,16 +70,18 @@ namespace Tetris
             navigateType = NavigateType.Right;
             random = new Random();
             checkStatus = true;
-            navigatorStatus = false;
             FillMatrix();
+            #region Создание объектов всех игровых фигур
+
+            stallion1 = new Stallion1(mainScreen, onOff);
             figure = new Figure(mainScreen, onOff);
             line = new Line(mainScreen, onOff);
-        }
+            stallion2 = new Stallion2(mainScreen, onOff);
+            triangle = new Triangle(mainScreen, onOff);
+            zFigure = new ZFigure(mainScreen, onOff);
+            sFigure = new SFigure(mainScreen, onOff);
 
-        static Model()
-        {
-            isNull = new BackGraundMatrix();
-            isNotNull = new BackGraundMatrix();
+            #endregion
         }
 
         #endregion
@@ -123,17 +118,7 @@ namespace Tetris
             if (screen != null)
                 screen.Invalidate();
 
-            #region Создание объектов всех игровых фигур
-
-            stallion1 = new Stallion1(mainScreen, onOff);
-            figure = new Figure(mainScreen, onOff);
-            line = new Line(mainScreen, onOff);
-            stallion2 = new Stallion2(mainScreen, onOff);
-            triangle = new Triangle(mainScreen, onOff);
-            zFigure = new ZFigure(mainScreen, onOff);
-            sFigure = new SFigure(mainScreen, onOff);
-
-            #endregion
+            
 
         }
 
@@ -170,12 +155,13 @@ namespace Tetris
 
         #region Скорость игры и движение фигур
 
-        public void StartTimer(Screen screen)
+        public void StartTimer(Screen screen, NextFigureScreen nextFigure)
         {
             if (GameStatus == GameStatus.NewGame)
             {
                 GameStatus = GameStatus.Started;
                 this.screen = screen;
+                this.nextFigure = nextFigure;
             
                 if(moveBlock == null)
                     moveBlock = new TimerCallback(Run);
@@ -271,7 +257,6 @@ namespace Tetris
                     return;
                 }
 
-                navigatorStatus = true;
                 navigateType = NavigateType.Right;
                 MoveFigure();
             }
@@ -285,7 +270,6 @@ namespace Tetris
                 {
                     return;
                 }
-                navigatorStatus = true;
                 navigateType = NavigateType.Left;
                 MoveFigure();
             }
@@ -295,7 +279,6 @@ namespace Tetris
         {
             if (GameStatus == GameStatus.Started)
             {
-                navigatorStatus = true;
                 navigateType = NavigateType.Down;
                 MoveFigure();
             }
@@ -305,7 +288,6 @@ namespace Tetris
         {
             if (GameStatus == GameStatus.Started)
             {
-                navigatorStatus = true;
                 navigateType = NavigateType.Turn;
                 MoveFigure();
             }
@@ -313,8 +295,6 @@ namespace Tetris
 
         private void MoveFigure()
         {
-            navigatorStatus = false;
-
             switch (navigateType)
             {
                 case NavigateType.Right:

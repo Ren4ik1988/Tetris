@@ -59,6 +59,12 @@
     <Compile Include="Figures\Line.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Navigator.cs" />
+    <Compile Include="NextFigureScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NextFigureScreen.Designer.cs">
+      <DependentUpon>NextFigureScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="PositionOfBlocks.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +81,9 @@
     <Compile Include="Figures\ZFigure.cs" />
     <EmbeddedResource Include="Controller.resx">
       <DependentUpon>Controller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NextFigureScreen.resx">
+      <DependentUpon>NextFigureScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
