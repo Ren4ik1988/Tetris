@@ -21,13 +21,48 @@ namespace Tetris
             Image = Images.MainImage;
         }
 
+        # region Установка изображений, используемых для построения фигур
 
-        public void PutImg()
+        public void PutMainImg()
         {
-            if (Image != Images.BlockImage)
-                Image = Images.BlockImage;
-            else
-                Image = Images.MainImage;
+            Image = Images.MainImage;
         }
+
+        public void PutFigureImg()
+        {
+            Image = Images.BlockImage; ;
+        }
+
+        public void PutLineImg()
+        {
+            Image = Images.LineImage;
+        }
+
+        public void PutStallion1Img()
+        {
+            Image = Images.Stallion1Image;
+        }
+
+        public void PutStallion2Img()
+        {
+            Image = Images.Stallion2Image;
+        }
+
+        public void PutZFigureImg()
+        {
+            Image = Images.ZFigureImage;
+        }
+
+        public void PutSFigureImg()
+        {
+            Image = Images.SFigureImage;
+        }
+
+        public void PutTriangleImg()
+        {
+            Image = Images.TriangleImage;
+        }
+
+        #endregion
     }
 }

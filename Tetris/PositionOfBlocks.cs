@@ -10,8 +10,8 @@ namespace Tetris
     class PositionOfBlocks // класс отвечает за разметку координат для каждого элемента массива
     {
         static Point[,] position = new Point[Model.vertLength, Model.gorizontLength];
-        static int xPos = 0;
-        static int yPos = 0;
+        static int xPos = 2;
+        static int yPos = 2;
         static int sizeOfBlock = 30; // определяет размерность одного квадрата в пикселях
 
         static PositionOfBlocks()
@@ -23,7 +23,7 @@ namespace Tetris
                     Position[i, j] = new Point(xPos, yPos);
                     xPos += sizeOfBlock;
                 }
-                xPos = 0;
+                xPos = 2;
                 yPos += sizeOfBlock;
             }
         }

@@ -34,9 +34,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lime;
             this.DoubleBuffered = true;
+            this.Location = new System.Drawing.Point(2, 2);
             this.Name = "Screen";
-            this.Size = new System.Drawing.Size(300, 720);
+            this.Size = new System.Drawing.Size(304, 724);
             this.ResumeLayout(false);
 
         }

@@ -87,7 +87,6 @@ namespace Tetris
         {
             isNull = new BackGraundMatrix();
             isNotNull = new BackGraundMatrix();
-            isNotNull.PutImg();
         }
 
         #endregion
@@ -157,13 +156,13 @@ namespace Tetris
 
             switch (figurelist)
             {
-                case FigureList.rectangle: mainFigure = figure; break;
-                case FigureList.line: mainFigure = line; break;
-                case FigureList.stallion1: mainFigure = stallion1; break;
-                case FigureList.stallion2: mainFigure = stallion2; break;
-                case FigureList.triangle: mainFigure = triangle; break;
-                case FigureList.sfigure: mainFigure = sFigure; break;
-                case FigureList.zfigure: mainFigure = zFigure; break;
+                case FigureList.rectangle: isNotNull.PutFigureImg(); mainFigure = figure; break;
+                case FigureList.line: isNotNull.PutLineImg(); mainFigure = line; break;
+                case FigureList.stallion1: isNotNull.PutStallion1Img(); mainFigure = stallion1; break;
+                case FigureList.stallion2: isNotNull.PutStallion2Img(); mainFigure = stallion2; break;
+                case FigureList.triangle: isNotNull.PutTriangleImg(); mainFigure = triangle; break;
+                case FigureList.sfigure: isNotNull.PutSFigureImg(); mainFigure = sFigure; break;
+                case FigureList.zfigure: isNotNull.PutZFigureImg(); mainFigure = zFigure; break;
             }
         }
 
@@ -248,7 +247,7 @@ namespace Tetris
                 {
                     if (onOff[k - 1, j] == On)
                     {
-                        mainScreen[k, j].Image = IsNotNull.Image;
+                        mainScreen[k, j].Image = mainScreen[k - 1, j].Image;
                         mainScreen[k - 1, j].Image = IsNull.Image;
                         onOff[k, j] = On;
                         onOff[k - 1, j] = Off;
