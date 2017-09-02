@@ -13,7 +13,7 @@ namespace Tetris
         protected int randomTurnCode;
         protected Random random;
         static protected int i2, j2;
-        protected int n, m, n2, m2;
+        //protected int n, m, n2, m2;
         protected BackGraundMatrix IsNull;
         protected BackGraundMatrix IsNotNull;
         protected BackGraundMatrix[,] mainScreen;
@@ -25,23 +25,25 @@ namespace Tetris
         {
             this.mainScreen = mainScreen;
             this.onOff = onOff;
-            IsNotNull.Image = (new BackGraundMatrix()).Images.BlockImage;
-            IsNull.Image = (new BackGraundMatrix()).Images.MainImage;
+            IsNotNull = new BackGraundMatrix();
+            IsNotNull.Image = IsNotNull.Images.BlockImage;
+            IsNull = new BackGraundMatrix();
+            IsNull.Image = IsNull.Images.MainImage;
             random = new Random();
         }
 
-        public virtual void Random()
-        {
-            n2 = n + 1;
-            m2 = m + 1;
+        //public virtual void Random()
+        //{
+        //    n2 = n + 1;
+        //    m2 = m + 1;
 
-            for (int k = n; k <= n2; k++)
-                for (int l = m; l <= m2; l++)
-                {
-                    mainScreen[k, l].Image = IsNotNull.Image;
-                    onOff[k, l] = Model.On;
-                }
-        }
+        //    for (int k = n; k <= n2; k++)
+        //        for (int l = m; l <= m2; l++)
+        //        {
+        //            mainScreen[k, l].Image = IsNotNull.Image;
+        //            onOff[k, l] = Model.On;
+        //        }
+        //}
 
         public virtual void Random(ref int i, ref int j) 
         {
@@ -65,7 +67,7 @@ namespace Tetris
             for (int k = i; k <= i2; k++)
                 for (int l = j; l <= j2; l++)
                 {
-                    mainScreen[k, l].Image = Model.IsNull.Image;
+                    mainScreen[k, l].Image = IsNull.Image;
                     onOff[k, l] = Model.Off;
                 }
 
@@ -79,7 +81,7 @@ namespace Tetris
             for (int k = i; k <= i2; k++)
                 for (int l = j; l <= j2; l++)
                 {
-                    mainScreen[k, l].Image = Model.IsNotNull.Image;
+                    mainScreen[k, l].Image = IsNotNull.Image;
                     onOff[k, l] = Model.On;
                 }
             

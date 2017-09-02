@@ -8,7 +8,8 @@ namespace Tetris
 {
     class ZFigure : Figure
     {
-        public ZFigure(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff){ }
+        public ZFigure(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff)
+                    => IsNotNull.Image = IsNotNull.Images.ZFigureImage;
 
         #region Определяем рандомную начальную позицию фигуры в игровом поле
 
@@ -32,13 +33,13 @@ namespace Tetris
 
             for (int k = j; k <= j+1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNotNull.Image;
+                mainScreen[i, k].Image = IsNotNull.Image;
                 onOff[i, k] = Model.On;
             }
 
             for (int k = j+1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNotNull.Image;
+                mainScreen[i2, k].Image = IsNotNull.Image;
                 onOff[i2, k] = Model.On;
             }
         }
@@ -51,13 +52,13 @@ namespace Tetris
 
             for (int k = i; k <= i+1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNotNull.Image;
+                mainScreen[k, j2].Image = IsNotNull.Image;
                 onOff[k, j2] = Model.On;
             }
 
             for (int k = i+1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNotNull.Image;
+                mainScreen[k, j].Image = IsNotNull.Image;
                 onOff[k, j] = Model.On;
             }
         }
@@ -89,13 +90,13 @@ namespace Tetris
 
             for (int k = j; k <= j + 1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNull.Image;
+                mainScreen[i, k].Image = IsNull.Image;
                 onOff[i, k] = Model.Off;
             }
 
             for (int k = j + 1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNull.Image;
+                mainScreen[i2, k].Image = IsNull.Image;
                 onOff[i2, k] = Model.Off;
             }
 
@@ -108,13 +109,13 @@ namespace Tetris
 
             for (int k = j; k <= j + 1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNotNull.Image;
+                mainScreen[i, k].Image = IsNotNull.Image;
                 onOff[i, k] = Model.On;
             }
 
             for (int k = j + 1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNotNull.Image;
+                mainScreen[i2, k].Image = IsNotNull.Image;
                 onOff[i2, k] = Model.On;
             }
             #endregion
@@ -134,13 +135,13 @@ namespace Tetris
 
             for (int k = i; k <= i + 1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNull.Image;
+                mainScreen[k, j2].Image = IsNull.Image;
                 onOff[k, j2] = Model.Off;
             }
 
             for (int k = i + 1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNull.Image;
+                mainScreen[k, j].Image = IsNull.Image;
                 onOff[k, j] = Model.Off;
             }
 
@@ -153,13 +154,13 @@ namespace Tetris
 
             for (int k = i; k <= i + 1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNotNull.Image;
+                mainScreen[k, j2].Image = IsNotNull.Image;
                 onOff[k, j2] = Model.On;
             }
 
             for (int k = i + 1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNotNull.Image;
+                mainScreen[k, j].Image = IsNotNull.Image;
                 onOff[k, j] = Model.On;
             }
             #endregion
@@ -195,13 +196,13 @@ namespace Tetris
 
             for (int k = j; k <= j + 1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNull.Image;
+                mainScreen[i, k].Image = IsNull.Image;
                 onOff[i, k] = Model.Off;
             }
 
             for (int k = j + 1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNull.Image;
+                mainScreen[i2, k].Image = IsNull.Image;
                 onOff[i2, k] = Model.Off;
             }
 
@@ -214,13 +215,13 @@ namespace Tetris
 
             for (int k = j; k <= j + 1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNotNull.Image;
+                mainScreen[i, k].Image = IsNotNull.Image;
                 onOff[i, k] = Model.On;
             }
 
             for (int k = j + 1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNotNull.Image;
+                mainScreen[i2, k].Image = IsNotNull.Image;
                 onOff[i2, k] = Model.On;
             }
 
@@ -251,13 +252,13 @@ namespace Tetris
 
             for (int k = i; k <= i + 1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNull.Image;
+                mainScreen[k, j2].Image = IsNull.Image;
                 onOff[k, j2] = Model.Off;
             }
 
             for (int k = i + 1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNull.Image;
+                mainScreen[k, j].Image = IsNull.Image;
                 onOff[k, j] = Model.Off;
             }
 
@@ -270,13 +271,13 @@ namespace Tetris
 
             for (int k = i; k <= i + 1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNotNull.Image;
+                mainScreen[k, j2].Image = IsNotNull.Image;
                 onOff[k, j2] = Model.On;
             }
 
             for (int k = i + 1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNotNull.Image;
+                mainScreen[k, j].Image = IsNotNull.Image;
                 onOff[k, j] = Model.On;
             }
 
@@ -313,13 +314,13 @@ namespace Tetris
 
             for (int k = j; k <= j + 1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNull.Image;
+                mainScreen[i, k].Image = IsNull.Image;
                 onOff[i, k] = Model.Off;
             }
 
             for (int k = j + 1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNull.Image;
+                mainScreen[i2, k].Image = IsNull.Image;
                 onOff[i2, k] = Model.Off;
             }
 
@@ -332,13 +333,13 @@ namespace Tetris
 
             for (int k = j; k <= j + 1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNotNull.Image;
+                mainScreen[i, k].Image = IsNotNull.Image;
                 onOff[i, k] = Model.On;
             }
 
             for (int k = j + 1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNotNull.Image;
+                mainScreen[i2, k].Image = IsNotNull.Image;
                 onOff[i2, k] = Model.On;
             }
 
@@ -369,13 +370,13 @@ namespace Tetris
 
             for (int k = i; k <= i + 1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNull.Image;
+                mainScreen[k, j2].Image = IsNull.Image;
                 onOff[k, j2] = Model.Off;
             }
 
             for (int k = i + 1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNull.Image;
+                mainScreen[k, j].Image = IsNull.Image;
                 onOff[k, j] = Model.Off;
             }
 
@@ -388,13 +389,13 @@ namespace Tetris
 
             for (int k = i; k <= i + 1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNotNull.Image;
+                mainScreen[k, j2].Image = IsNotNull.Image;
                 onOff[k, j2] = Model.On;
             }
 
             for (int k = i + 1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNotNull.Image;
+                mainScreen[k, j].Image = IsNotNull.Image;
                 onOff[k, j] = Model.On;
             }
 
@@ -434,13 +435,13 @@ namespace Tetris
 
             for (int k = i; k <= i + 1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNull.Image;
+                mainScreen[k, j2].Image = IsNull.Image;
                 onOff[k, j2] = Model.Off;
             }
 
             for (int k = i + 1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNull.Image;
+                mainScreen[k, j].Image = IsNull.Image;
                 onOff[k, j] = Model.Off;
             }
 
@@ -453,13 +454,13 @@ namespace Tetris
 
             for (int k = j; k <= j + 1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNotNull.Image;
+                mainScreen[i, k].Image = IsNotNull.Image;
                 onOff[i, k] = Model.On;
             }
 
             for (int k = j + 1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNotNull.Image;
+                mainScreen[i2, k].Image = IsNotNull.Image;
                 onOff[i2, k] = Model.On;
             }
 
@@ -487,13 +488,13 @@ namespace Tetris
 
             for (int k = j; k <= j + 1; k++)
             {
-                mainScreen[i, k].Image = Model.IsNull.Image;
+                mainScreen[i, k].Image = IsNull.Image;
                 onOff[i, k] = Model.Off;
             }
 
             for (int k = j + 1; k <= j2; k++)
             {
-                mainScreen[i2, k].Image = Model.IsNull.Image;
+                mainScreen[i2, k].Image = IsNull.Image;
                 onOff[i2, k] = Model.Off;
             }
 
@@ -505,13 +506,13 @@ namespace Tetris
 
             for (int k = i; k <= i + 1; k++)
             {
-                mainScreen[k, j2].Image = Model.IsNotNull.Image;
+                mainScreen[k, j2].Image = IsNotNull.Image;
                 onOff[k, j2] = Model.On;
             }
 
             for (int k = i + 1; k <= i2; k++)
             {
-                mainScreen[k, j].Image = Model.IsNotNull.Image;
+                mainScreen[k, j].Image = IsNotNull.Image;
                 onOff[k, j] = Model.On;
             }
 

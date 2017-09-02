@@ -141,13 +141,13 @@ namespace Tetris
 
             switch (figurelist)
             {
-                case FigureList.rectangle: isNotNull.PutFigureImg(); mainFigure = figure; break;
-                case FigureList.line: isNotNull.PutLineImg(); mainFigure = line; break;
-                case FigureList.stallion1: isNotNull.PutStallion1Img(); mainFigure = stallion1; break;
-                case FigureList.stallion2: isNotNull.PutStallion2Img(); mainFigure = stallion2; break;
-                case FigureList.triangle: isNotNull.PutTriangleImg(); mainFigure = triangle; break;
-                case FigureList.sfigure: isNotNull.PutSFigureImg(); mainFigure = sFigure; break;
-                case FigureList.zfigure: isNotNull.PutZFigureImg(); mainFigure = zFigure; break;
+                case FigureList.rectangle: mainFigure = figure; break;
+                case FigureList.line: mainFigure = line; break;
+                case FigureList.stallion1: mainFigure = stallion1; break;
+                case FigureList.stallion2: mainFigure = stallion2; break;
+                case FigureList.triangle: mainFigure = triangle; break;
+                case FigureList.sfigure: mainFigure = sFigure; break;
+                case FigureList.zfigure: mainFigure = zFigure; break;
             }
         }
 
@@ -223,7 +223,7 @@ namespace Tetris
         {
             for (j = 0; j < gorizontLength; j++)
             {
-                mainScreen[i, j].Image = IsNull.Image;
+                mainScreen[i, j].Image = mainScreen[i, j].Images.MainImage;
                 onOff[i, j] = Off;
             }
 
@@ -234,7 +234,7 @@ namespace Tetris
                     if (onOff[k - 1, j] == On)
                     {
                         mainScreen[k, j].Image = mainScreen[k - 1, j].Image;
-                        mainScreen[k - 1, j].Image = IsNull.Image;
+                        mainScreen[k - 1, j].Image = mainScreen[k-1, j].Images.MainImage;
                         onOff[k, j] = On;
                         onOff[k - 1, j] = Off;
                     }
