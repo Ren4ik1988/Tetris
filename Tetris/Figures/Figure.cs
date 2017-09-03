@@ -18,10 +18,11 @@ namespace Tetris
         protected BackGraundMatrix IsNotNull;
         protected BackGraundMatrix[,] mainScreen;
         protected short[,] onOff;
+        protected BackGraundMatrix [,] nextScreen;
 
         #endregion
 
-        public Figure(BackGraundMatrix[,] mainScreen, short[,] onOff)
+        public Figure(BackGraundMatrix[,] mainScreen, short[,] onOff, BackGraundMatrix [,] nextScreen)
         {
             this.mainScreen = mainScreen;
             this.onOff = onOff;
@@ -30,20 +31,15 @@ namespace Tetris
             IsNull = new BackGraundMatrix();
             IsNull.Image = IsNull.Images.MainImage;
             random = new Random();
+            this.nextScreen = nextScreen;
         }
 
-        //public virtual void Random()
-        //{
-        //    n2 = n + 1;
-        //    m2 = m + 1;
-
-        //    for (int k = n; k <= n2; k++)
-        //        for (int l = m; l <= m2; l++)
-        //        {
-        //            mainScreen[k, l].Image = IsNotNull.Image;
-        //            onOff[k, l] = Model.On;
-        //        }
-        //}
+        public virtual void ImplementNextFigureMatrix()
+        {
+            for (int m = 0; m < 2; m++)
+                for (int n = 0; n < 2; n++)
+                    nextScreen[m, n].Image = IsNotNull.Image;
+        }
 
         public virtual void Random(ref int i, ref int j) 
         {

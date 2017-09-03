@@ -62,7 +62,6 @@ namespace Tetris
         {
             Image = Images.TriangleImage;
         }
-
         #endregion
     }
 }

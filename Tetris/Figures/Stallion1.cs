@@ -8,8 +8,20 @@ namespace Tetris
 {
     class Stallion1 : Figure
     {
-        public Stallion1(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff)
+        public Stallion1(BackGraundMatrix[,] mainScreen, short[,] onOff, BackGraundMatrix[,] nextScreen) : base(mainScreen, onOff, nextScreen)
                     => IsNotNull.Image = IsNotNull.Images.Stallion1Image;
+
+        public override void ImplementNextFigureMatrix()
+        {
+            int m = 0;
+            int k = 0;
+            for (m = 0; m <= 3; m++)
+            {
+                nextScreen[m, k].Image = IsNotNull.Image;
+            }
+
+            nextScreen[3, 1].Image = IsNotNull.Image;
+        }
 
         #region Определяем рандомную начальную позицию фигуры в игровом поле
         public override void Random(ref int i, ref int j)

@@ -8,8 +8,23 @@ namespace Tetris
 {
     class SFigure : Figure
     {
-        public SFigure(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff)
+        public SFigure(BackGraundMatrix[,] mainScreen, short[,] onOff, BackGraundMatrix[,] nextScreen) : base(mainScreen, onOff, nextScreen)
                     => IsNotNull.Image = IsNotNull.Images.SFigureImage;
+
+        public override void ImplementNextFigureMatrix()
+        {
+            int m = 0;
+            int k = 0;
+            for (k = 0; k <= 2; k++)
+            {
+                nextScreen[m, k].Image = IsNotNull.Image;
+            }
+
+            for(k = 1; k <= 2; k++)
+            {
+                nextScreen[m+1, k].Image = IsNotNull.Image;
+            }
+        }
 
         #region Определяем рандомную начальную позицию фигуры в игровом поле
 

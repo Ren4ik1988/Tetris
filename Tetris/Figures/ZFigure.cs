@@ -8,7 +8,7 @@ namespace Tetris
 {
     class ZFigure : Figure
     {
-        public ZFigure(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff)
+        public ZFigure(BackGraundMatrix[,] mainScreen, short[,] onOff, BackGraundMatrix[,] nextScreen) : base(mainScreen, onOff, nextScreen)
                     => IsNotNull.Image = IsNotNull.Images.ZFigureImage;
 
         #region Определяем рандомную начальную позицию фигуры в игровом поле

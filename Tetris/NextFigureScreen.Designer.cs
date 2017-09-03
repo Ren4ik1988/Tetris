@@ -38,7 +38,7 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Location = new System.Drawing.Point(373, 210);
             this.Name = "NextFigureScreen";
-            this.Size = new System.Drawing.Size(146, 146);
+            this.Size = new System.Drawing.Size(64, 124);
             this.ResumeLayout(false);
 
         }

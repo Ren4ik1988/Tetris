@@ -49,6 +49,7 @@ namespace Tetris
                     Level_btn.Enabled = false;
                     model.Random();
                     screen.Invalidate();
+                    nextFigure.Invalidate();
                     model.StartTimer(screen, nextFigure);
                 }
                 else if (model.GameStatus == GameStatus.Started)

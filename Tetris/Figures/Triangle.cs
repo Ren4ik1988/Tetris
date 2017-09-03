@@ -8,7 +8,7 @@ namespace Tetris
 {
     class Triangle : Figure
     {
-        public Triangle(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff)
+        public Triangle(BackGraundMatrix[,] mainScreen, short[,] onOff, BackGraundMatrix[,] nextScreen) : base(mainScreen, onOff, nextScreen)
                     => IsNotNull.Image = IsNotNull.Images.TriangleImage;
 
         #region Определяем рандомную начальную позицию фигуры в игровом поле

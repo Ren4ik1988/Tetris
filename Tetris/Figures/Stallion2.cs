@@ -8,7 +8,7 @@ namespace Tetris
 {
     class Stallion2 : Figure
     {
-        public Stallion2(BackGraundMatrix[,] mainScreen, short[,] onOff) : base(mainScreen, onOff)
+        public Stallion2(BackGraundMatrix[,] mainScreen, short[,] onOff, BackGraundMatrix[,] nextScreen) : base(mainScreen, onOff, nextScreen)
                     => IsNotNull.Image = IsNotNull.Images.Stallion2Image;
 
         #region Определяем рандомную начальную позицию фигуры в игровом поле

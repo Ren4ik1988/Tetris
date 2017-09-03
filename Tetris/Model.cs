@@ -30,6 +30,7 @@ namespace Tetris
 
         #region Переменные для объектов фигур
 
+        Figure nextFig;
         Figure mainFigure;
         Figure figure;
         Line line;
@@ -51,14 +52,16 @@ namespace Tetris
         Timer timer;
         TimerCallback moveBlock;
         Screen screen;
-        NextFigureScreen nextFigure;
         NavigateType navigateType;
         FigureList figurelist;
         static bool canNavigateRight;
         static bool canNavigateLeft;
+        static BackGraundMatrix nullImage;
+        NextFigureScreen nextFigure;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
         short[,] onOff;
+        BackGraundMatrix [,] nextScreen = new BackGraundMatrix[4, 2];
 
         #endregion
 
@@ -71,17 +74,26 @@ namespace Tetris
             random = new Random();
             checkStatus = true;
             FillMatrix();
+            
             #region Создание объектов всех игровых фигур
 
-            stallion1 = new Stallion1(mainScreen, onOff);
-            figure = new Figure(mainScreen, onOff);
-            line = new Line(mainScreen, onOff);
-            stallion2 = new Stallion2(mainScreen, onOff);
-            triangle = new Triangle(mainScreen, onOff);
-            zFigure = new ZFigure(mainScreen, onOff);
-            sFigure = new SFigure(mainScreen, onOff);
+            stallion1 = new Stallion1(mainScreen, onOff, nextScreen);
+            figure = new Figure(mainScreen, onOff, nextScreen);
+            line = new Line(mainScreen, onOff, nextScreen);
+            stallion2 = new Stallion2(mainScreen, onOff, nextScreen);
+            triangle = new Triangle(mainScreen, onOff, nextScreen);
+            zFigure = new ZFigure(mainScreen, onOff, nextScreen);
+            sFigure = new SFigure(mainScreen, onOff, nextScreen);
 
             #endregion
+            ChooseFirstFigure();
+            FillNextscreen();
+        }
+
+        static Model()
+        {
+            nullImage = new BackGraundMatrix();
+            nullImage.Image = NullImage.Images.GridNextFigure;
         }
 
         #endregion
@@ -92,6 +104,8 @@ namespace Tetris
         public int GameLevel { set => gameLevel = value; }
         public static bool CanNavigateRight { get => canNavigateRight; set => canNavigateRight = value; }
         public static bool CanNavigateLeft { get => canNavigateLeft; set => canNavigateLeft = value; }
+        internal static BackGraundMatrix NullImage { get => nullImage; }
+        internal BackGraundMatrix[,] NextScreen { get => nextScreen; set => nextScreen = value; }
 
         #endregion
 
@@ -118,36 +132,49 @@ namespace Tetris
             if (screen != null)
                 screen.Invalidate();
 
-            
-
         }
-
+        void FillNextscreen()
+        {
+            for (int i = 0; i < 4; i++)
+                for (int k = 0; k < 2; k++)
+                {
+                    NextScreen[i, k] = new BackGraundMatrix();
+                    NextScreen[i, k].Image = nullImage.Image;
+                }
+        }
         public void Random()
         {
             i = 0;
-
-            ChooseFigure();
+            mainFigure = nextFig;
             mainFigure.Random(ref i, ref j);
 
             if (screen != null)
                 screen.Invalidate();
 
+            #region Определяем следующую фигуру и выводим ее на экран подсказки
+            FillNextscreen();
+            ChooseFirstFigure();
+            nextFig.ImplementNextFigureMatrix();
+            if(nextFigure != null)
+                nextFigure.Invalidate();
+        #endregion
+
             CanNavigateRight = canNavigateLeft = true;
         }
 
-        private void ChooseFigure()
+        private void ChooseFirstFigure()
         {
             figurelist = (FigureList)random.Next(0, 7);
 
             switch (figurelist)
             {
-                case FigureList.rectangle: mainFigure = figure; break;
-                case FigureList.line: mainFigure = line; break;
-                case FigureList.stallion1: mainFigure = stallion1; break;
-                case FigureList.stallion2: mainFigure = stallion2; break;
-                case FigureList.triangle: mainFigure = triangle; break;
-                case FigureList.sfigure: mainFigure = sFigure; break;
-                case FigureList.zfigure: mainFigure = zFigure; break;
+                case FigureList.rectangle: nextFig = figure; break;
+                case FigureList.line: nextFig = line; break;
+                case FigureList.stallion1: nextFig = stallion1; break;
+                case FigureList.stallion2: nextFig = stallion2; break;
+                case FigureList.triangle: nextFig = triangle; break;
+                case FigureList.sfigure: nextFig = sFigure; break;
+                case FigureList.zfigure: nextFig = zFigure; break;
             }
         }
 

@@ -9,7 +9,7 @@ namespace Tetris
 {
     class Images
     {
-        Image mainImage, blockImage, lineImage, stallion1Image, stallion2Image, zFigureImage, sFigureImage, triangleImage;
+        Image mainImage, blockImage, lineImage, stallion1Image, stallion2Image, zFigureImage, sFigureImage, triangleImage, gridNextFigure;
 
         #region Свойства
         public Image BlockImage { get => blockImage; }
@@ -20,7 +20,8 @@ namespace Tetris
         public Image ZFigureImage { get => zFigureImage; }
         public Image SFigureImage { get => sFigureImage; }
         public Image TriangleImage { get => triangleImage; }
-#endregion
+        public Image GridNextFigure { get => gridNextFigure; }
+        #endregion
 
         public Images()
         {
@@ -32,6 +33,7 @@ namespace Tetris
             zFigureImage = Properties.Resources.ZFigure;
             sFigureImage = Properties.Resources.SFigure;
             triangleImage = Properties.Resources.triangle;
+            gridNextFigure = Properties.Resources.gridNextFigure;
         }
     }
 }

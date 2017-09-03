@@ -141,5 +141,8 @@
   <ItemGroup>
     <None Include="Resources\ZFigure.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gridNextFigure.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
