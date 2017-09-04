@@ -15,14 +15,14 @@ namespace Tetris
         {
             int m = 0;
             int k = 0;
-            for (k = 0; k <= 2; k++)
-            {
-                nextScreen[m, k].Image = IsNotNull.Image;
-            }
-
-            for(k = 1; k <= 2; k++)
+            for (k = 0; k < 2; k++)
             {
                 nextScreen[m+1, k].Image = IsNotNull.Image;
+            }
+
+            for(k = 1; k < 3; k++)
+            {
+                nextScreen[m, k].Image = IsNotNull.Image;
             }
         }
 

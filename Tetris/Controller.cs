@@ -143,6 +143,7 @@ namespace Tetris
                         break;
                 }
             }
-    #endregion 
+        #endregion
+        
     }
 }

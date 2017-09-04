@@ -11,6 +11,17 @@ namespace Tetris
         public Line(BackGraundMatrix[,] mainScreen, short[,] onOff, BackGraundMatrix[,] nextScreen) : base(mainScreen, onOff, nextScreen) 
                     => IsNotNull.Image = IsNotNull.Images.LineImage;
 
+        public override void ImplementNextFigureMatrix()
+        {
+            int m = 0;
+            int k = 1;
+            for (; m < 4; m++)
+            {
+                nextScreen[m, k].Image = IsNotNull.Image;
+            }
+            
+        }
+
         #region Определяем начальную позицию фигуры и ее поворот: 0 - линия горизонтальная, 1 - вертикальная
         public override void Random(ref int i, ref int j)
         {

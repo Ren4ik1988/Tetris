@@ -61,7 +61,7 @@ namespace Tetris
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
         short[,] onOff;
-        BackGraundMatrix [,] nextScreen = new BackGraundMatrix[4, 2];
+        BackGraundMatrix [,] nextScreen = new BackGraundMatrix[4, 3];
 
         #endregion
 
@@ -136,7 +136,7 @@ namespace Tetris
         void FillNextscreen()
         {
             for (int i = 0; i < 4; i++)
-                for (int k = 0; k < 2; k++)
+                for (int k = 0; k < 3; k++)
                 {
                     NextScreen[i, k] = new BackGraundMatrix();
                     NextScreen[i, k].Image = nullImage.Image;

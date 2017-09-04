@@ -23,7 +23,7 @@ namespace Tetris
         protected override void OnPaint(PaintEventArgs e)
         {
             for (int i = 0; i<4; i++)
-                for (int k = 0; k <2; k++)
+                for (int k = 0; k <3; k++)
                 {
                     e.Graphics.DrawImage(model.NextScreen[i,k].Image, PositionOfBlocks.Position[i, k]);
                 }

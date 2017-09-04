@@ -15,12 +15,12 @@ namespace Tetris
         {
             int m = 0;
             int k = 0;
-            for (m = 0; m <= 3; m++)
+            for (; k < 3; k++)
             {
-                nextScreen[m, k].Image = IsNotNull.Image;
+                nextScreen[1, k].Image = IsNotNull.Image;
             }
 
-            nextScreen[3, 1].Image = IsNotNull.Image;
+            nextScreen[0, 2].Image = IsNotNull.Image;
         }
 
         #region Определяем рандомную начальную позицию фигуры в игровом поле
@@ -282,7 +282,7 @@ namespace Tetris
         }
 
         #endregion
-
+    
         #region Отвечает за перемещение фигуры влево
         internal override void LeftMove(ref int i, ref int j)
         {

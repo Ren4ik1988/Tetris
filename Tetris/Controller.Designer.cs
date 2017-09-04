@@ -34,6 +34,7 @@
             this.Exit_btn = new System.Windows.Forms.Button();
             this.NewGame_btn = new System.Windows.Forms.Button();
             this.StartPause_Btn = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.MainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,11 +104,22 @@
             this.StartPause_Btn.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Manipulate);
             this.StartPause_Btn.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.InputCatch);
             // 
+            // textBox2
+            // 
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.ForeColor = System.Drawing.Color.Navy;
+            this.textBox2.Location = new System.Drawing.Point(400, 220);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 13);
+            this.textBox2.TabIndex = 1;
+            this.textBox2.Text = "Следующая фигура";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 731);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.MainPanel);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(550, 770);
@@ -118,6 +130,7 @@
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -129,6 +142,7 @@
         private System.Windows.Forms.Button Exit_btn;
         private System.Windows.Forms.Button NewGame_btn;
         private System.Windows.Forms.Button StartPause_Btn;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

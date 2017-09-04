@@ -11,6 +11,18 @@ namespace Tetris
         public Stallion2(BackGraundMatrix[,] mainScreen, short[,] onOff, BackGraundMatrix[,] nextScreen) : base(mainScreen, onOff, nextScreen)
                     => IsNotNull.Image = IsNotNull.Images.Stallion2Image;
 
+        public override void ImplementNextFigureMatrix()
+        {
+            int m = 0;
+            int k = 0;
+            for (; k < 3; k++)
+            {
+                nextScreen[1, k].Image = IsNotNull.Image;
+            }
+
+            nextScreen[0, 0].Image = IsNotNull.Image;
+        }
+
         #region Определяем рандомную начальную позицию фигуры в игровом поле
         public override void Random(ref int i, ref int j)
         {
