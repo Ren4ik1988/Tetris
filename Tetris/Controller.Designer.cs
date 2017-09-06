@@ -57,6 +57,7 @@
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Location = new System.Drawing.Point(21, 112);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(110, 13);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "Уровень сложности";
@@ -110,6 +111,7 @@
             this.textBox2.ForeColor = System.Drawing.Color.Navy;
             this.textBox2.Location = new System.Drawing.Point(400, 220);
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(100, 13);
             this.textBox2.TabIndex = 1;
             this.textBox2.Text = "Следующая фигура";

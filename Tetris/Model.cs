@@ -73,6 +73,8 @@ namespace Tetris
             navigateType = NavigateType.Right;
             random = new Random();
             checkStatus = true;
+            mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
+            onOff = new short[vertLength, gorizontLength];
             FillMatrix();
             
             #region Создание объектов всех игровых фигур
@@ -87,7 +89,6 @@ namespace Tetris
 
             #endregion
             ChooseFirstFigure();
-            FillNextscreen();
         }
 
         static Model()
@@ -114,8 +115,7 @@ namespace Tetris
         public void FillMatrix() //изначальное построение матрицы экрана
         {
             i = j = 0;
-            mainScreen = new BackGraundMatrix[vertLength, gorizontLength];
-            onOff = new short[vertLength, gorizontLength];
+            
 
             if (timer != null)
             {
@@ -132,6 +132,8 @@ namespace Tetris
             if (screen != null)
                 screen.Invalidate();
 
+            FillNextscreen();
+
         }
         void FillNextscreen()
         {
@@ -141,6 +143,8 @@ namespace Tetris
                     NextScreen[i, k] = new BackGraundMatrix();
                     NextScreen[i, k].Image = nullImage.Image;
                 }
+            if (nextFigure != null)
+                nextFigure.Invalidate();
         }
         public void Random()
         {
