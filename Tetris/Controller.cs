@@ -36,7 +36,6 @@ namespace Tetris
             InitializeComponent();
             this.Controls.Add(screen);
             this.Controls.Add(nextFigure);
-
         }
         #endregion
 
@@ -94,6 +93,7 @@ namespace Tetris
             model.FillMatrix();
             StartPause_Btn.Text = start;
             Level_btn.Enabled = true;
+            Scorefix();
         }
 
         private void Exit_btn_Click(object sender, EventArgs e)
@@ -144,5 +144,11 @@ namespace Tetris
             }
         }
         #endregion
+
+        public void Scorefix()
+        {
+            ScoreLabel.Text = model.FixScore().ToString();
+            LineLabel.Text = model.FixLines().ToString();
+        }
     }
 }

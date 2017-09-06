@@ -243,9 +243,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label ScoreLabel;
         private System.Windows.Forms.Label LevelLabel;
-        private System.Windows.Forms.Label LineLabel;
+        public System.Windows.Forms.Label ScoreLabel;
+        public System.Windows.Forms.Label LineLabel;
     }
 }
 

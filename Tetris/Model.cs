@@ -44,6 +44,7 @@ namespace Tetris
 
         #region Поля
 
+        int score, lines, level;
         public GameStatus GameStatus;
         Random random;
         static bool checkStatus;
@@ -58,6 +59,7 @@ namespace Tetris
         static bool canNavigateLeft;
         static BackGraundMatrix nullImage;
         NextFigureScreen nextFigure;
+        MainForm controller;
 
         BackGraundMatrix[,] mainScreen; // основной слой экрана, создается по типу матрицы обычного монитора, но вместо пикселей ячейки 
         short[,] onOff;
@@ -114,6 +116,7 @@ namespace Tetris
 
         public void FillMatrix() //изначальное построение матрицы экрана
         {
+            score = level = lines = 0;
             i = j = 0;
             
 
@@ -146,11 +149,23 @@ namespace Tetris
             if (nextFigure != null)
                 nextFigure.Invalidate();
         }
+
+        internal int FixLines()
+        {
+            return lines; ;
+        }
+
+        internal int FixScore()
+        {
+            return score;
+        }
+
         public void Random()
         {
             i = 0;
             mainFigure = nextFig;
             mainFigure.Random(ref i, ref j);
+            level = 0;
 
             if (screen != null)
                 screen.Invalidate();
@@ -246,12 +261,19 @@ namespace Tetris
                     checkStatus = true;
             }
 
+
             if (checkStatus)
+            {
+                level++;
                 ClearLine();
+            }
+
+            
         }
 
         private void ClearLine() //если вся линия полностью заполнилась, очищает линию и перемещает верхние фигуры на пустую строку
         {
+            lines += 1;
             for (j = 0; j < gorizontLength; j++)
             {
                 mainScreen[i, j].Image = mainScreen[i, j].Images.MainImage;
@@ -271,7 +293,8 @@ namespace Tetris
                     }
                 }
             }
-            
+            score += level;
+            //controller.Scorefix();
             TestAllFull();
         }
 
