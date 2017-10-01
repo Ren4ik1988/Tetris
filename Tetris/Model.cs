@@ -68,8 +68,9 @@ namespace Tetris
         #endregion
 
         #region Constructors
-        public Model()
+        public Model(MainForm mainForm)
         {
+            this.controller = mainForm;
             GameStatus = GameStatus.NewGame;
             gameLevel = Easy;
             navigateType = NavigateType.Right;
@@ -294,7 +295,7 @@ namespace Tetris
                 }
             }
             score += level;
-            //controller.Scorefix();
+            controller.Score(score, lines);
             TestAllFull();
         }
 

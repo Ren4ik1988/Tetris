@@ -30,7 +30,7 @@ namespace Tetris
         #region Constructor
         public MainForm()
         {
-            model = new Model();
+            model = new Model(this);
             screen = new Screen(model);
             nextFigure = new NextFigureScreen(model);
             InitializeComponent();
@@ -93,7 +93,8 @@ namespace Tetris
             model.FillMatrix();
             StartPause_Btn.Text = start;
             Level_btn.Enabled = true;
-            Scorefix();
+            ScoreLabel.Text = "0";
+            LineLabel.Text = "0";
         }
 
         private void Exit_btn_Click(object sender, EventArgs e)
@@ -143,12 +144,20 @@ namespace Tetris
                     break;
             }
         }
-        #endregion
 
-        public void Scorefix()
+        internal void Score(int score, int lines)
         {
-            ScoreLabel.Text = model.FixScore().ToString();
-            LineLabel.Text = model.FixLines().ToString();
+            if (ScoreLabel.InvokeRequired)
+                ScoreLabel.Invoke(new Action<int>((s) => ScoreLabel.Text = s.ToString()), score);
+            else
+                ScoreLabel.Text = score.ToString();
+
+            if (LineLabel.InvokeRequired)
+                LineLabel.Invoke(new Action<int>((s) => LineLabel.Text = s.ToString()), lines);
+            else
+                LineLabel.Text = lines.ToString();
         }
+        
+        #endregion
     }
 }
