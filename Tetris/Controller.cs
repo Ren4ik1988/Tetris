@@ -160,8 +160,12 @@ namespace Tetris
 
         internal void GameOver(int score, Line line)
         {
-            string result = $"Игра окончена! {Environment.NewLine}Количество линий: {score} {Environment.NewLine}Очки: {score}";
+            string result = $"Игра окончена! {Environment.NewLine}Количество линий: {line} {Environment.NewLine}Очки: {score}";
             MessageBox.Show(result, "Game Over");
+
+            if (this.StartPause_Btn.InvokeRequired)
+                StartPause_Btn.Invoke(new Action<string>((s) => this.StartPause_Btn.Text = s), start);
+            
         }
 
         #endregion
