@@ -157,7 +157,13 @@ namespace Tetris
             else
                 LineLabel.Text = lines.ToString();
         }
-        
+
+        internal void GameOver(int score, Line line)
+        {
+            string result = $"Игра окончена! {Environment.NewLine}Количество линий: {score} {Environment.NewLine}Очки: {score}";
+            MessageBox.Show(result, "Game Over");
+        }
+
         #endregion
     }
 }

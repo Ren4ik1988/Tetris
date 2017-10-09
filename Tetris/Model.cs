@@ -238,13 +238,32 @@ namespace Tetris
             else
             {
                 checkStatus = true;
-
+                for(i = 3, j=0; j<gorizontLength; j++)
+                {
+                    if (onOff[i, j] == On)
+                    {
+                        gameOver();
+                        return;
+                    }
+                }
                 for (i = vertLength - 1; i > 0; i--)
                     TestAllFull();
                 Random();
             }
         }
-    
+
+        private void gameOver()
+        {
+            this.GameStatus = GameStatus.NewGame;
+            if (timer != null)
+            {
+                timer.Dispose();
+                timer = null;
+            }
+            controller.GameOver(this.score, this.line);
+            FillMatrix();
+        }
+
         #endregion
 
         #region Проверка заполненности линий, их очистка и смещение блоков после очистки
